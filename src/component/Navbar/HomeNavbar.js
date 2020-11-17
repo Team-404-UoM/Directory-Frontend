@@ -26,6 +26,7 @@ class HomeNavbar extends Component{
       <Nav.Link as={Link} to="../Blog" >Blog</Nav.Link>
       <Nav.Link as={Link} to="../Forum" >Forum</Nav.Link>
       <Nav.Link as={Link} to="../Test" >Test</Nav.Link>
+      <Nav.Link as={Link} to="../Settings" >Settings</Nav.Link>
     </Nav>
   </Navbar>
 

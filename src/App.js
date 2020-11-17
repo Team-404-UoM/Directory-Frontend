@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Bloginterface from './component/Blog/Bloginterface';
 import Forum from './component/Forum/Forum';
-//import Texteditor from './component/Texteditor';
 import './component/Blog/Texteditor.css';
 import HomeNavbar from './component/Navbar/HomeNavbar';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -21,6 +20,7 @@ import AcademicStaff from './component/User/SignUp/AcademicStaff';
 import Selection from './component/User/SignUp/Selection';
 import Login from './component/User/SignIn/Login';
 import AboutUs from './component/AboutUs/AboutUs';
+import Settings from './component/Settings/Settings';
 
 
 
@@ -70,8 +70,10 @@ const App = () => {
                             <Route path="/Gallery" component={Albums}/>
 
                             <Route path="/albums/:category/:id" component={View}/>
-
+                            
                             <Route path="/Forum/ForumReply" exact component={ForumReply}/>
+                            
+                            <Route path="/Settings" exact component={Settings}/>
 
 
 
