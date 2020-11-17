@@ -1,0 +1,43 @@
+.cont {
+    background-color: transparent;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-style: oblique;
+    margin: 0px;
+}
+
+.std {
+    margin-left: 70px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.past {
+    background-image: linear-gradient(to bottom right, rgb(230, 223, 243), rgb(134, 168, 202));
+    padding: 10px
+}
+
+.type {
+    margin-bottom: 20px;
+}
+
+.type2 {
+    width: 80px;
+    margin-left: 100px;
+}
+
+.type3 {
+    width: 110px;
+}
+
+.jumbo {
+    margin-left: 100px;
+    width: 800px;
+    height: 400px;
+    background-Image: linear-gradient(to bottom right, rgba(5, 128, 54, 0.83), rgb(11, 189, 138))
+}
+
+.topic {
+    font-family: 'Oswald', sans-serif;
+    font-size: 60px;
+}

@@ -1,0 +1,56 @@
+            .forumstyle {
+                margin-top: 1rem;
+                margin-left: 450px;
+                margin-right: 850px;
+                width: 500px;
+                border: 2px solid black
+            }
+            
+            .button {
+                margin-left: 475px;
+                margin-top: 10px;
+                margin-bottom: 100px;
+            }
+            
+            .cardbutton {
+                margin-left: 10px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            
+            .badgestyle {
+                margin-left: 5px;
+            }
+            
+            .divstyle {
+                position: fixed;
+                margin-left: 38%;
+            }
+            
+            .carddeletebutton {
+                float: right;
+                margin-top: 6px;
+            }
+            
+            .sidenav {
+                height: 100%;
+                width: 300px;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #343A40;
+                overflow-x: hidden;
+                padding-top: 20px;
+                margin-top: 77px;
+            }
+            
+            .overflow {
+                background: grey;
+                padding: 15px;
+                width: 900px;
+                height: 500px;
+                margin-left: 400px;
+                overflow: scroll;
+                border: 1px solid #ccc;
+            }

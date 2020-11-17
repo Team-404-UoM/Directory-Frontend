@@ -1,0 +1,40 @@
+                    .selection {
+                        padding: 122px;
+                        text-align: center;
+                        color: white;
+                        font-size: 30px;
+                    }
+                    
+                    .lecturer {
+                        border-style: solid;
+                        background-color: '#333333';
+                        border-radius: 20;
+                        margin-top: 5;
+                    }
+                    
+                    .selection {
+                        background-image: linear-gradient(to bottom right, rgba(49, 19, 216, 0.83), rgb(218, 228, 238))
+                    }
+                    
+                    .box {
+                        width: 150px;
+                        border: 5px solid;
+                        padding: 20px;
+                        margin: 25px;
+                        border-radius: 50px;
+                        background-image: linear-gradient(to bottom right, rgba(18, 97, 110, 0.83), rgb(253, 253, 253));
+                    }
+                    
+                    .outerbox {
+                        width: 250px;
+                        border: 5px solid white;
+                        padding: 20px;
+                        margin: 20px;
+                        border-radius: 20px;
+                        background-color: black;
+                    }
+                    
+                    .title {
+                        font-size: 30px;
+                        font-family: 'Bebas Neue', 'cursive';
+                    }

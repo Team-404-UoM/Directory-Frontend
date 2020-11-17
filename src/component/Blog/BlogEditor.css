@@ -1,0 +1,40 @@
+.center {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.label1 {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.textbox {
+    height: 25px;
+    margin-left: 80px
+}
+
+.textbox1 {
+    height: 20px;
+    margin-left: 58px;
+}
+
+.textboxcover {
+    height: 25px;
+    width: 500px;
+}
+
+.Button {
+    height: 25px;
+    width: 100px;
+    text-size-adjust: 10px;
+}
+
+.button2 {
+    margin-left: 20px;
+}
+
+.jumb {
+    margin-left: 20px;
+    margin-right: 20px;
+}

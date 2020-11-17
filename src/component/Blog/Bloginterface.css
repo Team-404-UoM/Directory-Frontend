@@ -1,0 +1,38 @@
+.button {
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.vbutton {
+    margin-left: 300px;
+}
+
+.b {
+    border-style: solid;
+}
+
+.b2 {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.label {
+    margin-left: 20px;
+    width: 30px;
+    padding: 0px;
+    border: 3px solid gray;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.cardinterface {
+    border: 100px solid black;
+    width: 30rem;
+    margin: auto;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+.cardtitle {
+    text-align: center;
+}

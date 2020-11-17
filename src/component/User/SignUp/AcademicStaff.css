@@ -1,0 +1,31 @@
+.academic {
+    background-color: transparent;
+    margin: 0px;
+    background-image: linear-gradient(to bottom right, rgb(230, 223, 243), rgb(134, 168, 202));
+    padding: 35px
+}
+
+.lec {
+    margin-left: 30px;
+}
+
+.jumboaca {
+    margin-left: 350px;
+    width: 800px;
+    height: 400px;
+    background-Image: linear-gradient(to bottom right, rgba(5, 128, 54, 0.83), rgb(11, 189, 138))
+}
+
+.acatype {
+    margin-bottom: 20px;
+}
+
+.topic {
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+    margin-left: 50px;
+}
+
+.acatype2 {
+    width: 110px;
+}
