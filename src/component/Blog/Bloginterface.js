@@ -6,6 +6,8 @@ import { Component } from 'react';
 import { Link} from 'react-router-dom'
 import axios from 'axios';
 import pic2 from '../Forum/pic2.jpg';
+import { GrLike } from "react-icons/gr";
+import { BsHeart } from "react-icons/bs";
 
 
 
@@ -23,33 +25,45 @@ class Bloginterface extends Component {
             blogs:[],
             uploadBlogs:[],
             blogid:'',
-            vote:0,
+            //vote:0,
             updated:false,
-            color:'info'
+            //color:'outline-info'
           }
-          this.updatevote = this.updatevote.bind(this);
+          //this.updatevote = this.updatevote.bind(this);
         }
       
-        updatevote() {
+        updatevote=(id)=> {
+          console.log(id)
       
           if(!this.state.updated) {
-            this.setState((prevState, props) => {
-              return {
-                vote: prevState.vote + 1,
-                updated: true,
-                color:'danger'
+             axios.patch('http://localhost:4000/Blog/like/'+id)
+             .then(res => {
+               console.log(res);
+               this.getAllPosts();
+            })
+             this.setState((prevState, props) => {
+               return {
+                 updated:true
+                 //vote: prevState.vote + 1,
+                //blogs.likestatus: true,
+                 //color:'info'
               };
-            });
-          } else {
+             });
+           } else {
+            axios.patch('http://localhost:4000/Blog/unlike/'+id)
+            .then(res => {
+              console.log(res);
+              this.getAllPosts();
+           })
       
-            this.setState((prevState, props) => {
-              return {
-                vote: prevState.vote - 1,
+             this.setState((prevState, props) => {
+               return {
+                 //vote: prevState.vote - 1,
                 updated: false,
-                color: 'info'
-              };
-            });
-          }
+                //color: 'outline-info'
+               };
+             });
+           }
       
       
         }
@@ -125,8 +139,8 @@ render(){
             </Link>
             <Button style={{marginLeft:'5px',marginRight:'5px'}} variant="danger" onClick={this.deletePost.bind(this,blog._id)}>Delete</Button>
             <div style={{float:'right'}}>
-              <Button onClick={this.updatevote} id='1'   variant={this.state.color}>Vote</Button>
-            <label className='label' >{this.state.vote}</label>
+              <Button onClick={this.updatevote.bind(this,blog._id)} id='1'   variant={blog.color}><BsHeart/></Button>
+            <label className='label' >{blog.like}</label>
             </div>
             
 

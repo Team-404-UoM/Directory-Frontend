@@ -20,7 +20,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
         this.state={
             title:'',
             image:'',
-            body:'Write Your Blog here...',
+            body:'',
             like:0
             
            
@@ -99,6 +99,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
            
         
         <CKEditor
+        placeholder='write'
                     editor={ ClassicEditor }
                     data={this.state.body}
                     onReady={ editor => {
