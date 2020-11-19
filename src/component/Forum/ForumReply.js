@@ -13,7 +13,7 @@ class ForumReply extends Component {
             message: "",
             createtime: "",
             replymessage:"",
-            rpl:[]
+            reply:["h1","h2"]
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -32,13 +32,16 @@ class ForumReply extends Component {
 
     handleChange(event){
         this.setState({replymessage:event.target.value});
-        console.log(this.state.rpl)
+        // console.log(this.state.reply)
     
       }
 
-      handleClick(event){
+      handleClick=(event)=>{
           event.preventDefault();
-        this.setState({rpl:this.state.replymessage })
+          const newreply=this.state.replymessage;
+          console.log(newreply);
+         this.setState({ reply:this.state.reply.concat(newreply)})
+        console.log(this.state.reply);
       }
     
     render() {
@@ -58,17 +61,24 @@ class ForumReply extends Component {
                     </Card></Col>
 
 
+
+
                     <Col><Card className='replycard'>
                         <Card.Header as="h5">Reply Here</Card.Header>
                         <Card.Body>
                             <Card.Title></Card.Title>
                             <Card.Text>
-                                <textarea style={{ width: '460px' }} value={this.state.replymessage} onChange={this.handleChange}/>
+                                <textarea placeholder="Please Type reply here" style={{ width: '460px' }} value={this.state.replymessage} onChange={this.handleChange}/>
                             </Card.Text>
 
                         </Card.Body>
                         <Button variant="primary" onClick={this.handleClick}>Post</Button>
                     </Card>
+
+
+
+
+
 
                         <Card style={{ width: '400px', marginBottom: '30px', marginTop: '20px', border: '1px solid grey' }}>
                             <Card.Header >

@@ -16,7 +16,7 @@ class Forum extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: "Please write Question",
+      message: "",
       posts: [],
       showModel: false,
       editPost:{message:'',id:''}
@@ -117,7 +117,7 @@ class Forum extends Component {
             <Card.Body>
               <Card.Title></Card.Title>
               <Card.Text>
-                <textarea style={{ width: '460px' }} value={this.state.message} onChange={this.handleChange} />
+                <textarea style={{ width: '460px' }} placeholder="Please write question here..." value={this.state.message} onChange={this.handleChange} />
               </Card.Text>
 
             </Card.Body>
