@@ -70,7 +70,8 @@ class Test extends Component {
           
            <button onClick={this.updatevote}>Like</button>
            <p>{this.state.likes}</p>
-       
+       <h1>Hello world</h1>
+       <h2>Hello world again</h2>
 
 
 
