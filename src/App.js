@@ -22,7 +22,7 @@ import Login from './component/User/SignIn/Login';
 import AboutUs from './component/AboutUs/AboutUs';
 import Settings from './component/Settings/Settings';
 
-//test comment
+
 
 
 const App = () => {
