@@ -21,8 +21,8 @@ import Selection from './component/User/SignUp/Selection';
 import Login from './component/User/SignIn/Login';
 import AboutUs from './component/AboutUs/AboutUs';
 import Settings from './component/Settings/Settings';
-//Test comment two
 
+//my test
 
 
 const App = () => {
