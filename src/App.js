@@ -21,70 +21,131 @@ import Selection from './component/User/SignUp/Selection';
 import Login from './component/User/SignIn/Login';
 import AboutUs from './component/AboutUs/AboutUs';
 import Settings from './component/Settings/Settings';
+//Test comment
 
 
 
 const App = () => {
-    return (
-        <BrowserRouter>
+    return ( <
+        BrowserRouter >
 
-            <div >
-                <Switch>
-                    <React.Fragment>
-                        <div>
+        <
+        div >
+        <
+        Switch >
+        <
+        React.Fragment >
+        <
+        div >
 
-                           <HomeNavbar />
-                            <Route path="/">
-                            </Route>
-                            <Route path="/SignUp/PastStudent/" exact component={PastStudent}/>
+        <
+        HomeNavbar / >
+        <
+        Route path = "/" >
+        <
+        /Route> <
+        Route path = "/SignUp/PastStudent/"
+        exact component = { PastStudent }
+        />
 
-                            <Route path="/SignUp/AcademicStaff/" exact component={AcademicStaff}/>
-                            <Route path="/SignIn" exact component={Login}/>
-                            <Route path="/SignUp/Selection" exact component={Selection}/>
-                            <Route path="/AboutUs" exact component={AboutUs}/>
+        <
+        Route path = "/SignUp/AcademicStaff/"
+        exact component = { AcademicStaff }
+        /> <
+        Route path = "/SignIn"
+        exact component = { Login }
+        /> <
+        Route path = "/SignUp/Selection"
+        exact component = { Selection }
+        /> <
+        Route path = "/AboutUs"
+        exact component = { AboutUs }
+        />
 
-                            <Route path="/Blog" exact component={Bloginterface}/>
-                              
-
-                            <Route path="/Forum" exact component={Forum}/>
-                           
-
-                            <Route path="/Blog/BlogEditor" exact >
-                                <BlogEditor />
-                            </Route>
-
-                            <Route path="/blog/Bloguploader" exact >
-                                <Bloguploader />
-                            </Route>
-
-                            <Route path="/Test" exact component={Test}/>
-                           
-                            <Route path="/Blog/BlogView" exact component={BlogView}/>
-
-                            <Route path="/Blog/BlogEditPost" exact component={BlogEditPost}/>
-
-                            <Route path="/events" component={EventPage}/>
-
-                            <Route path="/payments/:id" component={PayemetForm}/>
-
-                            <Route path="/Gallery" component={Albums}/>
-
-                            <Route path="/albums/:category/:id" component={View}/>
-                            
-                            <Route path="/Forum/ForumReply" exact component={ForumReply}/>
-                            
-                            <Route path="/Settings" exact component={Settings}/>
+        <
+        Route path = "/Blog"
+        exact component = { Bloginterface }
+        />
 
 
+        <
+        Route path = "/Forum"
+        exact component = { Forum }
+        />
+
+
+        <
+        Route path = "/Blog/BlogEditor"
+        exact >
+        <
+        BlogEditor / >
+        <
+        /Route>
+
+        <
+        Route path = "/blog/Bloguploader"
+        exact >
+        <
+        Bloguploader / >
+        <
+        /Route>
+
+        <
+        Route path = "/Test"
+        exact component = { Test }
+        />
+
+        <
+        Route path = "/Blog/BlogView"
+        exact component = { BlogView }
+        />
+
+        <
+        Route path = "/Blog/BlogEditPost"
+        exact component = { BlogEditPost }
+        />
+
+        <
+        Route path = "/events"
+        component = { EventPage }
+        />
+
+        <
+        Route path = "/payments/:id"
+        component = { PayemetForm }
+        />
+
+        <
+        Route path = "/Gallery"
+        component = { Albums }
+        />
+
+        <
+        Route path = "/albums/:category/:id"
+        component = { View }
+        />
+
+        <
+        Route path = "/Forum/ForumReply"
+        exact component = { ForumReply }
+        />
+
+        <
+        Route path = "/Settings"
+        exact component = { Settings }
+        />
 
 
 
 
-                        </div>
-                    </React.Fragment>
-                </Switch>
-            </div>
-        </BrowserRouter>
+
+
+        <
+        /div> < /
+        React.Fragment > <
+        /Switch> < /
+        div > <
+        /BrowserRouter>
     );
 }
 
