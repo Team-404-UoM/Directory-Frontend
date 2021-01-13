@@ -36,7 +36,7 @@ class BlogEditor extends Component {
       like: this.state.like,
     };
 
-    axios.post("http://localhost:4000/Blog/", blogdetails).then((res) => {
+    axios.post("http://localhost:4000/Blog/blogdetails").then((res) => {
       console.log(res);
       console.log(res.data);
 

@@ -69,7 +69,7 @@ class create extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        axios.post('http://localhost:4000/signup', registered)
+        axios.post(`${process.env.REACT_APP_BASE_URL}/signup`, registered)
             .then(response => console.log(response.data))
 
         this.setState({
