@@ -74,20 +74,20 @@ class Bloginterface extends Component {
 
         getAllPosts = () => {
 
-          axios.get('http://localhost:4000/Blog/Bloginterface')
+          axios.get(`${process.env.REACT_APP_BASE_URL}/Blog/Bloginterface`)
             .then(res => this.setState({ blogs: res.data.reverse() }))
             console.log(this.state.res)
         }
         getAllUploadPosts = () => {
 
-          axios.get('http://localhost:4000/Bloguploader')
+          axios.get(`${process.env.REACT_APP_BASE_URL}/Bloguploader`)
             .then(res => this.setState({ uploadBlogs: res.data.reverse() }))
             console.log(this.state.res)
         }
 
 
         deletePost = (id) => {
-          axios.delete('http://localhost:4000/Blog/'+id)
+          axios.delete(`${process.env.REACT_APP_BASE_URL}/Blog/`+id)
             .then(res => {
               console.log(res);
               this.getAllPosts();
@@ -96,7 +96,7 @@ class Bloginterface extends Component {
         }
         
         deleteUploadPost = (id) => {
-          axios.delete('http://localhost:4000/Bloguploader/'+id)
+          axios.delete(`${process.env.REACT_APP_BASE_URL}/Bloguploader/`+id)
             .then(res => {
               console.log(res);
               this.getAllUploadPosts();
