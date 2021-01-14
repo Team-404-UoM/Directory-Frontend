@@ -23,8 +23,11 @@ import AboutUs from './component/AboutUs/AboutUs';
 import Settings from './component/Settings/Settings';
 
 
-//Github testing mode
-//Again test commit
+//test commit 2
+
+
+
+
 
 const App = () => {
     return ( <BrowserRouter>
