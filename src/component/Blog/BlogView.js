@@ -17,7 +17,7 @@ class BlogView extends Component {
 
     componentDidMount() {//{if(this.props.location.query!=undefined){
         console.log(this.props)
-        axios.get('http://localhost:4000/Blog/'+this.props.location.query.id)
+        axios.get(`${process.env.REACT_APP_BASE_URL}/Blog/`+this.props.location.query.id)
             .then(res => this.setState({
                 title: res.data.blog.title,
                 image: res.data.blog.image,
