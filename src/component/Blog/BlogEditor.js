@@ -62,7 +62,7 @@ class BlogEditor extends Component {
 
   render() {
     return (
-      <div>
+      <div class="container-fluid">
         <Postselection />
         <div className="center">
           <h6> Write and Publish Your Article Here </h6>
@@ -75,7 +75,7 @@ class BlogEditor extends Component {
                 {" "}
                 Topic{" "}
                 <input
-                  className="textbox"
+                  className="textbox  "
                   type="text"
                   size="80"
                   value={this.state.title}
@@ -121,7 +121,7 @@ class BlogEditor extends Component {
                 Post
               </Button>
 
-              <Button className="button2" variant="dark">
+              <Button className="button2" variant="dark" href="http://localhost:3000/Blog">
                 Cancel
               </Button>
             </div>

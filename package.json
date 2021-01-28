@@ -14,6 +14,7 @@
     "axios": "^0.21.0",
     "boostrap": "^2.0.0",
     "bootstrap": "^4.5.3",
+    "boxicons": "^2.0.7",
     "coreui": "^0.4.2-alpha2",
     "dotenv": "^8.2.0",
     "draft-js": "^0.11.7",

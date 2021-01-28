@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import './BlogEditor.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
+import { Button,Container } from 'react-bootstrap';
 
 
 import Jumbotron from 'react-bootstrap/Jumbotron'
@@ -94,6 +94,7 @@ class BlogEditor extends Component {
     render() {
 
         return (
+            <Container fluid>
             <div>
 
                 <Postselection />
@@ -102,8 +103,10 @@ class BlogEditor extends Component {
                 </div>
 
                 <Jumbotron className='jumb'>
+                    
                     <form  >
-                        <div className='label1'>
+                    {/* Edit mode insert sections */}
+                        <div className='label1 '>
                             <label > Topic   <input className='textbox' type='text' size="80" value={this.state.title} onChange={this.handleTitle} />
                             </label>
                         </div>
@@ -136,13 +139,14 @@ class BlogEditor extends Component {
                         <div>
                             <Button onClick={this.handleSubmit} className='button2' variant="dark">Post</Button>
 
-                            <Button className='button2' variant="dark" href="/Blog/Bloginterface">Cancel</Button>
+                            <Button className='button2' variant="dark" href="http://localhost:3000/Blog">Cancel</Button>
                         </div>
 
                     </form>
                 </Jumbotron>
 
             </div>
+            </Container>
 
         );
     }
