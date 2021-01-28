@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card,Button,Container,Col,Row} from 'react-bootstrap';
 import './Bloginterface.css';
+import './bootstrap.min.css';
 import { MdNoteAdd } from 'react-icons/md';
 import { Component } from 'react';
 import { Link} from 'react-router-dom'
@@ -8,6 +9,8 @@ import axios from 'axios';
 import pic2 from '../Forum/pic2.jpg';
 import { GrLike } from "react-icons/gr";
 import { BsHeart } from "react-icons/bs";
+import { BiDislike,BiLike } from "react-icons/bi";
+import boxicons from 'boxicons';
 
 
 
@@ -123,11 +126,13 @@ render(){
            
            <Container>
              <Row>
-               <Col>
+               <Col xs={12} sm={12} md={6}>
            { this.state.blogs.map((blog)=>
            
             <Card key={blog._id} style={{width: '30rem',margin:'auto',marginTop:'20px',marginBottom:'50px',borderStyle:'outset',borderWidth:'2px', borderColor:'black'}}>
             <p style={{fontSize:'13px'}}><img src={pic2} alt="" style={{width:'30px',height:'30px',marginRight:'5px',marginTop:'10px',marginLeft:'5px',borderRadius:'2px'}}/><strong>Anushka Praveen Shared by</strong></p>
+            
+            
             <Card.Img variant="top" alt="" style={{border:'1px solid gray',width:'29.8rem',height:'19rem'}} src={blog.image} />
             <Card.Body>
             <Card.Title className='cardtitle'><h4><strong>{blog.title}</strong></h4></Card.Title>
@@ -139,7 +144,9 @@ render(){
             </Link>
             <Button style={{marginLeft:'5px',marginRight:'5px'}} variant="danger" onClick={this.deletePost.bind(this,blog._id)}>Delete</Button>
             <div style={{float:'right'}}>
-              <Button onClick={this.updatevote.bind(this,blog._id)} id='1'   variant={blog.color}><BsHeart/></Button>
+            <box-icon onClick={this.updatevote.bind(this,blog._id)} id='1'   variant={blog.color} border='square' type='solid' name='dislike' color="blue" size='md'></box-icon>
+            <label className='label' >{blog.like}</label>
+             <box-icon onClick={this.updatevote.bind(this,blog._id)} id='1'   variant={blog.color} border='square' type='solid' name='like' color="blue" size='md'></box-icon>
             <label className='label' >{blog.like}</label>
             </div>
             
@@ -162,8 +169,10 @@ render(){
           
           <Button style={{marginLeft:'5px',marginRight:'5px'}} variant="danger" onClick={this.deleteUploadPost.bind(this,blog._id)}>Delete</Button>
           <div style={{float:'right'}}>
-            <Button onClick={this.updatevote} id='1'   variant={this.state.color}>Vote</Button>
-          <label className='label' >0</label>
+          <box-icon onClick={this.updatevote.bind(this,blog._id)} id='1'   variant={blog.color} border='square' type='solid' name='dislike' color="blue" size='md'></box-icon>
+            <label className='label' >{blog.like}</label>
+             <box-icon onClick={this.updatevote.bind(this,blog._id)} id='1'   variant={blog.color} border='square' type='solid' name='like' color="blue" size='md'></box-icon>
+            <label className='label' >{blog.like}</label>
           </div>
           </Card.Body>
           </Card>

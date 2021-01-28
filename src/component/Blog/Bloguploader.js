@@ -104,7 +104,7 @@ import axios from 'axios';
         <div>
         <Button className='button2' variant="dark" onClick={this.handleSubmit}>Post</Button>
        
-        <Button className='button2' variant="dark">Cancel</Button>
+        <Button className='button2' variant="dark" href="http://localhost:3000/Blog">Cancel</Button>
         </div>
         
         </form>	
