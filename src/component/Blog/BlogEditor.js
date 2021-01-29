@@ -19,11 +19,19 @@ class BlogEditor extends Component {
       image: "",
       body: "",
       like: 0,
+      blogImage:"",
     };
     this.handleTitle = this.handleTitle.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChangeFile = this.onChangeFile.bind(this);
   }
+  onChangeFile(event){
+    this.setState({
+      blogImage:event.target.files[0]
+    });
+  }
+
 
   handleSubmit(event) {
     console.log(this.state.title);
@@ -34,6 +42,7 @@ class BlogEditor extends Component {
       image: this.state.image,
       body: this.state.body,
       like: this.state.like,
+      blogImage:this.state.blogImage,
     };
 
     axios.post(`${process.env.REACT_APP_BASE_URL}/Blog/`,blogdetails).then((res) => {
@@ -49,6 +58,7 @@ class BlogEditor extends Component {
     });
   }
 
+ 
   handleTitle(event) {
     this.setState({
       title: event.target.value,
@@ -92,6 +102,8 @@ class BlogEditor extends Component {
                 type="text"
                 size="80"
               />
+              
+              <input type="file" filename="image" onChange={this.onChangeFile}  />
             </div>
 
             <div className="label1">
