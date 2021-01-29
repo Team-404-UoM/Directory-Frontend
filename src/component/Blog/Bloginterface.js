@@ -71,7 +71,7 @@ class Bloginterface extends Component {
       
         }
         componentDidMount() {
-          this.getAllPosts();
+         this.getAllPosts();
           this.getAllUploadPosts();
         }      
 
@@ -114,6 +114,21 @@ class Bloginterface extends Component {
             console.log(this.state.blogid);
         });
       }
+
+filterContent(blogs,searchTerme){
+  const result = blogs.filter((blogs) => blogs.title.toLowercase().includes(searchTerme));
+  this.setState({blogs:result});
+}
+
+      handleTextSearch = (e)=>{
+        const searchTerme=e.currentTarget.value;
+        getAllPosts=()=> {
+          axios.get(`${process.env.REACT_APP_BASE_URL}/Blog/Bloginterface`)
+            .then((res) =>{if(res.success) {this.filterContent(res.data.blogs,searchTerme)
+            }
+            })
+          }
+        };
       
 
 
@@ -126,7 +141,18 @@ render(){
            
            <Container>
              <Row>
+               <div>
+             <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={this.handleTextSearch}/>
+        
+             </form>
+               
+               </div>
+              </Row>
+              
+              <Row>
                <Col xs={12} sm={12} md={6}>
+                 <h3>Writeen Blogs</h3>
            { this.state.blogs.map((blog)=>
            
             <Card key={blog._id} style={{width: '30rem',margin:'auto',marginTop:'20px',marginBottom:'50px',borderStyle:'outset',borderWidth:'2px', borderColor:'black'}}>
@@ -158,6 +184,7 @@ render(){
            </Col>
            
            <Col>
+           <h3>Linked Blogs</h3>
            {this.state.uploadBlogs.map((blog)=>
            
           <Card key={blog._id} style={{ width: '30rem',margin:'auto',marginTop:'20px',marginBottom:'50px',borderStyle:'outset',borderWidth:'2px', borderColor:'black'}}>
