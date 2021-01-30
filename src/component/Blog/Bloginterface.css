@@ -33,3 +33,15 @@
 .cardtitle {
     text-align: center;
 }
+
+.searchbar {
+    float: right;
+    width: 30rem;
+    height: 50px;
+    padding: 10px;
+}
+
+.blog-section-title {
+    text-align: center;
+    padding: 10px;
+}

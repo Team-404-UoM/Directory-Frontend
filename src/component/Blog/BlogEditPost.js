@@ -140,6 +140,15 @@ class BlogEditor extends Component {
                             <Button onClick={this.handleSubmit} className='button2' variant="dark">Post</Button>
 
                             <Button className='button2' variant="dark" href="http://localhost:3000/Blog">Cancel</Button>
+
+                             
+              <Button
+                onClick={this.handleSubmit}
+                className="button2"
+                variant="primary"
+              >
+                Preview
+              </Button>
                         </div>
 
                     </form>
