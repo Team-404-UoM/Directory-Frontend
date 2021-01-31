@@ -4,6 +4,7 @@ import "./bootstrap.min.css"
 import './AcademicStaff.css';
 import lecturer from "./lecturer.png";
 import { Row, Col, Button, Jumbotron } from 'react-bootstrap';
+import Questionform from './Questionform';
 
 
 class create extends Component {
@@ -15,7 +16,8 @@ class create extends Component {
             faculty: '',
             gender: '',
             email: '',
-            password: ''
+            password: '',
+            showSignUp: false
         }
         // this.changeFirstName = this.changeFirstName.bind(this)
         // this.changeLastName = this.changeLastName.bind(this)
@@ -82,11 +84,11 @@ class create extends Component {
     //     })
     // }
     render() {
-        return (
+        return this.state.showSignUp ? (
 
             <div className="academic">
                 <style>
-                @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+                    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 </style>
 
 
@@ -121,7 +123,7 @@ class create extends Component {
                             </Row>
                             <Row>
                                 <Col className="acatype">
-                                <select className='form-control form-group' name="gender" id="gender"
+                                    <select className='form-control form-group' name="gender" id="gender"
                                     // onChange={this.changeGender}
                                     >
                                         <option value="" selected disabled hidden>
@@ -200,7 +202,14 @@ class create extends Component {
 
 
 
-        );
+
+        ) : <Questionform onValidationPass={() => {
+            
+            this.setState({ showSignUp: true }, ()=>{
+                console.log(this.state);
+            });
+            
+        }} />;
 
     }
 }
