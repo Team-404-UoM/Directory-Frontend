@@ -21,6 +21,7 @@ import Selection from './component/User/SignUp/Selection';
 import Login from './component/User/SignIn/Login';
 import AboutUs from './component/AboutUs/AboutUs';
 import Settings from './component/Settings/Settings';
+import ProfileEdit from './component/User/Profile/ProfileEditMode';
 
 
 //test commit 2
@@ -77,6 +78,8 @@ const App = () => {
         <Route path = "/Forum/ForumReply" exact component = {ForumReply}/>
 
         <Route path = "/Settings" exact component = {Settings}/>
+
+        <Route path = "/ProfileEdit" exact component = {ProfileEdit}/>
 
 
 
