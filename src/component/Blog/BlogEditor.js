@@ -25,6 +25,7 @@ class BlogEditor extends Component {
     this.handleImage = this.handleImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeFile = this.onChangeFile.bind(this);
+    this.handlecategorie=this.handlecategorie.bind(this);
   }
   onChangeFile(event) {
     this.setState({
@@ -41,6 +42,7 @@ class BlogEditor extends Component {
       image: this.state.image,
       body: this.state.body,
       like: this.state.like,
+      categorie:this.state.categorie,
       blogImage: this.state.blogImage,
     };
 
@@ -64,6 +66,12 @@ class BlogEditor extends Component {
       title: event.target.value,
     });
   }
+handlecategorie(event){
+  this.setState({
+    categorie:event.target.value,
+  });
+}
+
   handleImage(event) {
     this.setState({
       image: event.target.value,
@@ -116,28 +124,28 @@ class BlogEditor extends Component {
                     />
                   </div>
                   <label for="categorie">Choose a Categories:</label>
-                  <select name="categorie" id="cars">
-                    <option value="volvo">Economic</option>
-                    <option value="saab">Finance</option>
-                    <option value="opel">Gaming</option>
-                    <option value="audi">Nature</option>
-                    <option value="audi">Medical</option>
-                    <option value="audi">Social</option>
-                    <option value="audi">Shopping</option>
-                    <option value="audi">Technology</option>
-                    <option value="audi">Sport</option>
-                    <option value="audi">Science</option>
-                    <option value="audi">Education</option>
-                    <option value="audi">Social Media</option>
-                    <option value="audi">Business</option>
-                    <option value="audi">Fashion</option>
-                    <option value="audi">Music</option>
-                    <option value="audi">Food</option>
-                    <option value="audi">Travel</option>
-                    <option value="audi">Law</option>
-                    <option value="audi">Photography</option>
-                    <option value="audi">Design</option>
-                    <option value="audi">Other</option>
+                  <select name="categorie" onChange={this.handlecategorie} id="catrgories">
+                    <option value="Economic">Economic</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="Nature">Nature</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Social">Social</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Science">Science</option>
+                    <option value="Education">Education</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Business">Business</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Music">Music</option>
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Law">Law</option>
+                    <option value="Photography">Photography</option>
+                    <option value="Design">Design</option>
+                    <option value="Other">Other</option>
                   </select>
 
                   <div className="label1">

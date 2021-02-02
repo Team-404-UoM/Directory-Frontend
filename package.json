@@ -13,7 +13,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.0",
     "boostrap": "^2.0.0",
-    "bootstrap": "^4.5.3",
+    "bootstrap": "^5.0.0-beta1",
     "boxicons": "^2.0.7",
     "coreui": "^0.4.2-alpha2",
     "dotenv": "^8.2.0",

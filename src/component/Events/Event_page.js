@@ -15,6 +15,7 @@ const Event_page = () => {
     const [events, setEvents] = useState([]);
     const [modal, setModal] = useState(false);
 
+
     useEffect(()=>{
         getEvents().then(result =>{
             setEvents(result)
