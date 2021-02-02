@@ -11,6 +11,7 @@ import { GrLike } from "react-icons/gr";
 import { BsHeart } from "react-icons/bs";
 import { BiDislike,BiLike } from "react-icons/bi";
 import boxicons from 'boxicons';
+import bootstrap from 'bootstrap';
 
 
 
@@ -24,21 +25,26 @@ class Bloginterface extends Component {
         constructor(props){
       
           super(props);
+         
           this.state ={
             blogs:[],
+            //allBlogs:[],
             uploadBlogs:[],
+            //allUploadBlogs:[],
             blogid:'',
             //vote:0,
-            updated:false,
+            likeupdated:false,
+            dislikeupdated:false,
             //color:'outline-info'
           }
-          //this.updatevote = this.updatevote.bind(this);
+          this.updatelike = this.updatelike.bind(this);
+          this.updatedislike = this.updatedislike.bind(this);
         }
       
-        updatevote=(id)=> {
+        updatelike=(id)=> {
           console.log(id)
       
-          if(!this.state.updated) {
+          if(!this.state.likeupdated) {
              axios.patch('http://localhost:4000/Blog/like/'+id)
              .then(res => {
                console.log(res);
@@ -46,10 +52,10 @@ class Bloginterface extends Component {
             })
              this.setState((prevState, props) => {
                return {
-                 updated:true
+                 likeupdated:true,
                  //vote: prevState.vote + 1,
                 //blogs.likestatus: true,
-                 //color:'info'
+                 likecolor:'blue'
               };
              });
            } else {
@@ -62,29 +68,74 @@ class Bloginterface extends Component {
              this.setState((prevState, props) => {
                return {
                  //vote: prevState.vote - 1,
-                updated: false,
-                //color: 'outline-info'
+                likeupdated: false,
+                likecolor: 'black'
                };
              });
            }
       
       
         }
+
+        
+        updatedislike=(id)=> {
+          console.log(id)
+      
+          if(!this.state.dislikeupdated) {
+             axios.patch('http://localhost:4000/Blog/dislike/'+id)
+             .then(res => {
+               console.log(res);
+               this.getAllPosts();
+            })
+             this.setState((prevState, props) => {
+               return {
+                 dislikeupdated:true,
+                 //vote: prevState.vote + 1,
+                //blogs.likestatus: true,
+                 dislikecolor:'blue'
+              };
+             });
+           } else {
+            axios.patch('http://localhost:4000/Blog/disunlike/'+id)
+            .then(res => {
+              console.log(res);
+              this.getAllPosts();
+           })
+      
+             this.setState((prevState, props) => {
+               return {
+                 //vote: prevState.vote - 1,
+                dislikeupdated: false,
+                dislikecolor: 'black'
+               };
+             });
+           }
+      
+      
+        }
+
+
         componentDidMount() {
          this.getAllPosts();
-          this.getAllUploadPosts();
+         this.getAllUploadPosts();
         }      
 
-        getAllPosts = () => {
+        getAllPosts () {
 
           axios.get(`${process.env.REACT_APP_BASE_URL}/Blog/Bloginterface`)
-            .then(res => this.setState({ blogs: res.data.reverse() }))
+            .then(res => {
+              this.setState({ blogs: res.data.reverse() })
+              //this.setState({ allBlogs: res.data.reverse() })
+            })
             console.log(this.state.res)
         }
         getAllUploadPosts = () => {
 
           axios.get(`${process.env.REACT_APP_BASE_URL}/Bloguploader`)
-            .then(res => this.setState({ uploadBlogs: res.data.reverse() }))
+            .then(res => {
+              this.setState({ uploadBlogs: res.data.reverse() })
+              //this.setState({ allUploadBlogs: res.data.reverse() })
+            })
             console.log(this.state.res)
         }
 
@@ -115,20 +166,17 @@ class Bloginterface extends Component {
         });
       }
 
-filterContent(blogs,searchTerme){
-  const result = blogs.filter((blogs) => blogs.title.toLowercase().includes(searchTerme));
-  this.setState({blogs:result});
-}
+  /* filterContent(blogs,searchTerme){
+   const result = blogs.filter((blog) => (blog.title).toLowerCase().includes(searchTerme));
+   return (result);
+ } */
 
-      handleTextSearch = (e)=>{
-        const searchTerme=e.currentTarget.value;
-        // getAllPosts=()=> {
-        //   axios.get(`${process.env.REACT_APP_BASE_URL}/Blog/Bloginterface`)
-        //     .then((res) =>{if(res.success) {this.filterContent(res.data.blogs,searchTerme)
-        //     }
-        //     })
-        //   }
-        };
+      /* handleTextSearch = (e)=>{
+        const res = filterContent(this.state.allBlogs,searchTerme)
+        const searchTerme=e.currentTarget.value; */
+  // this.setState({blogs:filterContent(this.state.allBlogs,searchTerme).reverse()});
+  // this.setState({uploadBlogs:filterContent(this.state.allUploadBlogs,searchTerme).reverse()});
+   //     };
       
 
 
@@ -159,7 +207,7 @@ render(){
            
             <Card key={blog._id} style={{width: '30rem',margin:'auto',marginTop:'20px',marginBottom:'50px',borderStyle:'outset',borderWidth:'2px', borderColor:'black'}}>
             <p style={{fontSize:'13px'}}><img src={pic2} alt="" style={{width:'30px',height:'30px',marginRight:'5px',marginTop:'10px',marginLeft:'5px',borderRadius:'2px'}}/><strong>Anushka Praveen Shared by</strong></p>
-            
+            <span style={{float:"right",marginTop:"-15px"}}><strong>Categorie | {blog.categorie}</strong></span>
             
             <Card.Img variant="top" alt="" style={{border:'1px solid gray',width:'29.8rem',height:'19rem'}} src={blog.image} />
             <Card.Body>
@@ -172,14 +220,26 @@ render(){
             </Link>
             <Button style={{marginLeft:'5px',marginRight:'5px'}} variant="danger" onClick={this.deletePost.bind(this,blog._id)}>Delete</Button>
             <div style={{float:'right'}}>
-            <box-icon onClick={this.updatevote.bind(this,blog._id)} id='1'   variant={blog.color} border='square' type='solid' name='dislike' color="blue" size='md'></box-icon>
-            <label className='label' >{blog.like}</label>
-             <box-icon onClick={this.updatevote.bind(this,blog._id)} id='1'   variant={blog.color} border='square' type='solid' name='like' color="blue" size='md'></box-icon>
+           <box-icon onClick={this.updatedislike.bind(this,blog._id)} id='1'  border='square' type='solid' name='dislike' color={blog.dislikecolor} size='md'></box-icon>
+            <label className='label' >{blog.dislike}</label>
+             <box-icon onClick={this.updatelike.bind(this,blog._id)} id='1'   border='square' type='solid' name='like' color={blog.likecolor} size='md'></box-icon>
             <label className='label' >{blog.like}</label>
             </div>
             
+  
+            
 
             </Card.Body>
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Comment
+  </a>
+ 
+
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+  </div>
+</div>
             </Card>
 
            )} 
@@ -197,12 +257,12 @@ render(){
           <Button onClick={() => console.log('Click')}  href={blog.url} style={{marginLeft:'5px',marginRight:'5px'}} variant="primary">Read</Button>
           
           <Button style={{marginLeft:'5px',marginRight:'5px'}} variant="danger" onClick={this.deleteUploadPost.bind(this,blog._id)}>Delete</Button>
-          <div style={{float:'right'}}>
+          {/* <div style={{float:'right'}}>
           <box-icon onClick={this.updatevote.bind(this,blog._id)} id='1'   variant={blog.color} border='square' type='solid' name='dislike' color="blue" size='md'></box-icon>
             <label className='label' >{blog.like}</label>
              <box-icon onClick={this.updatevote.bind(this,blog._id)} id='1'   variant={blog.color} border='square' type='solid' name='like' color="blue" size='md'></box-icon>
             <label className='label' >{blog.like}</label>
-          </div>
+          </div> */}
           </Card.Body>
           </Card>
          
