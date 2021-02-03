@@ -92,26 +92,26 @@ handlecategorie(event){
         <div>
           <Jumbotron className="jumb">
             <div className="row">
-              <div className="col-6">
+              <div className="col-10">
                 <form>
-                  <div className="label1">
-                    <label>
-                      {" "}
-                      Topic{" "}
+                  <div >
+                    <label className="topic-label">
+                      Topic
+                      </label>
                       <input
-                        className="textbox  "
+                        className="topic-textbox"
                         type="text"
                         size="80"
                         value={this.state.title}
                         onChange={this.handleTitle}
                       />
-                    </label>
+                   
                   </div>
 
-                  <div className="label1">
-                    <label> Cover Photo URL </label>{" "}
+                  <div>
+                    <label  className="url-label"> Cover Photo URL </label>{" "}
                     <input
-                      className="textboxcover"
+                      className="url-textbox"
                       value={this.state.image}
                       onChange={this.handleImage}
                       type="text"
@@ -123,8 +123,8 @@ handlecategorie(event){
                       onChange={this.onChangeFile}
                     />
                   </div>
-                  <label for="categorie">Choose a Categories:</label>
-                  <select name="categorie" onChange={this.handlecategorie} id="catrgories">
+                  <label className="categorie-label" for="categorie">Choose a Categories:</label>
+                  <select className="categorie-select" name="categorie" onChange={this.handlecategorie} id="catrgories">
                     <option value="Economic">Economic</option>
                     <option value="Finance">Finance</option>
                     <option value="Gaming">Gaming</option>
@@ -195,9 +195,9 @@ handlecategorie(event){
                 </form>
               </div>
 
-              <div className="col-6">
+              <div className="col-2">
                 <Button
-                  style={{ folat: "right", marginLeft: "30rem" }}
+                  style={{ marginLeft:"40px"}}
                   variant="dark"
                 >
                   Templates

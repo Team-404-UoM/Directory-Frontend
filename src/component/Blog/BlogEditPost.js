@@ -22,6 +22,7 @@ class BlogEditor extends Component {
             title: '',
             image: '',
             body: '',
+            categorie:'',
 
 
         };
@@ -29,6 +30,7 @@ class BlogEditor extends Component {
         this.handleTitle = this.handleTitle.bind(this);
         this.handleImage = this.handleImage.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handlecategorie=this.handlecategorie.bind(this);
     }
 
     componentDidMount() {if(this.props.location.query!==undefined){
@@ -37,12 +39,15 @@ class BlogEditor extends Component {
             .then(res => this.setState({
                 title: res.data.blog.title,
                 image: res.data.blog.image,
-                body: res.data.blog.body
+                body: res.data.blog.body,
+                categorie:res.data.blog.categorie,
+                
             }))
             .catch((err)=>console.log(err))}
 
         
     }
+   
 
 
 
@@ -53,7 +58,8 @@ class BlogEditor extends Component {
         const blogdetails = {
             title: this.state.title,
             image: this.state.image,
-            body: this.state.body
+            body: this.state.body,
+            categorie:this.state.categorie,
         }
 
         axios.patch(`${process.env.REACT_APP_BASE_URL}/Blog/` + this.props.location.query.id, blogdetails)
@@ -66,6 +72,7 @@ class BlogEditor extends Component {
                     title: '',
                     image: '',
                     body: ''
+                    
                 })
             });
 
@@ -86,6 +93,11 @@ class BlogEditor extends Component {
         });
 
     }
+    handlecategorie(event){
+        this.setState({
+          categorie:event.target.value,
+        });
+      }
 
 
 
@@ -114,6 +126,32 @@ class BlogEditor extends Component {
 
                             <label> Cover Photo URL </label>  <input className='textboxcover' value={this.state.image} onChange={this.handleImage} type='text' size="80" />
 
+                        </div>
+                        <div>
+                        <label className="categorie-label" for="categorie">Choose a Categories:</label>
+                  <select className="categorie-select" name="categorie" value={this.state.categorie} onChange={this.handlecategorie} id="catrgories">
+                    <option value="Economic">Economic</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="Nature">Nature</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Social">Social</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Science">Science</option>
+                    <option value="Education">Education</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Business">Business</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Music">Music</option>
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Law">Law</option>
+                    <option value="Photography">Photography</option>
+                    <option value="Design">Design</option>
+                    <option value="Other">Other</option>
+                  </select>
                         </div>
 
                         <div className='label1'>
