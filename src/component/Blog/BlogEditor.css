@@ -4,24 +4,28 @@
     margin-top: 20px;
 }
 
-.label1 {
-    margin-left: 20px;
-    margin-bottom: 10px;
+.topic-label {
+    margin-right: 118px;
 }
 
-.textbox {
-    height: 25px;
-    margin-left: 80px
+.url-label {
+    margin-right: 30px;
 }
 
-.textbox1 {
-    height: 20px;
-    margin-left: 58px;
+.categorie-label {
+    margin-right: 5px;
 }
 
-.textboxcover {
-    height: 25px;
-    width: 500px;
+.topic-textbox {
+    border-radius: 25px
+}
+
+.url-textbox {
+    border-radius: 25px
+}
+
+.categorie-select {
+    border-radius: 25px
 }
 
 .Button {
