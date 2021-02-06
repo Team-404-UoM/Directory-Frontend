@@ -2,7 +2,7 @@ import React from "react";
 import { Component } from "react";
 import "./BlogEditor.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
+import { Button,Modal } from "react-bootstrap";
 
 import Jumbotron from "react-bootstrap/Jumbotron";
 
@@ -10,6 +10,7 @@ import Postselection from "./Postselection";
 import axios from "axios";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import {Link} from 'react-router-dom';
 
 class BlogEditor extends Component {
   constructor(props) {
@@ -20,12 +21,15 @@ class BlogEditor extends Component {
       body: "",
       like: 0,
       blogImage: "",
+      show:false,
     };
     this.handleTitle = this.handleTitle.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeFile = this.onChangeFile.bind(this);
     this.handlecategorie=this.handlecategorie.bind(this);
+    this.handlemodal=this.handlemodal.bind(this);
+    this.handleclosemodal=this.handleclosemodal.bind(this);
   }
   onChangeFile(event) {
     this.setState({
@@ -51,7 +55,7 @@ class BlogEditor extends Component {
       .then((res) => {
         console.log(res);
         console.log(res.data);
-
+        this.handleclosemodal();
         console.log("mounted");
         this.setState({
           title: "",
@@ -76,6 +80,15 @@ handlecategorie(event){
     this.setState({
       image: event.target.value,
     });
+  }
+
+  handlemodal(){
+    this.setState({show:true}
+      )
+  }
+  handleclosemodal(){
+    this.setState({show:false}
+      )
   }
 
   render() {
@@ -166,26 +179,40 @@ handlecategorie(event){
                       }}
                     />
                   </div>
+                  <Modal show={this.state.show} >
+        <Modal.Header closeButton>
+          <Modal.Title>Save Article</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Do you want Post this Article?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleclosemodal} >
+            Close
+          </Button>
+          <Button variant="primary" onClick={this.handleSubmit} href="#test">
+           Post Article
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
                   <div>
                     <Button
-                      onClick={this.handleSubmit}
+                       onClick={this.handlemodal}
                       className="button2"
                       variant="dark"
                     >
                       Post
                     </Button>
 
-                    <Button
+                   <Link to="/Blog"> <Button
                       className="button2"
                       variant="dark"
-                      href="http://localhost:3000/Blog"
+                     
                     >
                       Cancel
-                    </Button>
+                    </Button></Link> 
 
                     <Button
-                      onClick={this.handleSubmit}
+                     
                       className="button2"
                       variant="primary"
                     >
