@@ -64,7 +64,7 @@ class BlogEditor extends Component {
         });
       })
       .catch((err)=>{
-       console.log(res);
+      
       })
 
         }
