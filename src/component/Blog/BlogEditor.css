@@ -36,9 +36,42 @@
 
 .button2 {
     margin-left: 20px;
+    margin-top: 20px;
 }
 
 .jumb {
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.link-topic-label {
+    margin-right: 110px;
+}
+
+.link-url-label {
+    margin-right: 85px;
+}
+
+.link-imgurl-label {
+    margin-right: 30px;
+}
+
+.link-categorie-label {
+    margin-right: 5px;
+}
+
+.link-topic-textbox {
+    border-radius: 25px
+}
+
+.link-topic-textbox {
+    border-radius: 25px
+}
+
+.link-imgurl-textbox {
+    border-radius: 25px
+}
+
+.link-url-textbox {
+    border-radius: 25px
 }

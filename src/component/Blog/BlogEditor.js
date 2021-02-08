@@ -62,8 +62,12 @@ class BlogEditor extends Component {
           image: "",
           body: "",
         });
-      });
-  }
+      })
+      .catch((err)=>{
+      
+      })
+
+        }
 
   handleTitle(event) {
     this.setState({
