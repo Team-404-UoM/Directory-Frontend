@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Navbar,Nav} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import Uom from './uom.png';
+import logo from './Team404.jpg';
 import './Nav.css'; 
 
 class HomeNavbar extends Component{
@@ -11,7 +11,7 @@ class HomeNavbar extends Component{
     <Navbar.Brand href="#home">
       <img
         alt=""
-        src={Uom}
+        src={logo}
         width="50"
         height="50"
         className="d-inline-block align-top"

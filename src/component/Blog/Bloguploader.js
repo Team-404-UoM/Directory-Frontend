@@ -25,6 +25,7 @@ class BlogEditor extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlemodal = this.handlemodal.bind(this);
     this.handleclosemodal = this.handleclosemodal.bind(this);
+    this.handlecategorie=this.handlecategorie.bind(this);
   }
 
   handleSubmit(event) {
@@ -35,6 +36,7 @@ class BlogEditor extends Component {
       title: this.state.title,
       image: this.state.image,
       url: this.state.url,
+      categorie:this.state.categorie
     };
 
     axios
@@ -65,6 +67,11 @@ class BlogEditor extends Component {
   handleUrl(event) {
     this.setState({
       url: event.target.value,
+    });
+  }
+  handlecategorie(event){
+    this.setState({
+      categorie:event.target.value,
     });
   }
 
@@ -122,6 +129,7 @@ class BlogEditor extends Component {
             </div>
             <label className="categorie-label" for="categorie">Choose a Categories:</label>
                   <select className="categorie-select" name="categorie" onChange={this.handlecategorie} id="catrgories">
+                  <option value="select">Select the Categorie</option>
                     <option value="Economic">Economic</option>
                     <option value="Finance">Finance</option>
                     <option value="Gaming">Gaming</option>
