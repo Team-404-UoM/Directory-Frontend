@@ -142,6 +142,7 @@ handlecategorie(event){
                   </div>
                   <label className="categorie-label" for="categorie">Choose a Categories:</label>
                   <select className="categorie-select" name="categorie" onChange={this.handlecategorie} id="catrgories">
+                  <option value="select">Select the Categorie</option>
                     <option value="Economic">Economic</option>
                     <option value="Finance">Finance</option>
                     <option value="Gaming">Gaming</option>

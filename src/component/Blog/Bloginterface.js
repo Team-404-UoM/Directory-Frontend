@@ -26,8 +26,12 @@ class Bloginterface extends Component {
       //vote:0,
       likeupdated: false,
       dislikeupdated: false,
-      show: false,
-      deleteBlog:''
+      uploadlikeupdated: false,
+      uploaddislikeupdated: false,
+      showuploadmodal: false,
+      showblogmodal:false,
+      deleteBlog: "",
+      deleteuploadBlog: "",
       //color:'outline-info'
     };
     this.updatelike = this.updatelike.bind(this);
@@ -35,6 +39,8 @@ class Bloginterface extends Component {
     this.handleTextSearch = this.handleTextSearch.bind(this);
     this.handlemodal = this.handlemodal.bind(this);
     this.handleclosemodal = this.handleclosemodal.bind(this);
+    this.uploadupdatelike = this.uploadupdatelike.bind(this);
+    this.uploadupdatedislike = this.uploadupdatedislike.bind(this);
   }
 
   updatelike = (id) => {
@@ -48,8 +54,6 @@ class Bloginterface extends Component {
       this.setState((prevState, props) => {
         return {
           likeupdated: true,
-          //vote: prevState.vote + 1,
-          //blogs.likestatus: true,
           likecolor: "blue",
         };
       });
@@ -61,7 +65,6 @@ class Bloginterface extends Component {
 
       this.setState((prevState, props) => {
         return {
-          //vote: prevState.vote - 1,
           likeupdated: false,
           likecolor: "black",
         };
@@ -80,8 +83,6 @@ class Bloginterface extends Component {
       this.setState((prevState, props) => {
         return {
           dislikeupdated: true,
-          //vote: prevState.vote + 1,
-          //blogs.likestatus: true,
           dislikecolor: "blue",
         };
       });
@@ -92,9 +93,67 @@ class Bloginterface extends Component {
       });
 
       this.setState((prevState, props) => {
-        return {
-          //vote: prevState.vote - 1,
+        return { 
           dislikeupdated: false,
+          dislikecolor: "black",
+        };
+      });
+    }
+  };
+
+  
+  uploadupdatelike = (id) => {
+    console.log(id);
+
+    if (!this.state.uploadlikeupdated) {
+      axios.patch("http://localhost:4000/Bloguploader/like/" + id).then((res) => {
+        console.log(res);
+        this.getAllUploadPosts();
+      });
+      this.setState((prevState, props) => {
+        return {
+          uploadlikeupdated: true,
+          likecolor: "blue",
+        };
+      });
+    } else {
+      axios.patch("http://localhost:4000/Bloguploader/unlike/" + id).then((res) => {
+        console.log(res);
+        this.getAllUploadPosts();
+      });
+
+      this.setState((prevState, props) => {
+        return {
+          uploadlikeupdated: false,
+          likecolor: "black",
+        };
+      });
+    }
+  };
+
+  uploadupdatedislike = (id) => {
+    console.log(id);
+
+    if (!this.state.uploaddislikeupdated) {
+      axios.patch("http://localhost:4000/Bloguploader/dislike/" + id).then((res) => {
+        console.log(res);
+        this.getAllUploadPosts();
+      });
+      this.setState((prevState, props) => {
+        return {
+          uploaddislikeupdated: true,
+          dislikecolor: "blue",
+        };
+      });
+    } else {
+      axios.patch("http://localhost:4000/Bloguploader/disunlike/" + id).then((res) => {
+        console.log(res);
+        this.getAllUploadPosts();
+      });
+
+      this.setState((prevState, props) => {
+        return {
+          uploaddislikeupdated: false,
           dislikecolor: "black",
         };
       });
@@ -110,33 +169,37 @@ class Bloginterface extends Component {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/Blog/Bloginterface`)
       .then((res) => {
-        this.setState((cur) => ({ ...cur, blogs: res.data.reverse() }));
-        this.setState((cur) => ({ ...cur, allBlogs: res.data.reverse() }));
+        this.setState((cur) => ({ ...cur, blogs: res.data }));
+        this.setState((cur) => ({ ...cur, allBlogs: res.data }));
       });
     // console.log(res.data);
   }
   getAllUploadPosts = () => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/Bloguploader`).then((res) => {
-      this.setState((cur) => ({ ...cur, uploadBlogs: res.data.reverse() }));
-      this.setState((cur) => ({ ...cur, allUploadBlogs: res.data.reverse() }));
+      this.setState((cur) => ({ ...cur, uploadBlogs: res.data }));
+      this.setState((cur) => ({ ...cur, allUploadBlogs: res.data }));
     });
     // console.log(this.state.res);
   };
 
   deletePost = () => {
-    axios.delete(`${process.env.REACT_APP_BASE_URL}/Blog/` + this.state.deleteBlog).then((res) => {
-      console.log(res);
-      this.handleclosemodal();
-      this.getAllPosts();
-    });
-  };
-
-  deleteUploadPost = (id) => {
     axios
-      .delete(`${process.env.REACT_APP_BASE_URL}/Bloguploader/` +  this.state.deleteBlog)
+      .delete(`${process.env.REACT_APP_BASE_URL}/Blog/`+this.state.deleteBlog)
       .then((res) => {
         console.log(res);
         this.handleclosemodal();
+        this.getAllPosts();
+      });
+  };
+
+  deleteUploadPost = () => {
+    axios
+      .delete(
+        `${process.env.REACT_APP_BASE_URL}/Bloguploader/`+
+          this.state.deleteuploadBlog
+      )      .then((res) => {
+        console.log(res);
+        this.handleuploadclosemodal();
         this.getAllUploadPosts();
       });
   };
@@ -162,7 +225,7 @@ class Bloginterface extends Component {
     );
 
     //const result = this.state.blogs.filter((blog) => blog.title.toLowerCase().includes(searchTerme));
-    this.setState((cur) => ({ ...cur, blogs: result1 }));
+    this.setState((cur) => ({ ...cur, blogs: result1}));
     this.setState((cur) => ({ ...cur, uploadBlogs: result2 }));
   }
 
@@ -174,17 +237,23 @@ class Bloginterface extends Component {
       this.state.allUploadBlogs,
       searchTerme
     );
-    
   };
+  handlemodal(y) {
+    console.log(y);
+    this.setState(() => ({ showblogmodal: true, deleteBlog: y }));
+  }
 
-  
 
-  handlemodal(x) {
-    this.setState(()=>({ show: true,deleteBlog:x }));
+  handleuploadmodal(x) {
+    
+    this.setState(() => ({ showuploadmodal: true, deleteuploadBlog: x }));
   }
 
   handleclosemodal() {
-    this.setState({ show: false });
+    this.setState({ showblogmodal: false });
+  }
+  handleuploadclosemodal() {
+    this.setState({ showuploadmodal: false });
   }
 
   render() {
@@ -247,7 +316,7 @@ class Bloginterface extends Component {
                     />
                     <strong>Anushka Praveen Shared by</strong>
                   </p>
-                  <span style={{ float: "right", marginTop: "-15px" }}>
+                  <span style={{ float: "right", marginTop: "-15px",marginLeft:"5px" }}>
                     <strong>Categorie | {blog.categorie}</strong>
                   </span>
 
@@ -339,10 +408,8 @@ class Bloginterface extends Component {
 
                   <div class="collapse" id="collapseExample">
                     <div class="card card-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life
-                      accusamus terry richardson ad squid. Nihil anim keffiyeh
-                      helvetica, craft beer labore wes anderson cred nesciunt
-                      sapiente ea proident.
+                    <textarea class="form-control" placeholder="Comment..." id="exampleFormControlTextarea1" rows="3"></textarea>
+                      
                     </div>
                   </div>
                 </Card>
@@ -379,6 +446,9 @@ class Bloginterface extends Component {
                     />
                     <strong>Anushka Praveen Shared by</strong>
                   </p>
+                  <span style={{ float: "right", marginTop: "-15px",marginLeft:"5px" }}>
+                    <strong>Categorie | {blog.categorie}</strong>
+                  </span>
                   <Card.Img
                     variant="top"
                     alt=""
@@ -407,15 +477,52 @@ class Bloginterface extends Component {
                     <Button
                       style={{ marginLeft: "5px", marginRight: "5px" }}
                       variant="danger"
-                      onClick={()=>this.handlemodal(blog._id)}
+                      onClick={() => this.handleuploadmodal(blog._id)}
                     >
                       Delete
                     </Button>
-                   
+                    <div style={{ float: "right" }}>
+                      <box-icon
+                        onClick={this.uploadupdatedislike.bind(this, blog._id)}
+                        id="1"
+                        border="square"
+                        type="solid"
+                        name="dislike"
+                        color={blog.dislikecolor}
+                        size="md"
+                      ></box-icon>
+                      <label className="label">{blog.dislike}</label>
+                      <box-icon
+                        onClick={this.uploadupdatelike.bind(this, blog._id)}
+                        id="1"
+                        border="square"
+                        type="solid"
+                        name="like"
+                        color={blog.likecolor}
+                        size="md"
+                      ></box-icon>
+                      <label className="label">{blog.like}</label>
+                    </div>
                   </Card.Body>
+                  <a
+                    class="btn btn-primary"
+                    data-bs-toggle="collapse"
+                    href="#collapseExample"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapseExample"
+                  >
+                    Comment
+                  </a>
+
+                  <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                    <textarea class="form-control" placeholder="Comment..." id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    </div>
                 </Card>
               ))}
-              <Modal show={this.state.show}>
+              <Modal show={this.state.showblogmodal}>
                 <Modal.Header>
                   <Modal.Title>Delete Article</Modal.Title>
                 </Modal.Header>
@@ -430,7 +537,8 @@ class Bloginterface extends Component {
                   </Button>
                 </Modal.Footer>
               </Modal>
-              <Modal show={this.state.show}>
+
+              <Modal show={this.state.showuploadmodal}>
                 <Modal.Header>
                   <Modal.Title>Delete Article</Modal.Title>
                 </Modal.Header>
