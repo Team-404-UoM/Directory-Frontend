@@ -17,6 +17,7 @@ class ForumReply extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleReply=this.handleReply.bind(this);
     }
 
     componentDidMount() {
@@ -42,6 +43,15 @@ class ForumReply extends Component {
           console.log(newreply);
          this.setState({ reply:this.state.reply.concat(newreply)})
         console.log(this.state.reply);
+      }
+
+      handleReply(){
+          const reply={
+              reply:this.state.replymessage
+          }
+
+        axios.put('http://localhost:4000/Forum/reply/'+this.props.location.query.id,reply)
+            .then(res => console.log(res))
       }
     
     render() {
@@ -72,7 +82,7 @@ class ForumReply extends Component {
                             </Card.Text>
 
                         </Card.Body>
-                        <Button variant="primary" onClick={this.handleClick}>Post</Button>
+                        <Button variant="primary" onClick={this.handleReply}>Post</Button>
                     </Card>
 
 
