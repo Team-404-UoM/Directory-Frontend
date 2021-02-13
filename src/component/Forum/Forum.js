@@ -155,7 +155,7 @@ class Forum extends Component {
         </div>
 
         <div style={{ backgroundColor: "rgba(192,192,192,0.3)" }}>
-          {this.state.posts.map((post) => (
+          {this.state.posts.slice(0,4).map((post) => (
             <Card
               key={post._id}
               style={{

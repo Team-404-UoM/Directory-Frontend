@@ -32,6 +32,7 @@ class Bloginterface extends Component {
       showblogmodal:false,
       deleteBlog: "",
       deleteuploadBlog: "",
+      visibleblog:5,
       //color:'outline-info'
     };
     this.updatelike = this.updatelike.bind(this);
@@ -41,6 +42,7 @@ class Bloginterface extends Component {
     this.handleclosemodal = this.handleclosemodal.bind(this);
     this.uploadupdatelike = this.uploadupdatelike.bind(this);
     this.uploadupdatedislike = this.uploadupdatedislike.bind(this);
+    this.loadmore=this.loadmore.bind(this);
   }
 
   updatelike = (id) => {
@@ -256,6 +258,13 @@ class Bloginterface extends Component {
     this.setState({ showuploadmodal: false });
   }
 
+  loadmore(){
+    this.setState((old)=>{
+      return{visibleblog:old.visibleblog+5}
+
+    })
+  }
+
   render() {
     return (
       <div style={{ backgroundColor: "rgba(192,192,192,0.3)" }}>
@@ -288,7 +297,7 @@ class Bloginterface extends Component {
           <Row>
             <Col xs={12} sm={12} md={6}>
               <h3 className="blog-section-title">Written Blogs</h3>
-              {this.state.blogs.map((blog) => (
+              {this.state.blogs.slice(0,this.state.visibleblog).map((blog) => (
                 <Card
                   key={blog._id}
                   style={{
@@ -395,30 +404,15 @@ class Bloginterface extends Component {
                       <label className="label">{blog.like}</label>
                     </div>
                   </Card.Body>
-                  <a
-                    class="btn btn-primary"
-                    data-bs-toggle="collapse"
-                    href="#collapseExample"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="collapseExample"
-                  >
-                    Comment
-                  </a>
-
-                  <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                    <textarea class="form-control" placeholder="Comment..." id="exampleFormControlTextarea1" rows="3"></textarea>
-                      
-                    </div>
-                  </div>
+                  
                 </Card>
               ))}
+              
             </Col>
 
             <Col>
               <h3 className="blog-section-title">Linked Blogs</h3>
-              {this.state.uploadBlogs.map((blog) => (
+              {this.state.uploadBlogs.slice(0,this.state.visibleblog).map((blog) => (
                 <Card
                   key={blog._id}
                   style={{
@@ -504,22 +498,9 @@ class Bloginterface extends Component {
                       <label className="label">{blog.like}</label>
                     </div>
                   </Card.Body>
-                  <a
-                    class="btn btn-primary"
-                    data-bs-toggle="collapse"
-                    href="#collapseExample"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="collapseExample"
-                  >
-                    Comment
-                  </a>
+                 
 
-                  <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                    <textarea class="form-control" placeholder="Comment..." id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    </div>
+                  
                 </Card>
               ))}
               <Modal show={this.state.showblogmodal}>
@@ -554,6 +535,9 @@ class Bloginterface extends Component {
                 </Modal.Footer>
               </Modal>
             </Col>
+          </Row>
+          <Row>
+          <div class="col-md-12 p-3 text-center">{this.state.visibleblog<(this.state.blogs.length && this.state.uploadBlogs.length) && <button type="button" class="btn btn-outline-info" onClick={this.loadmore}>Read more</button>}</div>
           </Row>
         </Container>
       </div>
