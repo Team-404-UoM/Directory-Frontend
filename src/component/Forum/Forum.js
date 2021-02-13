@@ -192,7 +192,7 @@ class Forum extends Component {
                     <BiMessageRounded style={{ marginRight: "2px" }} />
                     Reply
                     <Badge className="badgestyle" variant="light">
-                      0
+                      {post.reply.length}
                     </Badge>
                   </Button>
                 </Link>
