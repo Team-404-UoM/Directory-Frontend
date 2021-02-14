@@ -13,7 +13,8 @@ class ForumReply extends Component {
             message: "",
             createtime: "",
             replymessage:"",
-            reply:["h1","h2"]
+
+            replies:[]
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -24,8 +25,8 @@ class ForumReply extends Component {
         axios.get('http://localhost:4000/Forum/'+this.props.location.query.id)
             .then(res => this.setState({
                 message: res.data.forum.message,
-                createtime: res.data.forum.createdAt
-
+                createtime: res.data.forum.createdAt,
+                replies:res.data.forum.reply.reverse(),
             }))
 
 
@@ -51,7 +52,15 @@ class ForumReply extends Component {
           }
 
         axios.put('http://localhost:4000/Forum/reply/'+this.props.location.query.id,reply)
-            .then(res => console.log(res))
+            .then(res =>this.setState({replymessage:""}) )
+      }
+
+      handleDelete(value){
+          const deleteReply=value;
+          axios.delete('http://localhost:4000/Forum/reply/'+this.props.location.query.id,deleteReply)
+            .then((res) =>console.log(res))
+
+
       }
     
     render() {
@@ -68,7 +77,23 @@ class ForumReply extends Component {
                             </Card.Text>
 
                         </Card.Body>
-                    </Card></Col>
+                    </Card>
+                    {this.state.replies.map((reply)=>(
+                        <Card style={{ width: '400px', marginBottom: '30px', marginTop: '20px', border: '1px solid grey' }}>
+                            <Card.Header >
+                                <img src={pic2} style={{ width: '30px' }} className="rounded mr-2" alt="" />Anushka Praveen<small style={{ float: 'right' }}></small></Card.Header>
+
+                            <Card.Body>
+
+                                <Card.Text>
+                                 <p>{reply}</p>
+                                </Card.Text>
+
+                                <Button className='cardbutton' variant="outline-info" size='sm' >Edit</Button>
+                                <Button variant="outline-danger" size='sm' onClick={()=>this.handleDelete(reply)}>Delete</Button>
+                            </Card.Body>
+                        </Card>
+))}</Col>
 
 
 
@@ -90,20 +115,6 @@ class ForumReply extends Component {
 
 
 
-                        <Card style={{ width: '400px', marginBottom: '30px', marginTop: '20px', border: '1px solid grey' }}>
-                            <Card.Header >
-                                <img src={pic2} style={{ width: '30px' }} className="rounded mr-2" alt="" />Anushka Praveen<small style={{ float: 'right' }}></small></Card.Header>
-
-                            <Card.Body>
-
-                                <Card.Text>
-                                 <p>{this.state.replymessage}</p>
-                                </Card.Text>
-
-                                <Button className='cardbutton' variant="outline-info" size='sm' >Edit</Button>
-                                <Button variant="outline-danger" size='sm' >Delete</Button>
-                            </Card.Body>
-                        </Card>
                     </Col>
                 </Row>
 
