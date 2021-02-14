@@ -45,3 +45,16 @@
     text-align: center;
     padding: 10px;
 }
+
+.blog-views {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.blog-date {
+    font-size: 13px;
+    margin-left: 2px;
+    margin-right: 10px;
+    font-weight: bold;
+    float: right;
+}

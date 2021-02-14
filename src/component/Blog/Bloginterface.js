@@ -12,7 +12,7 @@ import { BsHeart } from "react-icons/bs";
 import { BiDislike, BiLike } from "react-icons/bi";
 import boxicons from "boxicons";
 import bootstrap from "bootstrap";
-
+import moment from "moment";
 class Bloginterface extends Component {
   constructor(props) {
     super(props);
@@ -29,10 +29,10 @@ class Bloginterface extends Component {
       uploadlikeupdated: false,
       uploaddislikeupdated: false,
       showuploadmodal: false,
-      showblogmodal:false,
+      showblogmodal: false,
       deleteBlog: "",
       deleteuploadBlog: "",
-      visibleblog:5,
+      visibleblog: 5,
       //color:'outline-info'
     };
     this.updatelike = this.updatelike.bind(this);
@@ -42,7 +42,7 @@ class Bloginterface extends Component {
     this.handleclosemodal = this.handleclosemodal.bind(this);
     this.uploadupdatelike = this.uploadupdatelike.bind(this);
     this.uploadupdatedislike = this.uploadupdatedislike.bind(this);
-    this.loadmore=this.loadmore.bind(this);
+    this.loadmore = this.loadmore.bind(this);
   }
 
   updatelike = (id) => {
@@ -95,7 +95,7 @@ class Bloginterface extends Component {
       });
 
       this.setState((prevState, props) => {
-        return { 
+        return {
           dislikeupdated: false,
           dislikecolor: "black",
         };
@@ -103,15 +103,16 @@ class Bloginterface extends Component {
     }
   };
 
-  
   uploadupdatelike = (id) => {
     console.log(id);
 
     if (!this.state.uploadlikeupdated) {
-      axios.patch("http://localhost:4000/Bloguploader/like/" + id).then((res) => {
-        console.log(res);
-        this.getAllUploadPosts();
-      });
+      axios
+        .patch("http://localhost:4000/Bloguploader/like/" + id)
+        .then((res) => {
+          console.log(res);
+          this.getAllUploadPosts();
+        });
       this.setState((prevState, props) => {
         return {
           uploadlikeupdated: true,
@@ -119,10 +120,12 @@ class Bloginterface extends Component {
         };
       });
     } else {
-      axios.patch("http://localhost:4000/Bloguploader/unlike/" + id).then((res) => {
-        console.log(res);
-        this.getAllUploadPosts();
-      });
+      axios
+        .patch("http://localhost:4000/Bloguploader/unlike/" + id)
+        .then((res) => {
+          console.log(res);
+          this.getAllUploadPosts();
+        });
 
       this.setState((prevState, props) => {
         return {
@@ -137,10 +140,12 @@ class Bloginterface extends Component {
     console.log(id);
 
     if (!this.state.uploaddislikeupdated) {
-      axios.patch("http://localhost:4000/Bloguploader/dislike/" + id).then((res) => {
-        console.log(res);
-        this.getAllUploadPosts();
-      });
+      axios
+        .patch("http://localhost:4000/Bloguploader/dislike/" + id)
+        .then((res) => {
+          console.log(res);
+          this.getAllUploadPosts();
+        });
       this.setState((prevState, props) => {
         return {
           uploaddislikeupdated: true,
@@ -148,10 +153,12 @@ class Bloginterface extends Component {
         };
       });
     } else {
-      axios.patch("http://localhost:4000/Bloguploader/disunlike/" + id).then((res) => {
-        console.log(res);
-        this.getAllUploadPosts();
-      });
+      axios
+        .patch("http://localhost:4000/Bloguploader/disunlike/" + id)
+        .then((res) => {
+          console.log(res);
+          this.getAllUploadPosts();
+        });
 
       this.setState((prevState, props) => {
         return {
@@ -186,7 +193,7 @@ class Bloginterface extends Component {
 
   deletePost = () => {
     axios
-      .delete(`${process.env.REACT_APP_BASE_URL}/Blog/`+this.state.deleteBlog)
+      .delete(`${process.env.REACT_APP_BASE_URL}/Blog/` + this.state.deleteBlog)
       .then((res) => {
         console.log(res);
         this.handleclosemodal();
@@ -197,9 +204,10 @@ class Bloginterface extends Component {
   deleteUploadPost = () => {
     axios
       .delete(
-        `${process.env.REACT_APP_BASE_URL}/Bloguploader/`+
+        `${process.env.REACT_APP_BASE_URL}/Bloguploader/` +
           this.state.deleteuploadBlog
-      )      .then((res) => {
+      )
+      .then((res) => {
         console.log(res);
         this.handleuploadclosemodal();
         this.getAllUploadPosts();
@@ -217,6 +225,11 @@ class Bloginterface extends Component {
     );
   };
 
+  updateviews(id){
+    axios.put(`${process.env.REACT_APP_BASE_URL}/Blog/updateviews/`+id)
+    .then((res)=>{console.log(res)})
+  }
+
   filterContent(blogs, uploadedBlogs, searchTerme) {
     const result1 = blogs.filter((blog) =>
       blog.title.toLowerCase().includes(searchTerme)
@@ -227,7 +240,7 @@ class Bloginterface extends Component {
     );
 
     //const result = this.state.blogs.filter((blog) => blog.title.toLowerCase().includes(searchTerme));
-    this.setState((cur) => ({ ...cur, blogs: result1}));
+    this.setState((cur) => ({ ...cur, blogs: result1 }));
     this.setState((cur) => ({ ...cur, uploadBlogs: result2 }));
   }
 
@@ -240,14 +253,17 @@ class Bloginterface extends Component {
       searchTerme
     );
   };
+handleupdateviews(id){
+  console.log(id);
+this.updateviews(id)
+}
+
   handlemodal(y) {
     console.log(y);
     this.setState(() => ({ showblogmodal: true, deleteBlog: y }));
   }
 
-
   handleuploadmodal(x) {
-    
     this.setState(() => ({ showuploadmodal: true, deleteuploadBlog: x }));
   }
 
@@ -258,11 +274,10 @@ class Bloginterface extends Component {
     this.setState({ showuploadmodal: false });
   }
 
-  loadmore(){
-    this.setState((old)=>{
-      return{visibleblog:old.visibleblog+5}
-
-    })
+  loadmore() {
+    this.setState((old) => {
+      return { visibleblog: old.visibleblog + 5 };
+    });
   }
 
   render() {
@@ -297,7 +312,7 @@ class Bloginterface extends Component {
           <Row>
             <Col xs={12} sm={12} md={6}>
               <h3 className="blog-section-title">Written Blogs</h3>
-              {this.state.blogs.slice(0,this.state.visibleblog).map((blog) => (
+              {this.state.blogs.slice(0, this.state.visibleblog).map((blog) => (
                 <Card
                   key={blog._id}
                   style={{
@@ -325,9 +340,22 @@ class Bloginterface extends Component {
                     />
                     <strong>Anushka Praveen Shared by</strong>
                   </p>
-                  <span style={{ float: "right", marginTop: "-15px",marginLeft:"5px" }}>
+                  <span
+                    style={{
+                      float: "right",
+                      marginTop: "-15px",
+                      marginLeft: "5px",
+                    }}
+                  >
                     <strong>Categorie | {blog.categorie}</strong>
+                    <box-icon  style={{marginLeft:"195px"}} name='time' animation='flashing' size="xs" ></box-icon>
+                    <span className="blog-date">
+                      {moment(blog.updatedAt).format("MMM DD ,YYYY")}
+                    </span>
                   </span>
+                  
+                  
+                  
 
                   <Card.Img
                     variant="top"
@@ -345,164 +373,195 @@ class Bloginterface extends Component {
                         <strong>{blog.title}</strong>
                       </h4>
                     </Card.Title>
+                    <div className="row">
+                      <div className="col-6">
+                        <Link
+                          to={{
+                            pathname: "/Blog/BlogView/",
+                            query: { id: blog._id },
+                          }}
+                        >
+                          <Button
+                            onClick={() => this.handleupdateviews(blog._id)}
+                            style={{ marginLeft: "5px", marginRight: "5px" }}
+                            variant="primary"
+                            size="sm"
+                          >
+                            Read
+                          </Button>
+                        </Link>
+                        <Link
+                          to={{
+                            pathname: "/Blog/BlogEditPost",
+                            query: { id: blog._id },
+                          }}
+                        >
+                          <Button
+                            className=""
+                            variant="success"
+                            onClick={this.editBlog.bind(this, blog._id)}
+                            size="sm"
+                          >
+                            Edit
+                          </Button>
+                        </Link>
+                        <Button
+                          style={{ marginLeft: "5px", marginRight: "5px" }}
+                          variant="danger"
+                          size="sm"
+                          onClick={() =>
+                            this.handlemodal(blog._id)
+                          } /* onClick={this.deletePost.bind(this,blog._id)} */
+                        >
+                          Delete
+                        </Button>
+                        <div>
+                          <p>
+                            <span class="badge rounded-pill bg-dark blog-views">
+                             {blog.views}
+                            </span>{" "}
+                            Views
+                          </p>
+                        </div>
+                      </div>
 
-                    <Link
-                      to={{
-                        pathname: "/Blog/BlogView/",
-                        query: { id: blog._id },
-                      }}
-                    >
-                      <Button
-                        onClick={() => console.log("Click")}
-                        style={{ marginLeft: "5px", marginRight: "5px" }}
-                        variant="primary"
-                      >
-                        Read
-                      </Button>
-                    </Link>
-                    <Link
-                      to={{
-                        pathname: "/Blog/BlogEditPost",
-                        query: { id: blog._id },
-                      }}
-                    >
-                      <Button
-                        className=""
-                        variant="success"
-                        onClick={this.editBlog.bind(this, blog._id)}
-                      >
-                        Edit
-                      </Button>
-                    </Link>
-                    <Button
-                      style={{ marginLeft: "5px", marginRight: "5px" }}
-                      variant="danger"
-                      onClick={()=>this.handlemodal(blog._id)} /* onClick={this.deletePost.bind(this,blog._id)} */
-                    >
-                      Delete
-                    </Button>
-                    <div style={{ float: "right" }}>
-                      <box-icon
-                        onClick={this.updatedislike.bind(this, blog._id)}
-                        id="1"
-                        border="square"
-                        type="solid"
-                        name="dislike"
-                        color={blog.dislikecolor}
-                        size="md"
-                      ></box-icon>
-                      <label className="label">{blog.dislike}</label>
-                      <box-icon
-                        onClick={this.updatelike.bind(this, blog._id)}
-                        id="1"
-                        border="square"
-                        type="solid"
-                        name="like"
-                        color={blog.likecolor}
-                        size="md"
-                      ></box-icon>
-                      <label className="label">{blog.like}</label>
+                      <div className="col-6">
+                        <div style={{ float: "right" }}>
+                          <box-icon
+                            onClick={this.updatedislike.bind(this, blog._id)}
+                            id="1"
+                            border="square"
+                            type="solid"
+                            name="dislike"
+                            color={blog.dislikecolor}
+                            size="md"
+                          ></box-icon>
+                          <label className="label">{blog.dislike}</label>
+                          <box-icon
+                            onClick={this.updatelike.bind(this, blog._id)}
+                            id="1"
+                            border="square"
+                            type="solid"
+                            name="like"
+                            color={blog.likecolor}
+                            size="md"
+                          ></box-icon>
+                          <label className="label">{blog.like}</label>
+                        </div>
+                      </div>
                     </div>
                   </Card.Body>
-                  
                 </Card>
               ))}
-              
             </Col>
 
             <Col>
               <h3 className="blog-section-title">Linked Blogs</h3>
-              {this.state.uploadBlogs.slice(0,this.state.visibleblog).map((blog) => (
-                <Card
-                  key={blog._id}
-                  style={{
-                    width: "30rem",
-                    margin: "auto",
-                    marginTop: "20px",
-                    marginBottom: "50px",
-                    borderStyle: "outset",
-                    borderWidth: "2px",
-                    borderColor: "black",
-                  }}
-                >
-                  <p style={{ fontSize: "13px" }}>
-                    <img
-                      src={pic2}
+              {this.state.uploadBlogs
+                .slice(0, this.state.visibleblog)
+                .map((blog) => (
+                  <Card
+                    key={blog._id}
+                    style={{
+                      width: "30rem",
+                      margin: "auto",
+                      marginTop: "20px",
+                      marginBottom: "50px",
+                      borderStyle: "outset",
+                      borderWidth: "2px",
+                      borderColor: "black",
+                    }}
+                  >
+                    <p style={{ fontSize: "13px" }}>
+                      <img
+                        src={pic2}
+                        alt=""
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          marginRight: "5px",
+                          marginTop: "10px",
+                          marginLeft: "5px",
+                          borderRadius: "2px",
+                        }}
+                      />
+                      <strong>Anushka Praveen Shared by</strong>
+                    </p>
+                    <span
+                      style={{
+                        float: "right",
+                        marginTop: "-15px",
+                        marginLeft: "5px",
+                      }}
+                    >
+                      <strong>Categorie | {blog.categorie}</strong>
+                      <box-icon  style={{marginLeft:"238px"}} name='time' animation='flashing' size="xs" ></box-icon>
+                      <span className="blog-date">
+                      {moment(blog.updatedAt).format("MMM DD ,YYYY")}
+                    </span>
+                    </span>
+                    <Card.Img
+                      variant="top"
                       alt=""
                       style={{
-                        width: "30px",
-                        height: "30px",
-                        marginRight: "5px",
-                        marginTop: "10px",
-                        marginLeft: "5px",
-                        borderRadius: "2px",
+                        border: "1px solid gray",
+                        width: "29.8rem",
+                        height: "19rem",
                       }}
+                      src={blog.image}
                     />
-                    <strong>Anushka Praveen Shared by</strong>
-                  </p>
-                  <span style={{ float: "right", marginTop: "-15px",marginLeft:"5px" }}>
-                    <strong>Categorie | {blog.categorie}</strong>
-                  </span>
-                  <Card.Img
-                    variant="top"
-                    alt=""
-                    style={{
-                      border: "1px solid gray",
-                      width: "29.8rem",
-                      height: "19rem",
-                    }}
-                    src={blog.image}
-                  />
-                  <Card.Body>
-                    <Card.Title style={{ textAlign: "center" }}>
-                      <h4>
-                        <strong>{blog.title}</strong>
-                      </h4>
-                    </Card.Title>
-                    <Button
-                      onClick={() => console.log("Click")}
-                      href={blog.url}
-                      style={{ marginLeft: "5px", marginRight: "5px" }}
-                      variant="primary"
-                    >
-                      Read
-                    </Button>
+                    <Card.Body>
+                      <Card.Title style={{ textAlign: "center" }}>
+                        <h4>
+                          <strong>{blog.title}</strong>
+                        </h4>
+                      </Card.Title>
+                      <Button
+                        onClick={() => console.log("Click")}
+                        href={blog.url}
+                        style={{ marginLeft: "5px", marginRight: "5px" }}
+                        variant="primary"
+                        size="sm"
+                      >
+                        Read
+                      </Button>
 
-                    <Button
-                      style={{ marginLeft: "5px", marginRight: "5px" }}
-                      variant="danger"
-                      onClick={() => this.handleuploadmodal(blog._id)}
-                    >
-                      Delete
-                    </Button>
-                    <div style={{ float: "right" }}>
-                      <box-icon
-                        onClick={this.uploadupdatedislike.bind(this, blog._id)}
-                        id="1"
-                        border="square"
-                        type="solid"
-                        name="dislike"
-                        color={blog.dislikecolor}
-                        size="md"
-                      ></box-icon>
-                      <label className="label">{blog.dislike}</label>
-                      <box-icon
-                        onClick={this.uploadupdatelike.bind(this, blog._id)}
-                        id="1"
-                        border="square"
-                        type="solid"
-                        name="like"
-                        color={blog.likecolor}
-                        size="md"
-                      ></box-icon>
-                      <label className="label">{blog.like}</label>
-                    </div>
-                  </Card.Body>
-                 
-
-                  
-                </Card>
-              ))}
+                      <Button
+                        style={{ marginLeft: "5px", marginRight: "5px" }}
+                        variant="danger"
+                        size="sm"
+                        onClick={() => this.handleuploadmodal(blog._id)}
+                      >
+                        Delete
+                      </Button>
+                      <div style={{ float: "right" }}>
+                        <box-icon
+                          onClick={this.uploadupdatedislike.bind(
+                            this,
+                            blog._id
+                          )}
+                          id="1"
+                          border="square"
+                          type="solid"
+                          name="dislike"
+                          color={blog.dislikecolor}
+                          size="md"
+                        ></box-icon>
+                        <label className="label">{blog.dislike}</label>
+                        <box-icon
+                          onClick={this.uploadupdatelike.bind(this, blog._id)}
+                          id="1"
+                          border="square"
+                          type="solid"
+                          name="like"
+                          color={blog.likecolor}
+                          size="md"
+                        ></box-icon>
+                        <label className="label">{blog.like}</label>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                ))}
               <Modal show={this.state.showblogmodal}>
                 <Modal.Header>
                   <Modal.Title>Delete Article</Modal.Title>
@@ -537,7 +596,18 @@ class Bloginterface extends Component {
             </Col>
           </Row>
           <Row>
-          <div class="col-md-12 p-3 text-center">{this.state.visibleblog<(this.state.blogs.length && this.state.uploadBlogs.length) && <button type="button" class="btn btn-outline-info" onClick={this.loadmore}>Read more</button>}</div>
+            <div class="col-md-12 p-3 text-center">
+              {this.state.visibleblog <
+                (this.state.blogs.length && this.state.uploadBlogs.length) && (
+                <button
+                  type="button"
+                  class="btn btn-outline-info"
+                  onClick={this.loadmore}
+                >
+                  Read more
+                </button>
+              )}
+            </div>
           </Row>
         </Container>
       </div>

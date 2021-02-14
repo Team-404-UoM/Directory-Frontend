@@ -10,7 +10,7 @@ class Test extends Component {
         url:null,
         allurl:[]
       }
-   
+   this.funsplit=this.funsplit.bind(this);
   }
   onChangeHandler=(event)=>{
     console.log(event.target.files[0]);
@@ -27,7 +27,7 @@ class Test extends Component {
 
   onClickHandler = () => {
     const imgurl={
-      URL:this.state.url,
+      url:this.state.url,
       
     }
     console.log(this.state.url);
@@ -46,6 +46,15 @@ componentDidMount() {
   this.getallurl();
   console.log(this.state.allurl);
 } 
+funsplit(){
+  console.log("clicked");
+  
+  let current=this.state.allurl;
+  console.log(current);
+  for(let x=0;x<current.length;x++){
+console.log(current.x);
+  }
+}
     render() {
     
       return (
@@ -61,14 +70,15 @@ componentDidMount() {
                 </button>
                 <div style={{padding:"50px"}}>
                 <img  src={this.state.url} width="200px" height="200px"/>
-                </div>
-                <div>
+                 </div>
+                 <div>
                 {this.state.allurl.map((url) => (
-                <li>{url.URL}</li>,
-                <img  src={url.URL} width="100px" height="100px"></img>))}
+                <li>{url.URL}</li>
+               /*  <img  src={url.URL} width="100px" height="100px"></img> */
+                ))}
 
-                </div>
-           
+                </div>  
+           <button onClick={this.funsplit}>click</button>
             </div>
         
         </div>

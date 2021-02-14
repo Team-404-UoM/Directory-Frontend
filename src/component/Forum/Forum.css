@@ -54,3 +54,9 @@
                 overflow: scroll;
                 border: 1px solid #ccc;
             }
+            
+            .select {
+                width: 100px;
+                margin: 10px;
+                margin-left: 20px;
+            }

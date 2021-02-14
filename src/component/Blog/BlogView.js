@@ -4,6 +4,7 @@ import axios from "axios";
 import pic2 from "../Forum/pic2.jpg";
 import "./Blogview.css";
 import moment from "moment";
+import boxicons from "boxicons";
 
 class BlogView extends Component {
   constructor(props) {
@@ -77,12 +78,14 @@ class BlogView extends Component {
                     />
                     <strong>Anushka Praveen </strong>
                     <span style={{ marginLeft: "40px" }}>
+                    <box-icon  name='time' animation='flashing' size="xs" ></box-icon>
                       <strong>
                         Created At:{" "}
                         {moment(this.state.createtime).format("MMM DD ,YYYY")}
                       </strong>
                     </span>
                     <span style={{ marginLeft: "50px" }}>
+                    <box-icon   name='time' animation='flashing' size="xs" ></box-icon>
                       <strong>
                         Updated At:{" "}
                         {moment(this.state.updatetime).format("MMM DD ,YYYY")}

@@ -18,13 +18,17 @@ class Forum extends Component {
       posts: [],
       showModel: false,
       showConfirm: false,
-      showDeleteConfirm:false,
-      deletePost:"",
+      showDeleteConfirm: false,
+      deletePost: "",
       editPost: { message: "", id: "" },
+      visiblequestions: 10,
+      visibletype: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.loadmore = this.loadmore.bind(this);
+    this.handletypechange = this.handletypechange.bind(this);
   }
 
   handleChange(event) {
@@ -59,12 +63,14 @@ class Forum extends Component {
   };
 
   deletePost = (id) => {
-    axios.delete("http://localhost:4000/Forum/" + this.state.deletePost).then((res) => {
-      console.log(res);
-  this.handleDeleteCloseModal();
-      
-      this.getAllPosts();
-    });
+    axios
+      .delete("http://localhost:4000/Forum/" + this.state.deletePost)
+      .then((res) => {
+        console.log(res);
+        this.handleDeleteCloseModal();
+
+        this.getAllPosts();
+      });
   };
 
   editPost = (id, message) => {
@@ -74,7 +80,6 @@ class Forum extends Component {
       editPost: { message: message, id: id },
     }));
     console.log(this.state);
-    
   };
 
   updatePost = () => {
@@ -104,23 +109,34 @@ class Forum extends Component {
     this.getAllPosts();
   };
 
-  handleModal=()=> {
-   this.setState({ showConfirm: true });
-  }
+  handleModal = () => {
+    this.setState({ showConfirm: true });
+  };
 
-  handleCloseModal=()=> {
+  handleCloseModal = () => {
     this.setState({ showConfirm: false });
-  }
+  };
 
-  handleDeleteModal=(id)=> {
-   this.setState(()=>({ showDeleteConfirm: true,deletePost:id }));
-  }
+  handleDeleteModal = (id) => {
+    this.setState(() => ({ showDeleteConfirm: true, deletePost: id }));
+  };
 
-  handleDeleteCloseModal=()=> {
+  handleDeleteCloseModal = () => {
     this.setState({ showDeleteConfirm: false });
+  };
+
+  loadmore() {
+    this.setState((old) => {
+      return { visiblequestions: old.visiblequestions + 5 };
+    });
   }
 
-  
+  handletypechange(event) {
+    this.setState(
+      { visibletype: event.target.value },
+      console.log(this.state.visibletype)
+    );
+  }
 
   render() {
     return (
@@ -144,6 +160,32 @@ class Forum extends Component {
                 />
               </Card.Text>
             </Card.Body>
+            <div>
+              <select
+                className="form-select-sm select"
+                aria-label="Default select example"
+                onChange={this.handletypechange}
+              >
+                <option selected>Select Type</option>
+                <option value="all">All</option>
+                <option value="academic">Academic</option>
+                <option value="student">Student</option>
+              </select>
+              {this.state.visibletype == "student" && (
+                <select
+                  className="form-select-sm select"
+                  aria-label="Default select example"
+                >
+                  <option selected>Select Faculty</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Information Technology">
+                    Information Technology
+                  </option>
+                  <option value="Architecture">Architecture</option>
+                  <option value="Business">Business</option>
+                </select>
+              )}
+            </div>
           </Card>
           <Button
             className="button"
@@ -155,66 +197,84 @@ class Forum extends Component {
         </div>
 
         <div style={{ backgroundColor: "rgba(192,192,192,0.3)" }}>
-          {this.state.posts.slice(0,4).map((post) => (
-            <Card
-              key={post._id}
-              style={{
-                width: "500px",
-                marginLeft: "30%",
-                marginBottom: "30px",
-                marginTop: "20px",
-                border: "1px solid grey",
-              }}
-            >
-              <Card.Header>
-                <img
-                  src={pic2}
-                  style={{ width: "20px" }}
-                  className="rounded mr-2"
-                  alt=""
-                />
-                Anushka Praveen
-                <small style={{ float: "right" }}>
-                  {moment(post.createdAt).fromNow()}
-                </small>
-              </Card.Header>
+          {this.state.posts
+            .slice(0, this.state.visiblequestions)
+            .map((post) => (
+              <Card
+                key={post._id}
+                style={{
+                  width: "500px",
+                  marginLeft: "30%",
+                  marginBottom: "30px",
+                  marginTop: "20px",
+                  border: "1px solid grey",
+                }}
+              >
+                <Card.Header>
+                  <img
+                    src={pic2}
+                    style={{ width: "20px" }}
+                    className="rounded mr-2"
+                    alt=""
+                  />
+                  Anushka Praveen
+                  <small style={{ float: "right" }}>
+                    {moment(post.createdAt).fromNow()}
+                  </small>
+                </Card.Header>
 
-              <Card.Body>
-                <Card.Text>{post.message}</Card.Text>
-                <Link
-                  to={{ pathname: "Forum/ForumReply", query: { id: post._id } }}
-                >
+                <Card.Body>
+                  <Card.Text>{post.message}</Card.Text>
+                  <Link
+                    to={{
+                      pathname: "Forum/ForumReply",
+                      query: { id: post._id },
+                    }}
+                  >
+                    <Button
+                      variant="outline-info"
+                      className="cardbutton"
+                      size="sm"
+                    >
+                      <BiMessageRounded style={{ marginRight: "2px" }} />
+                      Reply
+                      <Badge className="badgestyle" variant="light">
+                        {post.reply.length}
+                      </Badge>
+                    </Button>
+                  </Link>
                   <Button
                     variant="outline-info"
                     className="cardbutton"
                     size="sm"
+                    onClick={this.editPost.bind(this, post._id, post.message)}
                   >
-                    <BiMessageRounded style={{ marginRight: "2px" }} />
-                    Reply
-                    <Badge className="badgestyle" variant="light">
-                      {post.reply.length}
-                    </Badge>
+                    Edit
                   </Button>
-                </Link>
-                <Button
-                  variant="outline-info"
-                  className="cardbutton"
-                  size="sm"
-                  onClick={this.editPost.bind(this, post._id, post.message)}
-                >
-                  Edit
-                </Button>
-                <Button
-                  variant="outline-danger"
-                  className="carddeletebutton"
-                  size="sm"
-                  onClick={()=>this.handleDeleteModal(post._id)}/* {this.deletePost.bind(this, post._id)} */
-                >
-                  <RiDeleteBin6Line />
-                </Button>
-              </Card.Body>
-            </Card>
-          ))}
+                  <Button
+                    variant="outline-danger"
+                    className="carddeletebutton"
+                    size="sm"
+                    onClick={() =>
+                      this.handleDeleteModal(post._id)
+                    } /* {this.deletePost.bind(this, post._id)} */
+                  >
+                    <RiDeleteBin6Line />
+                  </Button>
+                </Card.Body>
+              </Card>
+            ))}
+          <div class="col-md-12 p-3 text-center">
+            {this.state.visiblequestions < this.state.posts.length && (
+              <button
+                type="button"
+                class="btn btn-outline-info"
+                onClick={this.loadmore}
+              >
+                Read more
+              </button>
+            )}
+          </div>
         </div>
         <Modal show={this.state.showModel}>
           <Modal.Header closeButton>
@@ -242,38 +302,36 @@ class Forum extends Component {
         </Modal>
 
         <Modal show={this.state.showConfirm}>
-                <Modal.Header>
-                  <Modal.Title>Post Question</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Do you want post this Question?</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={this.handleCloseModal}>
-                    Close
-                  </Button>
+          <Modal.Header>
+            <Modal.Title>Post Question</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Do you want post this Question?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleCloseModal}>
+              Close
+            </Button>
 
-                  <Button variant="danger" onClick={this.handleClick}>
-                    Post Question
-                  </Button>
-                </Modal.Footer>
-              </Modal>
+            <Button variant="danger" onClick={this.handleClick}>
+              Post Question
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
-              <Modal show={this.state.showDeleteConfirm}>
-                <Modal.Header>
-                  <Modal.Title>Delete Question</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Do you want Delete this Question?</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={this.handleDeleteCloseModal}>
-                    Close
-                  </Button>
+        <Modal show={this.state.showDeleteConfirm}>
+          <Modal.Header>
+            <Modal.Title>Delete Question</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Do you want Delete this Question?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleDeleteCloseModal}>
+              Close
+            </Button>
 
-                  <Button variant="danger" onClick={this.deletePost}>
-                   Delete Question
-                  </Button>
-                </Modal.Footer>
-              </Modal>
-
-             
+            <Button variant="danger" onClick={this.deletePost}>
+              Delete Question
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }
