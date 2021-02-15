@@ -2,23 +2,30 @@ import React, {useState, useEffect} from 'react';
 import {RiCalendarEventFill} from 'react-icons/ri'
 import {BsFillPersonCheckFill} from 'react-icons/bs'
 import {BsCheckAll} from 'react-icons/bs'
-import './Events.css';
+import '../../App.css';
 
 import DateCountdown from 'react-date-countdown-timer';
 import { CModal, CModalHeader, CModalBody,CModalFooter,CButton } from "@coreui/react";
 
 //Import api calls
-import {getEvents, updateAttendance} from './Events_api_calls'
+import {getEvents, updateAttendance, getThubnails, getThubnailImage} from '../../config/api_calls'
 
 const Event_page = () => {
 
     const [events, setEvents] = useState([]);
+    const [thumbs, setthumbs] = useState([]);
     const [modal, setModal] = useState(false);
 
-
+    //Fetch event data and thumnails to state
     useEffect(()=>{
+        //Event data
         getEvents().then(result =>{
             setEvents(result)
+            console.log(result);
+        })
+        //Thumbnails
+        getThubnails().then(result =>{
+            setthumbs(result);
             console.log(result);
         })
     }, [])
@@ -30,12 +37,16 @@ const Event_page = () => {
 
     return (
         <div className="container" style={{marginTop: 20}}>
-         {events.map((item, i) =>{ 
+            {events.map((item, i) =>{
                 return(
-                    <div className="card" key={item._id} style={{marginTop: 20, borderRadius: 15}}>
+                    <div className="card" style={{marginTop: 20, borderRadius: 15, marginBottom: 20}}>
                     <div className="card-horizontal">
                         <div className="img-square-wrapper" style={{padding: 15}}>
-                            <img className="" src={item.image} alt="Card image cap" width={300} height={200} style={{borderRadius: 10}}/>
+                            {thumbs.map(thumbnail => {
+                                if(item.image == thumbnail.filename){          
+                                        return <img className="" src={`http://localhost:5000/events/image/${thumbnail.filename}`} alt="Card image cap" width={300} height={200} style={{borderRadius: 10}}/>
+                                }
+                            })}
                         </div>
                         <div className="card-body">
                             <h3 className="card-title">{item.title}</h3>
@@ -49,15 +60,16 @@ const Event_page = () => {
                             <h4>
                             <DateCountdown 
                             dateTo={item.date} 
-                           //callback={()=>alert('Hello')} 
                             numberOfFigures={3} 
                             locales ={['year',' Months',' Days','Hours','minute','second']}
                             />
                             </h4>
                             <h5>Remaining</h5>
+                            <div><h6>Event Will be Held On {item.date}</h6></div>
                             </div>
                             </div>
-                            <h6 style={{marginTop: 13}}>{item.attendance} people are going  <BsFillPersonCheckFill style={{marginLeft: 4}}/></h6>
+                            {item.attendance == 1 ? <h6 style={{marginTop: 13}}>{item.attendance} person is going  <BsFillPersonCheckFill style={{marginLeft: 4}}/></h6> :
+                            <h6 style={{marginTop: 13}}>{item.attendance} people are participating  <BsFillPersonCheckFill style={{marginLeft: 4}}/></h6>}
                             </div>
                             
                     </div>
@@ -88,7 +100,7 @@ const Event_page = () => {
                     </CModal>
                     </div>
         )
-          })} 
+            })}
         </div>
     );
 }
