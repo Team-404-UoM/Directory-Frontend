@@ -178,15 +178,15 @@ class Bloginterface extends Component {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/Blog/Bloginterface`)
       .then((res) => {
-        this.setState((cur) => ({ ...cur, blogs: res.data }));
-        this.setState((cur) => ({ ...cur, allBlogs: res.data }));
+        this.setState((cur) => ({ ...cur, blogs: res.data.reverse() }));
+        this.setState((cur) => ({ ...cur, allBlogs: res.data.reverse() }));
       });
     // console.log(res.data);
   }
   getAllUploadPosts = () => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/Bloguploader`).then((res) => {
-      this.setState((cur) => ({ ...cur, uploadBlogs: res.data }));
-      this.setState((cur) => ({ ...cur, allUploadBlogs: res.data }));
+      this.setState((cur) => ({ ...cur, uploadBlogs: res.data.reverse() }));
+      this.setState((cur) => ({ ...cur, allUploadBlogs: res.data.reverse() }));
     });
     // console.log(this.state.res);
   };
@@ -246,7 +246,7 @@ class Bloginterface extends Component {
 
   handleTextSearch = (e) => {
     const searchTerme = e.currentTarget.value;
-    console.log(searchTerme);
+    console.log(this.state.allBlogs);
     this.filterContent(
       this.state.allBlogs,
       this.state.allUploadBlogs,

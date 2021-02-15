@@ -13,7 +13,7 @@ class Test extends Component {
    this.funsplit=this.funsplit.bind(this);
   }
   onChangeHandler=(event)=>{
-    console.log(event.target.files[0]);
+    console.log(URL.createObjectURL(event.target.files[0]));
     
     this.setState({
       selectedFile:event.target.files[0],
@@ -72,10 +72,10 @@ console.log(current.x);
                 <img  src={this.state.url} width="200px" height="200px"/>
                  </div>
                  <div>
-                {this.state.allurl.map((url) => (
-                <li>{url.URL}</li>
-               /*  <img  src={url.URL} width="100px" height="100px"></img> */
-                ))}
+                {this.state.allurl.map((url) => 
+                
+               <img  src="D:\Member-Web-Directory\Backend\images\1612695170712-evening.jpg" width="100px" height="100px"/>
+                )}
 
                 </div>  
            <button onClick={this.funsplit}>click</button>
