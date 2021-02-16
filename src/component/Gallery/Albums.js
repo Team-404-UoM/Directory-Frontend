@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import {getAlbums, getAlbumThumbnails, getAlbumThumbnailImage} from './Events_api_calls'//'../../config/api_calls'
+import {getAlbums, getAlbumThumbnails, getAlbumThumbnailImage} from './Events/Events_api_calls'//'../../config/api_calls'
 
 export default function Albums() {
     

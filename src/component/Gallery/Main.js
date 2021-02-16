@@ -16,11 +16,11 @@ import {
 } from "@coreui/react";
 
 import All from './Albums'
-import Events from './Events'
+import Events from './Events' 
 import Trips from './Trips'
 import Other from './Other'
 
-import {createAlbum} from './Events_api_calls'//'../../config/api_calls'
+import {createAlbum} from '../../Events/Events_api_calls' //'../../config/api_calls'
 
 import { BiPhotoAlbum } from "react-icons/bi";
 import { HiPlus } from "react-icons/hi";
