@@ -8,7 +8,7 @@ import DateCountdown from 'react-date-countdown-timer';
 import { CModal, CModalHeader, CModalBody,CModalFooter,CButton } from "@coreui/react";
 
 //Import api calls
-import {getEvents, updateAttendance, getThubnails, getThubnailImage} from './Events_api_calls' /* '../../config/api_calls' */
+import {getEvents, updateAttendance, /* getThubnails ,  getThubnailImage */} from './Events_api_calls' /* '../../config/api_calls' */
 
 const Event_page = () => {
 
@@ -17,7 +17,7 @@ const Event_page = () => {
     const [modal, setModal] = useState(false);
 
     //Fetch event data and thumnails to state
-    useEffect(()=>{
+   /*  useEffect(()=>{
         //Event data
         getEvents().then(result =>{
             setEvents(result)
@@ -28,7 +28,7 @@ const Event_page = () => {
             setthumbs(result);
             console.log(result);
         })
-    }, [])
+    }, []) */
 
     const toggle = ()=>{
         setModal(!modal);

@@ -67,7 +67,7 @@ const App = () => {
 
         <Route path = "/Blog/BlogEditPost" exact component = {BlogEditPost}/>
 
-        <Route path = "/events" component = {EventPage}/>
+       <Route path = "/events" component = {EventPage}/> 
 
         <Route path = "/payments/:id" component = {PayemetForm}/>
 
