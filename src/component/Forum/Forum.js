@@ -23,12 +23,15 @@ class Forum extends Component {
       editPost: { message: "", id: "" },
       visiblequestions: 10,
       visibletype: "",
+      faculty:""
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.loadmore = this.loadmore.bind(this);
     this.handletypechange = this.handletypechange.bind(this);
+    this.handlefaculty = this.handlefaculty.bind(this);
+    
   }
 
   handleChange(event) {
@@ -38,7 +41,7 @@ class Forum extends Component {
   handleClick(event) {
     console.log(this.state.message);
     event.preventDefault();
-    const message = { message: this.state.message };
+    const message = { message: this.state.message ,faculty:this.state.faculty,privacytype:this.state.visibletype};
 
     axios.post("http://localhost:4000/Forum", message).then((res) => {
       console.log(res);
@@ -54,6 +57,7 @@ class Forum extends Component {
 
   componentDidMount() {
     this.getAllPosts();
+   
   }
 
   getAllPosts = () => {
@@ -137,6 +141,14 @@ class Forum extends Component {
       console.log(this.state.visibletype)
     );
   }
+  handlefaculty(event) {
+    this.setState(
+      { faculty: event.target.value },
+      console.log(this.state.faculty)
+    );
+  }
+
+  
 
   render() {
     return (
@@ -175,8 +187,10 @@ class Forum extends Component {
                 <select
                   className="form-select-sm select"
                   aria-label="Default select example"
+                  onChange={this.handlefaculty}
                 >
                   <option selected>Select Faculty</option>
+                  <option value="All">All</option>
                   <option value="Engineering">Engineering</option>
                   <option value="Information Technology">
                     Information Technology
@@ -332,6 +346,7 @@ class Forum extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
+        
       </div>
     );
   }

@@ -8,35 +8,39 @@ class Test extends Component {
       this.state = {
         selectedFile: null,
         url:null,
+        imgname:null,
         allurl:[]
       }
    this.funsplit=this.funsplit.bind(this);
   }
   onChangeHandler=(event)=>{
-    console.log(URL.createObjectURL(event.target.files[0]));
+    
     
     this.setState({
       selectedFile:event.target.files[0],
       url:URL.createObjectURL(event.target.files[0]),
+      
       loaded: 0,
      
     })
    
-    console.log(this.state.url);
+    
   }
 
   onClickHandler = () => {
     const imgurl={
-      url:this.state.url,
+      
+     url:this.state.selectedFile.name
       
     }
-    console.log(this.state.url);
+    
+    //console.log(imgname)
     const data = new FormData() 
     data.append('file', this.state.selectedFile)   
     axios.post("http://localhost:4000/file/upload", data, { 
     }).then(res => { // then print response status
         console.log(res.statusText)})
-        axios.post("http://localhost:4000/file/url",imgurl).then((res)=>{console.log(res)})
+        axios.post("http://localhost:4000/file/url",imgurl).then((res)=>{console.log(res)}) 
 }
 getallurl=()=>{
  axios.get("http://localhost:4000/file/allurl").then((res)=>{this.setState({allurl:res.data})}
@@ -73,8 +77,8 @@ console.log(current.x);
                  </div>
                  <div>
                 {this.state.allurl.map((url) => 
-                
-               <img  src="D:\Member-Web-Directory\Backend\images\1612695170712-evening.jpg" width="100px" height="100px"/>
+                //<li>{url.url}</li>,
+                <img  src="undefined-test.jpg" width="100px" height="100px"/> 
                 )}
 
                 </div>  

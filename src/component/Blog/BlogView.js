@@ -94,7 +94,7 @@ class BlogView extends Component {
                   </p>
                   <p>
                     <span className="categorie-area">
-                      Categorie | {this.state.categorie}
+                      Category | {this.state.categorie}
                     </span>
                   </p>
                   <img
