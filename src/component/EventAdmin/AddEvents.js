@@ -4,7 +4,7 @@ import {
   addEvent,
   deleteEvent,
   updateEvent
-} from "../../config/api_calls";
+} from './Events_api_calls';  //"../../config/api_calls"; 
 import {
   CDataTable,
   CButton,
