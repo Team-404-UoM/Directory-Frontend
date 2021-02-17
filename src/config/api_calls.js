@@ -1,20 +1,21 @@
 //GET
 
-//Get event Data
-export const getEvents = async() => {
+//Get Event Data
+export const getEvents = async () => {
     try {
-        let event = await fetch(`${process.env.REACT_APP_BASE_URL}/event`, {
-            headers: { "Content-Type": "application/json" }
-        });
-        let results = await event.json();
-        return results;
+      let event = await fetch(`${process.env.REACT_APP_BASE_URL}/events`,
+      {
+          headers: { "Content-Type": "application/json" }
+      });
+      let results = await event.json();
+      return results;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
 //Get Job Data
-export const getJobs = async () => {
+  export const getJobs = async () => {
     try {
       let job = await fetch(`${process.env.REACT_APP_BASE_URL}/jobs`,
       {
@@ -27,22 +28,22 @@ export const getJobs = async () => {
     }
   };
 
-  //Get ticket data
-export const getTickets = async(id) => {
+//Get Ticket Data
+  export const getTickets = async (id) => {
     try {
-        let tickets = await fetch(`${process.env.REACT_APP_BASE_URL}/event/tickets/${id}`, {
-            headers: { "Content-Type": "application/json" }
-        });
-        let results = await tickets.json();
-        return results;
+      let tickets = await fetch(`${process.env.REACT_APP_BASE_URL}/events/tickets/${id}`,
+      {
+          headers: { "Content-Type": "application/json" }
+      });
+      let results = await tickets.json();
+      return results;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-}
-
+  }
 
 //Get Payment Data collection names
-export const getPaymentCollections = async () => {
+  export const getPaymentCollections = async () => {
     try {
       let coll = await fetch(`${process.env.REACT_APP_BASE_URL}/events/payemnt_collections`,
       {
@@ -55,7 +56,7 @@ export const getPaymentCollections = async () => {
     }
   }
 
-  //Get payemet data records for selected event
+//Get payemet data records for selected event
   export const getPaymentRecords = async (id) => {
     try {
       let rec = await fetch(`${process.env.REACT_APP_BASE_URL}/events/paymentRecords/${id}`,
@@ -69,7 +70,7 @@ export const getPaymentCollections = async () => {
     }
   }
 
-  //Get basic details of photo albums
+//Get basic details of photo albums
   export const getAlbums = async (id) => {
     try {
       let tickets = await fetch(`${process.env.REACT_APP_BASE_URL}/gallery/get_all_albums`,
@@ -83,7 +84,7 @@ export const getPaymentCollections = async () => {
     }
   }
 
-  //Get Thumbnail records for events
+//Get Thumbnail records for events
   export const getThubnails = async () => {
     try {
       let tickets = await fetch(`${process.env.REACT_APP_BASE_URL}/events/getThumb`,
@@ -97,7 +98,7 @@ export const getPaymentCollections = async () => {
     }
   }
 
-  //Get Thumbnail image for selected event 
+//Get Thumbnail image for selected event 
   export const getThubnailImage = async (file) => {
     try {
       let tickets = await fetch(`${process.env.REACT_APP_BASE_URL}/events/image/${file}`,
@@ -111,7 +112,7 @@ export const getPaymentCollections = async () => {
     }
   }
 
-  //Get thumbnail image data for albums
+//Get thumbnail image data for albums
   export const getAlbumThumbnails = async () => {
     try {
       let tickets = await fetch(`${process.env.REACT_APP_BASE_URL}/gallery/getThumb`,
@@ -125,7 +126,7 @@ export const getPaymentCollections = async () => {
     }
   }
 
-  //Get thumbnail image for seleted album
+//Get thumbnail image for seleted album
   export const getAlbumThumbnailImage = async (file) => {
     try {
       let tickets = await fetch(`${process.env.REACT_APP_BASE_URL}/gallery/image/${file}`,
@@ -141,37 +142,39 @@ export const getPaymentCollections = async () => {
 
 
 
-  //POST
 
-//Add basic transction data to database
-export const addPaymentData = async(ids, names, phones, emails, nics, prices, qtys, cards) => {
-    console.log(ids);
-    console.log(names);
+//POST
+
+//Add baisc transaction data to database
+  export const addPaymentData = async (ids, names, phones, emails, nics, prices, qtys, cards) => {
     try {
-        let data = await fetch(`${process.env.REACT_APP_BASE_URL}/event/register/${ids}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                current: names,
-                phone: phones,
-                email: emails,
-                card: cards,
-                qty: qtys,
-                nic: nics,
-                price: prices
-            })
-        });
-        let results = await data.json();
-        console.log(results);
-        return results;
+      let data = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/events/register/${ids}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: names,
+            phone: phones,
+            email: emails,
+            card: cards,
+            qty: qtys,
+            nic: nics,
+            price: prices
+        })
+        }
+      );
+      let results = await data.json();
+      console.log(results);
+      return results;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
 
 //Register event
-export const addEvent = async (title,description,image,date,paid,tickets) => {;
+  export const addEvent = async (title,description,image,date,paid,tickets) => {;
     try {
       let formDataSet = new FormData()
       formDataSet.append('title', title)
@@ -197,8 +200,7 @@ export const addEvent = async (title,description,image,date,paid,tickets) => {;
     }
   };
 
-
-  //Create album
+//Create album
   export const createAlbum = async (name,category,dateOfEvent,image,privacy) => {;
     try {
       let formDataSet = new FormData()
@@ -223,7 +225,31 @@ export const addEvent = async (title,description,image,date,paid,tickets) => {;
     }
   };
 
-  //process payment
+//Add jobs  
+  export const addJob = async (title,description,closingDate,requirements) => {
+    try {
+      let data = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/jobs/add`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            title: title,
+            description: description,
+            closingDate: closingDate,
+            requirements: requirements
+        })
+        }
+      );
+      let results = await data.json();
+      console.log(results);
+      return results;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+//process payment
   export const doPayment = async () => {
     try {
       let data = await fetch(
@@ -241,23 +267,27 @@ export const addEvent = async (title,description,image,date,paid,tickets) => {;
     }
   };
 
-//update attendance of free event
-export const updateAttendance = async(id) => {
+
+  //PUT
+
+//Update attendance of free event
+  export const updateAttendance = async (id) => {
     try {
-        let attendence = await fetch(`${process.env.REACT_APP_BASE_URL}/event/updateAttendance/${id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" }
-        });
-        let results = await attendence;
-        console.log(results);
-        return results;
+      let attendence = await fetch(`${process.env.REACT_APP_BASE_URL}/events/updateAttendance/${id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" }
+      });
+      let results = await attendence;
+      console.log(results);
+      return results;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-}
+  }
 
 //Update event data
-export const updateEvent = async (id,title,description,date,paid) => {
+  export const updateEvent = async (id,title,description,date,paid) => {
     try {
       let event = await fetch(`${process.env.REACT_APP_BASE_URL}/events/updateEvent/${id}`,
       {
@@ -278,7 +308,7 @@ export const updateEvent = async (id,title,description,date,paid) => {
     }
   }
 
-  //Update approval state of album
+//Update approval state of album
   export const updateApproval = async (id) => {
     try {
       let state = await fetch(`${process.env.REACT_APP_BASE_URL}/gallery/approveAlbum`,
@@ -297,12 +327,32 @@ export const updateEvent = async (id,title,description,date,paid) => {
     }
   }
 
-
+//Update job details
+  export const updateJobs = async (id,title,description,closingDate) => {
+    try {
+      let job = await fetch(`${process.env.REACT_APP_BASE_URL}/jobs/updateJob/${id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: title,
+          description: description,
+          closingDate: closingDate
+      })
+      });
+      let results = await job;
+      console.log(results);
+      return results;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
 
   //DELETE
 
 //Remove event
-export const deleteEvent = async (id,filename) => {
+  export const deleteEvent = async (id,filename) => {
     try {
       let event = await fetch(`${process.env.REACT_APP_BASE_URL}/events/removeEvent/${id}`,
       {
@@ -339,3 +389,20 @@ export const deleteEvent = async (id,filename) => {
       console.log(error);
     }
   }
+
+//Delete job data
+  export const deleteJob= async (id) => {
+    try {
+      let job = await fetch(`${process.env.REACT_APP_BASE_URL}/jobs/removeJob/${id}`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+      });
+      let results = await job;
+      console.log(results);
+      return results;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+

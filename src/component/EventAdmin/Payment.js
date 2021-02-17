@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   getPaymentCollections,
   getPaymentRecords
-} from "../../Events/Events_api_calls";
+} from "../../config/api_calls";
 import {
   CDataTable,
   CButton,

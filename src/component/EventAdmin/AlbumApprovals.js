@@ -3,7 +3,7 @@ import {
   getAlbums,
   updateApproval,
   deleteAlbum
-} from "../../Events/Events_api_calls";
+} from "../../config/api_calls";
 import {
   CDataTable,
   CButton,

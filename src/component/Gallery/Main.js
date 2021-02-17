@@ -20,7 +20,7 @@ import Events from './Events'
 import Trips from './Trips'
 import Other from './Other'
 
-import {createAlbum} from "../../Events/Events_api_calls"
+import {createAlbum} from "../../config/api_calls";
 
 import { BiPhotoAlbum } from "react-icons/bi";
 import { HiPlus } from "react-icons/hi";

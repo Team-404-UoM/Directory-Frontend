@@ -1,7 +1,7 @@
 import React, { useRef, useEffect,useState } from "react";
 import { CModal, CModalHeader, CModalBody,CModalFooter,CButton } from "@coreui/react";
 
-import { addPaymentData } from './Events/Events_api_calls'
+import { addPaymentData } from "../../config/api_calls"
 import {FaTruckMonster} from 'react-icons/fa';
 
 export default function Paypal({props}) {
