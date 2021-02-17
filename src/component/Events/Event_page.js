@@ -8,7 +8,7 @@ import DateCountdown from 'react-date-countdown-timer';
 import { CModal, CModalHeader, CModalBody,CModalFooter,CButton } from "@coreui/react";
 
 //Import api calls
-import {getEvents, updateAttendance, /* getThubnails ,  getThubnailImage */} from './Events_api_calls' /* '../../config/api_calls' */
+import {getEvents, updateAttendance, /* getThubnails ,  getThubnailImage */} from "../../config/api_calls" 
 
 const Event_page = () => {
 
@@ -44,7 +44,7 @@ const Event_page = () => {
                         <div className="img-square-wrapper" style={{padding: 15}}>
                             {thumbs.map(thumbnail => {
                                 if(item.image == thumbnail.filename){          
-                                        return <img className="" src={`http://localhost:5000/events/image/${thumbnail.filename}`} alt="Card image cap" width={300} height={200} style={{borderRadius: 10}}/>
+                                        return <img className="" src={`http://localhost:4000/events/image/${thumbnail.filename}`} alt="Card image cap" width={300} height={200} style={{borderRadius: 10}}/>
                                 }
                             })}
                         </div>

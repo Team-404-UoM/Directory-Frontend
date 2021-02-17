@@ -3,7 +3,7 @@ import React, {useState,useEffect} from 'react';
 import {FaTicketAlt, FaTruckMonster} from 'react-icons/fa';
 import {MdPayment} from 'react-icons/md';
 
-import { addPaymentData, getTickets } from './Events_api_calls';
+import { addPaymentData, getTickets } from "../../config/api_calls";
 import { CModal, CModalHeader, CModalBody,CModalFooter,CButton } from "@coreui/react";
 import "./bootstrap.min.css";
 

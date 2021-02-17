@@ -11,10 +11,14 @@ import BlogView from './component/Blog/BlogView';
 import BlogEditPost from './component/Blog/BlogEditPost';
 import Test from './component/Test/Test';
 import ForumReply from './component/Forum/ForumReply';
+
 import EventPage from './component/Events/Event_page';
 import PayemetForm from './component/Events/PayemetForm';
 import Albums from './component/Gallery/Main';
 import View from './component/Gallery/View';
+//import EventAdminHome from './components/EventAdmin/EventAdminHome';
+
+
 import PastStudent from './component/User/SignUp/PastStudent';
 import AcademicStaff from './component/User/SignUp/AcademicStaff';
 import Selection from './component/User/SignUp/Selection';
@@ -23,7 +27,7 @@ import AboutUs from './component/AboutUs/AboutUs';
 import Settings from './component/Settings/Settings';
 import ProfileEdit from './component/User/Profile/ProfileEditMode';
 
-
+import 'bootstrap/dist/css/bootstrap.css';
 //test commit 2
 
 
@@ -67,6 +71,8 @@ const App = () => {
 
         <Route path = "/Blog/BlogEditPost" exact component = {BlogEditPost}/>
 
+
+      
        <Route path = "/events" component = {EventPage}/> 
 
         <Route path = "/payments/:id" component = {PayemetForm}/>
@@ -74,6 +80,10 @@ const App = () => {
         <Route path = "/Gallery" component = {Albums}/>
 
         <Route path = "/albums/:category/:id" component = {View}/>
+
+
+
+
 
         <Route path = "/Forum/ForumReply" exact component = {ForumReply}/>
 
