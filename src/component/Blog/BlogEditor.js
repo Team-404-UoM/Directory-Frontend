@@ -22,6 +22,8 @@ class BlogEditor extends Component {
       like: 0,
       blogImage: "",
       show:false,
+      previewshow:false,
+      preview:{title:"",image:"",body:""}
     };
     this.handleTitle = this.handleTitle.bind(this);
     this.handleImage = this.handleImage.bind(this);
@@ -30,6 +32,8 @@ class BlogEditor extends Component {
     this.handlecategorie=this.handlecategorie.bind(this);
     this.handlemodal=this.handlemodal.bind(this);
     this.handleclosemodal=this.handleclosemodal.bind(this);
+    this.handlePreviewModal=this.handlePreviewModal.bind(this);
+    this.handleClosePreviewModal=this.handleClosePreviewModal.bind(this);
   }
   onChangeFile(event) {
     this.setState({
@@ -94,6 +98,18 @@ handlecategorie(event){
     this.setState({show:false}
       )
   }
+  handlePreviewModal(){
+    this.setState({previewshow:true}
+      )
+  }
+  handleClosePreviewModal(){
+    this.setState({previewshow:false}
+      )
+  }
+
+  
+
+
 
   render() {
     return (
@@ -140,9 +156,9 @@ handlecategorie(event){
                       onChange={this.onChangeFile}
                     />
                   </div>
-                  <label className="categorie-label" for="categorie">Choose a Categories:</label>
+                  <label className="categorie-label" for="categorie">Choose a Category:</label>
                   <select className="categorie-select" name="categorie" onChange={this.handlecategorie} id="catrgories">
-                  <option value="select">Select the Categorie</option>
+                  <option value="select">Select the Category</option>
                     <option value="Economic">Economic</option>
                     <option value="Finance">Finance</option>
                     <option value="Gaming">Gaming</option>
@@ -197,6 +213,28 @@ handlecategorie(event){
            Post Article
           </Button>
         </Modal.Footer>
+      </Modal> 
+      
+      <Modal
+        show={this.state.previewshow}
+        
+        dialogClassName="modal-90w"
+        size="lg"
+        aria-labelledby="example-custom-modal-styling-title"
+      >
+        <Modal.Header >
+          <Modal.Title id="example-custom-modal-styling-title">
+            <h3 className="preview-content"><strong>{this.state.title}</strong></h3>
+          <img className="preview-content" src={this.state.image} width="120px" height="120px"/>
+           <p>Categorie : {this.state.categorie}</p>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p  dangerouslySetInnerHTML={{ __html: this.state.body }}>
+         
+          </p>
+          <Button onClick={this.handleClosePreviewModal}>close</Button>
+        </Modal.Body>
       </Modal>
 
                   <div>
@@ -215,14 +253,14 @@ handlecategorie(event){
                     >
                       Cancel
                     </Button></Link> 
-
+                    {(this.state.title=="" && this.state.image=="" && this.state.body=="" )||(
                     <Button
-                     
                       className="button2"
                       variant="primary"
+                      onClick={this.handlePreviewModal}
                     >
                       Preview
-                    </Button>
+                    </Button>)}
                   </div>
                 </form>
               </div>
@@ -231,6 +269,7 @@ handlecategorie(event){
                 <Button
                   style={{ marginLeft:"40px"}}
                   variant="dark"
+                 
                 >
                   Templates
                 </Button>
