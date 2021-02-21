@@ -348,7 +348,7 @@ this.updateviews(id)
                     }}
                   >
                     <strong>Categorie | {blog.categorie}</strong>
-                    <box-icon  style={{marginLeft:"235px"}} name='time' animation='flashing' size="xs" ></box-icon>
+                   {/*  <box-icon  style={{marginLeft:"235px"}} name='time' animation='flashing' size="xs" ></box-icon> */}
                     <span className="blog-date">
                       {moment(blog.updatedAt).format("MMM DD ,YYYY")}
                     </span>
@@ -495,7 +495,7 @@ this.updateviews(id)
                       }}
                     >
                       <strong>Categorie | {blog.categorie}</strong>
-                      <box-icon  style={{marginLeft:"238px"}} name='time' animation='flashing' size="xs" ></box-icon>
+                      {/* <box-icon  style={{marginLeft:"238px"}} name='time' animation='flashing' size="xs" ></box-icon> */}
                       <span className="blog-date">
                       {moment(blog.updatedAt).format("MMM DD ,YYYY")}
                     </span>

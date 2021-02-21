@@ -11,7 +11,7 @@ class Test extends Component {
         imgname:null,
         allurl:[]
       }
-   this.funsplit=this.funsplit.bind(this);
+   
   }
   onChangeHandler=(event)=>{
     
@@ -28,19 +28,21 @@ class Test extends Component {
   }
 
   onClickHandler = () => {
-    const imgurl={
+    const imgname={
       
      url:this.state.selectedFile.name
+     
       
     }
     
     //console.log(imgname)
+   
     const data = new FormData() 
     data.append('file', this.state.selectedFile)   
     axios.post("http://localhost:4000/file/upload", data, { 
     }).then(res => { // then print response status
         console.log(res.statusText)})
-        axios.post("http://localhost:4000/file/url",imgurl).then((res)=>{console.log(res)}) 
+        axios.post("http://localhost:4000/file/url",imgname).then((res)=>{console.log(res)})
 }
 getallurl=()=>{
  axios.get("http://localhost:4000/file/allurl").then((res)=>{this.setState({allurl:res.data})}
@@ -50,15 +52,7 @@ componentDidMount() {
   this.getallurl();
   console.log(this.state.allurl);
 } 
-funsplit(){
-  console.log("clicked");
-  
-  let current=this.state.allurl;
-  console.log(current);
-  for(let x=0;x<current.length;x++){
-console.log(current.x);
-  }
-}
+
     render() {
     
       return (
@@ -78,11 +72,11 @@ console.log(current.x);
                  <div>
                 {this.state.allurl.map((url) => 
                 //<li>{url.url}</li>,
-                <img  src="undefined-test.jpg" width="100px" height="100px"/> 
-                )}
+                <img  src={`http://localhost:4000/images/${url.url}`} width="100px" height="100px"/> 
+                )}<div><img  src={`http://localhost:4000/images/undefined-test.jpg`} width="100px" height="100px"/></div>
 
                 </div>  
-           <button onClick={this.funsplit}>click</button>
+           <button >click</button>
             </div>
         
         </div>
