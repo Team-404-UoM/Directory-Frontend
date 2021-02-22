@@ -3,30 +3,41 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class Sidebar extends Component{
-state={
-  selectedFile:null
+  constructor(props) {
+    super(props);
+this.state={
+  show:false,
+  width:{width:'0%'},
 }
+this.handlechnage=this.handlechnage.bind(this);
+this.handleclosechange=this.handleclosechange.bind(this)}
 
-fileSelectedHandler=event=>{
+handlechnage(){
+  
   this.setState({
-    selectedFile:event.target.files[0]
+    show:true,
+    width:{width:'30%'}
+   
   })
-  console.log(event.target.files[0]);
+  console.log(this.state.show)
 }
 
-fileUploadHandler=()=>{
-  const fd=new FormData();
-  fd.append('image',this.state.selectedFile,this.state.selectedFile.name);
-
-axios.post('',fd).then(res=>{
-  console.log(res);
-})
-
+handleclosechange(){
+  this.setState({
+    show:false,
+    width:{width:'0%'}
+  })
 }
+
+
+
 render() {
+  
   return(<div>
-<input type="file" onChange={this.fileSelectedHandler}/>
-<button onclick={this.fileUploadHandler}>Upload</button>
+<div className={'sidebar'} style={this.state.width}>
+<button onClick={this.handleclosechange} type="button" class="btn-close btn-close-white closeButton" aria-label="Close"></button>
+<h1>hello</h1></div>
+<button onClick={this.handlechnage}>Side bar</button>
   </div>)
 }
 }

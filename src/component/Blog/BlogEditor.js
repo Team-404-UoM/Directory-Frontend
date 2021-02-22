@@ -20,10 +20,11 @@ class BlogEditor extends Component {
       image: "",
       body: "",
       like: 0,
-      blogImage: "",
+      coverImage: null,
       show:false,
       previewshow:false,
-      preview:{title:"",image:"",body:""}
+      preview:{title:"",image:"",body:""},
+      result:""
     };
     this.handleTitle = this.handleTitle.bind(this);
     this.handleImage = this.handleImage.bind(this);
@@ -37,7 +38,8 @@ class BlogEditor extends Component {
   }
   onChangeFile(event) {
     this.setState({
-      blogImage: event.target.files[0],
+      coverImage: event.target.files[0],
+      loaded:0
     });
   }
 
@@ -51,14 +53,19 @@ class BlogEditor extends Component {
       body: this.state.body,
       like: this.state.like,
       categorie:this.state.categorie,
-      blogImage: this.state.blogImage,
+      
     };
-
+    const data = new FormData() 
+    data.append('file', this.state.coverImage)   
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/Blog/`, blogdetails)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
+         this.setState({
+          result:res.data,
+        })
+        console.log(this.state.result.blog._id);
+        axios.put("http://localhost:4000/file/upload/"+this.state.result.blog._id, data).then((res)=>{console.log(res)})
+       console.log(res.data);
         this.handleclosemodal();
         console.log("mounted");
         this.setState({
@@ -66,6 +73,7 @@ class BlogEditor extends Component {
           image: "",
           body: "",
         });
+        
       })
       .catch((err)=>{
       
