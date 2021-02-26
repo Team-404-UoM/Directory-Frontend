@@ -16,8 +16,13 @@ class BlogView extends Component {
       categorie: "",
       createtime: "",
       updatetime: "",
-      show: true,
-    };
+      coverImage:"",
+      show:false,
+      width: { width:'0%' },
+      color:{backgroundColor:'white'}
+    }
+    this.handleSidebar=this.handleSidebar.bind(this);
+this.handleCloseSidebar=this.handleCloseSidebar.bind(this)
   }
 
   componentDidMount() {
@@ -32,6 +37,7 @@ class BlogView extends Component {
           title: res.data.blog.title,
           image: res.data.blog.image,
           body: res.data.blog.body,
+          coverImage:res.data.blog.coverImage,
           categorie: res.data.blog.categorie,
           createtime: res.data.blog.createdAt,
           updatetime: res.data.blog.updatedAt,
@@ -41,9 +47,19 @@ class BlogView extends Component {
     //.catch((err)=>console.log(err))
   }
   handleSidebar() {
-    this.setState({ show: false });
+    this.setState({ 
+      show: true,
+      width:{width:'30%'}
+     });
     console.log(this.state.show);
   }
+  
+handleCloseSidebar(){
+  this.setState({
+    show:false,
+    width:{width:'0%'}
+  })
+}
 
   render() {
     return (
@@ -51,12 +67,22 @@ class BlogView extends Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-4" hidden={this.state.show}>
-              <h1>hello</h1>
+              
             </div>
-            <div className={!this.state.show ? "col-8" : "col-12"}>
-              <button class="openbtn" onclick={this.handleSidebar}>
-                Comment
-              </button>
+            <div className="col-12">
+              <div className="openbutton"><box-icon  onClick={this.handleSidebar} size='lg' name='comment-detail'></box-icon></div>
+              
+             
+              <div className={"sidebar"} style={this.state.width || this.state.color}>
+                <button
+                  onClick={this.handleCloseSidebar}
+                  type="button"
+                  class="btn-close btn-close-white closeButton"
+                  aria-label="Close"
+                ></button>
+                <h1>Comments</h1>
+                <center><textarea></textarea></center>
+              </div>
 
               <React.Fragment>
                 <div>
@@ -78,14 +104,22 @@ class BlogView extends Component {
                     />
                     <strong>Anushka Praveen </strong>
                     <span style={{ marginLeft: "40px" }}>
-                    <box-icon  name='time' animation='flashing' size="xs" ></box-icon>
+                      <box-icon
+                        name="time"
+                        animation="flashing"
+                        size="xs"
+                      ></box-icon>
                       <strong>
                         Created At:{" "}
                         {moment(this.state.createtime).format("MMM DD ,YYYY")}
                       </strong>
                     </span>
                     <span style={{ marginLeft: "50px" }}>
-                    <box-icon   name='time' animation='flashing' size="xs" ></box-icon>
+                      <box-icon
+                        name="time"
+                        animation="flashing"
+                        size="xs"
+                      ></box-icon>
                       <strong>
                         Updated At:{" "}
                         {moment(this.state.updatetime).format("MMM DD ,YYYY")}
@@ -98,7 +132,7 @@ class BlogView extends Component {
                     </span>
                   </p>
                   <img
-                    src={this.state.image}
+                    src={`http://localhost:4000/images/${this.state.coverImage}`}
                     alt="Cover"
                     style={{
                       border: "1px solid gray",

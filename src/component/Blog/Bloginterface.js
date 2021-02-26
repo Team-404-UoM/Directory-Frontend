@@ -32,7 +32,7 @@ class Bloginterface extends Component {
       showblogmodal: false,
       deleteBlog: "",
       deleteuploadBlog: "",
-      visibleblog: 5,
+      visibleblog: 10,
       //color:'outline-info'
     };
     this.updatelike = this.updatelike.bind(this);
@@ -597,8 +597,7 @@ this.updateviews(id)
           </Row>
           <Row>
             <div class="col-md-12 p-3 text-center">
-              {this.state.visibleblog <
-                (this.state.blogs.length && this.state.uploadBlogs.length) && (
+              {this.state.visibleblog < (this.state.blogs.length || this.state.uploadBlogs.length ) && ( 
                 <button
                   type="button"
                   class="btn btn-outline-info"
@@ -606,7 +605,7 @@ this.updateviews(id)
                 >
                   Read more
                 </button>
-              )}
+              )} 
             </div>
           </Row>
         </Container>
