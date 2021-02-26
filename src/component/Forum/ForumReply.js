@@ -21,6 +21,7 @@ class ForumReply extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleReply=this.handleReply.bind(this);
         this.loadmore=this.loadmore.bind(this);
+        this.handleDelete=this.handleDelete(this);
     }
 
     componentDidMount() {
@@ -53,7 +54,8 @@ getquestion(){
 
       handleReply(){
           const reply={
-              reply:this.state.replymessage
+              body:this.state.replymessage,
+              date:Date.now()
           }
 
         axios.put('http://localhost:4000/Forum/reply/'+this.props.location.query.id,reply)
@@ -64,6 +66,7 @@ getquestion(){
       }
 
       handleDelete(value){
+          console.log(value);
           const deleteReply=value;
           axios.delete('http://localhost:4000/Forum/reply/'+this.props.location.query.id,deleteReply)
             .then((res) =>console.log(res))
@@ -101,11 +104,11 @@ getquestion(){
                             <Card.Body>
 
                                 <Card.Text>
-                                 <p>{reply}</p>
+                                 <p>{reply.body}</p>
                                 </Card.Text>
 
                                 <Button className='cardbutton' variant="outline-info" size='sm' >Edit</Button>
-                                <Button variant="outline-danger" size='sm' onClick={()=>this.handleDelete(reply)}>Delete</Button>
+                                <Button variant="outline-danger" size='sm' onClick={()=>this.handleDelete(reply.id)}>Delete</Button>
                             </Card.Body>
                         </Card>
 ))}
