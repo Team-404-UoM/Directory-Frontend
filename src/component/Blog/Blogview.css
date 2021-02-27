@@ -36,3 +36,17 @@
     margin-left: 200px;
     margin-top: 50px;
 }
+
+.comment-post-button {
+    margin-left: 75%;
+    margin-bottom: 20px;
+}
+
+.comment-size {
+    width: 80%
+}
+
+.comment-reply {
+    margin-left: 50px;
+    margin-right: 50px;
+}
