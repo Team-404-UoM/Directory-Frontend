@@ -5,6 +5,8 @@ import pic2 from "../Forum/pic2.jpg";
 import "./Blogview.css";
 import moment from "moment";
 import boxicons from "boxicons";
+import Toast from "react-bootstrap/Toast";
+import { getBlog } from "../../../../Backend/controllers/blogcontroller";
 
 class BlogView extends Component {
   constructor(props) {
@@ -16,18 +18,24 @@ class BlogView extends Component {
       categorie: "",
       createtime: "",
       updatetime: "",
-      coverImage:"",
-      show:false,
-      width: { width:'0%' },
-      color:{backgroundColor:'white'}
-    }
-    this.handleSidebar=this.handleSidebar.bind(this);
-this.handleCloseSidebar=this.handleCloseSidebar.bind(this)
+      coverImage: "",
+      comment:"",
+      show: false,
+      width: { width: "0%" },
+      color: { backgroundColor: "white" },
+    };
+    this.handleSidebar = this.handleSidebar.bind(this);
+    this.handleCloseSidebar = this.handleCloseSidebar.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleComment=this.handleComment.bind(this);
   }
 
   componentDidMount() {
     //{if(this.props.location.query!=undefined){
     console.log(this.props);
+    this.getBlog()
+  }
+    getBlog(){
     axios
       .get(
         `${process.env.REACT_APP_BASE_URL}/Blog/` + this.props.location.query.id
@@ -37,7 +45,7 @@ this.handleCloseSidebar=this.handleCloseSidebar.bind(this)
           title: res.data.blog.title,
           image: res.data.blog.image,
           body: res.data.blog.body,
-          coverImage:res.data.blog.coverImage,
+          coverImage: res.data.blog.coverImage,
           categorie: res.data.blog.categorie,
           createtime: res.data.blog.createdAt,
           updatetime: res.data.blog.updatedAt,
@@ -46,34 +54,58 @@ this.handleCloseSidebar=this.handleCloseSidebar.bind(this)
     console.log(this.state.title);
     //.catch((err)=>console.log(err))
   }
+  handleChange(event){
+    this.setState({comment:event.target.value});
+    console.log(this.state.comment.value)
+
+  }
+
+handleComment(){
+  const comment={
+    body:this.state.comment,
+    date:Date.now()
+  }
+  axios.patch('http://localhost:4000/Blog/comment/'+this.props.location.query.id,comment)
+  .then((res)=>this.setState({
+    comment:"",
+  }))
+
+}
+
   handleSidebar() {
-    this.setState({ 
+    this.setState({
       show: true,
-      width:{width:'30%'}
-     });
+      width: { width: "30%" },
+    });
     console.log(this.state.show);
   }
-  
-handleCloseSidebar(){
-  this.setState({
-    show:false,
-    width:{width:'0%'}
-  })
-}
+
+  handleCloseSidebar() {
+    this.setState({
+      show: false,
+      width: { width: "0%" },
+    });
+  }
 
   render() {
     return (
       <div>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-4" hidden={this.state.show}>
-              
-            </div>
+            <div className="col-4" hidden={this.state.show}></div>
             <div className="col-12">
-              <div className="openbutton"><box-icon  onClick={this.handleSidebar} size='lg' name='comment-detail'></box-icon></div>
-              
-             
-              <div className={"sidebar"} style={this.state.width || this.state.color}>
+              <div className="openbutton">
+                <box-icon
+                  onClick={this.handleSidebar}
+                  size="lg"
+                  name="comment-detail"
+                ></box-icon>
+              </div>
+
+              <div
+                className={"sidebar"}
+                style={this.state.width || this.state.color}
+              >
                 <button
                   onClick={this.handleCloseSidebar}
                   type="button"
@@ -81,7 +113,21 @@ handleCloseSidebar(){
                   aria-label="Close"
                 ></button>
                 <h1>Comments</h1>
-                <center><textarea></textarea></center>
+                <center>
+                  <textarea className="comment-size" onChange={this.handleChange}></textarea>
+                </center>
+                <button className="btn btn-primary comment-post-button" onClick={this.handleComment}>
+                  click
+                </button>
+                <Toast className="comment-reply">
+                  <Toast.Header>
+                    <strong className="mr-auto">Bootstrap</strong>
+                    <small>11 mins ago</small>
+                  </Toast.Header>
+                  <Toast.Body>
+                    Hello, world! This is a toast message.
+                  </Toast.Body>
+                </Toast>
               </div>
 
               <React.Fragment>
