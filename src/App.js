@@ -16,6 +16,7 @@ import EventPage from './component/Events/Event_page';
 import PayemetForm from './component/Events/PayemetForm';
 import Albums from './component/Gallery/Main';
 import View from './component/Gallery/View';
+import directory from './component/User/Directory/directory';
 //import EventAdminHome from './components/EventAdmin/EventAdminHome';
 
 
@@ -66,7 +67,7 @@ const App = () => {
         </Route>
 
         <Route path = "/Test" exact component = {Test}/>
-
+        <Route path="/Directory/directory" exact component={directory} />
         <Route path = "/Blog/BlogView" exact component = {BlogView}/>
 
         <Route path = "/Blog/BlogEditPost" exact component = {BlogEditPost}/>
