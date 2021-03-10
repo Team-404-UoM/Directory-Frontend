@@ -1,5 +1,4 @@
 .sidebar {
-    margin-top: 76px;
     height: 100%;
     /* 100% Full-height */
     width: 50%;
@@ -10,11 +9,11 @@
     /* Stay on top */
     top: 0;
     left: 0;
-    /*  background-color: rgb(218, 24, 24); */
+    background-color: #122;
     /* Black*/
     overflow-x: hidden;
     /* Disable horizontal scroll */
-    padding-top: 60px;
+    padding-top: 20px;
     /* Place content 60px from the top */
     transition: 0.5s;
     /* 0.5 second transition effect to slide in the sidebar */
@@ -22,19 +21,19 @@
 
 .closeButton {
     float: right;
-    margin-top: -40px;
+    /*  margin-top: -40px; */
     margin-right: 20px;
 }
 
 .categorie-area {
-    margin-left: 32.5rem;
+    /* margin-left: 32.5rem; */
     font-weight: bold;
     font-size: 20px;
 }
 
 .openbutton {
     margin-left: 200px;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 .comment-post-button {
@@ -49,4 +48,9 @@
 .comment-reply {
     margin-left: 50px;
     margin-right: 50px;
+    margin-bottom: 5px;
+}
+
+.card-title {
+    margin-right: 10px;
 }

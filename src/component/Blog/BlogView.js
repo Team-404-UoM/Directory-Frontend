@@ -6,7 +6,8 @@ import "./Blogview.css";
 import moment from "moment";
 import boxicons from "boxicons";
 import Toast from "react-bootstrap/Toast";
-import { getBlog } from "../../../../Backend/controllers/blogcontroller";
+import { Modal,Card } from "react-bootstrap";
+//import { getBlog } from "../../../../Backend/controllers/blogcontroller";
 
 class BlogView extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class BlogView extends Component {
       updatetime: "",
       coverImage: "",
       comment:"",
+      comments:[],
       show: false,
       width: { width: "0%" },
       color: { backgroundColor: "white" },
@@ -35,11 +37,9 @@ class BlogView extends Component {
     console.log(this.props);
     this.getBlog()
   }
-    getBlog(){
-    axios
-      .get(
-        `${process.env.REACT_APP_BASE_URL}/Blog/` + this.props.location.query.id
-      )
+  
+   getBlog(){
+    axios.get(`${process.env.REACT_APP_BASE_URL}/Blog/` + this.props.location.query.id)
       .then((res) =>
         this.setState({
           title: res.data.blog.title,
@@ -49,8 +49,9 @@ class BlogView extends Component {
           categorie: res.data.blog.categorie,
           createtime: res.data.blog.createdAt,
           updatetime: res.data.blog.updatedAt,
+          comments:res.data.blog.comments.reverse()
         })
-      );
+      )
     console.log(this.state.title);
     //.catch((err)=>console.log(err))
   }
@@ -60,17 +61,26 @@ class BlogView extends Component {
 
   }
 
-handleComment(){
+ handleComment(){
   const comment={
     body:this.state.comment,
     date:Date.now()
   }
   axios.patch('http://localhost:4000/Blog/comment/'+this.props.location.query.id,comment)
-  .then((res)=>this.setState({
+  .then((res)=> this.getBlog(),this.setState({
     comment:"",
+   
   }))
 
+} 
+
+handledDeleteComment(body){
+  console.log(body)
+ axios.delete("http://localhost:4000/Blog/comment/" + this.props.location.query.id +"/?name="+body)
+  .then((res)=>this.getBlog())    
+ 
 }
+
 
   handleSidebar() {
     this.setState({
@@ -90,7 +100,7 @@ handleComment(){
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="container">
           <div className="row">
             <div className="col-4" hidden={this.state.show}></div>
             <div className="col-12">
@@ -100,11 +110,13 @@ handleComment(){
                   size="lg"
                   name="comment-detail"
                 ></box-icon>
+                <div style={{marginTop:"-10px",marginLeft:"10px"}}><span class="badge rounded-pill bg-dark">{this.state.comments.length}</span></div>
+                
               </div>
 
               <div
                 className={"sidebar"}
-                style={this.state.width || this.state.color}
+                style={this.state.width /* || this.state.color */}
               >
                 <button
                   onClick={this.handleCloseSidebar}
@@ -112,22 +124,49 @@ handleComment(){
                   class="btn-close btn-close-white closeButton"
                   aria-label="Close"
                 ></button>
-                <h1>Comments</h1>
+                {/* <h1>Comments</h1> */}
                 <center>
-                  <textarea className="comment-size" onChange={this.handleChange}></textarea>
+                  <textarea className="comment-size" placeholder="Type comment here" value={this.state.comment} onChange={this.handleChange}></textarea>
                 </center>
                 <button className="btn btn-primary comment-post-button" onClick={this.handleComment}>
-                  click
-                </button>
-                <Toast className="comment-reply">
+                  Post
+                </button> 
+                {this.state.comments.map((comment)=>(
+                /* <Toast className="comment-reply">
                   <Toast.Header>
                     <strong className="mr-auto">Bootstrap</strong>
-                    <small>11 mins ago</small>
+                    <small>{moment(comment.date).fromNow()}</small>
                   </Toast.Header>
                   <Toast.Body>
-                    Hello, world! This is a toast message.
+                   {comment.body}
                   </Toast.Body>
-                </Toast>
+                </Toast>  */
+               <Card style={{width:'20rem'}} className="comment-reply">
+               <Card.Body>
+                 <Card.Title style={{float:"left"}}>
+                   <p style={{ fontSize: "13px", textAlign: "center" }}>
+                    <img
+                      src={pic2}
+                      alt="blog-cover"
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        marginTop: "-5px",
+                        marginRight:"2px",
+                        borderRadius: "2px",
+                      }}
+                    />
+                    <strong>Anushka Praveen </strong></p></Card.Title>
+                 <Card.Subtitle className="mb-2 text-muted ">{moment(comment.date).fromNow()}</Card.Subtitle><br/>
+                 
+                 <Card.Text>
+                 {comment.body}
+                 </Card.Text>
+                 {/* <Card.Link href="#">Card Link</Card.Link>
+                 <Card.Link href="#">Another Link</Card.Link> */}
+                 <box-icon style={{float:'right'}} color='red' name='trash' onClick={()=>this.handledDeleteComment(comment.body)}></box-icon>
+               </Card.Body>
+             </Card>))}
               </div>
 
               <React.Fragment>
@@ -174,7 +213,7 @@ handleComment(){
                   </p>
                   <p>
                     <span className="categorie-area">
-                      Category | {this.state.categorie}
+                     <center>Category | {this.state.categorie}</center> 
                     </span>
                   </p>
                   <img
@@ -184,7 +223,7 @@ handleComment(){
                       border: "1px solid gray",
                       width: "29.8rem",
                       height: "20rem",
-                      marginLeft: "35%",
+                      marginLeft: "32%",
                       marginBottom: "30px",
                       borderRadius: "5px",
                     }}
