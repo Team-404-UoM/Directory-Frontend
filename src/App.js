@@ -67,8 +67,10 @@ const App = () => {
         </Route>
 
         <Route path = "/Test" exact component = {Test}/>
+
         <Route path="/Directory/directory" exact component={directory} />
         <Route path = "/Blog/BlogView" exact component = {BlogView}/>
+
 
         <Route path = "/Blog/BlogEditPost" exact component = {BlogEditPost}/>
 

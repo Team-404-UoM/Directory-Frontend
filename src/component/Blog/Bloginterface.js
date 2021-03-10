@@ -365,7 +365,7 @@ this.updateviews(id)
                       width: "29.8rem",
                       height: "19rem",
                     }}
-                    src={blog.image}
+                    src={`http://localhost:4000/images/${blog.coverImage}`}
                   />
                   <Card.Body>
                     <Card.Title className="cardtitle">

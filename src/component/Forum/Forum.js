@@ -23,7 +23,8 @@ class Forum extends Component {
       editPost: { message: "", id: "" },
       visiblequestions: 10,
       visibletype: "",
-      faculty:""
+      faculty:"",
+      timenow:moment().format('LT')
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -57,6 +58,7 @@ class Forum extends Component {
 
   componentDidMount() {
     this.getAllPosts();
+    this.timelimit();
    
   }
 
@@ -146,6 +148,16 @@ class Forum extends Component {
       { faculty: event.target.value },
       console.log(this.state.faculty)
     );
+  }
+
+  timelimit(id){
+   if(this.state.timenow<2.30){
+     console.log("yes");
+   }else{
+     console.log("no");
+   }
+    const test=this.state.posts._id
+    console.log(this.state.timenow);
   }
 
   
@@ -257,6 +269,7 @@ class Forum extends Component {
                       </Badge>
                     </Button>
                   </Link>
+                 {this.state.timenow < moment(post.createdAt).format('LT') &&
                   <Button
                     variant="outline-info"
                     className="cardbutton"
@@ -264,7 +277,7 @@ class Forum extends Component {
                     onClick={this.editPost.bind(this, post._id, post.message)}
                   >
                     Edit
-                  </Button>
+                  </Button>}
                   <Button
                     variant="outline-danger"
                     className="carddeletebutton"
@@ -291,7 +304,7 @@ class Forum extends Component {
           </div>
         </div>
         <Modal show={this.state.showModel}>
-          <Modal.Header closeButton>
+         <Modal.Header>
             <Modal.Title>Edit Question</Modal.Title>
           </Modal.Header>
 

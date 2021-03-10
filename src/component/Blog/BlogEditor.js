@@ -17,17 +17,18 @@ class BlogEditor extends Component {
     super(props);
     this.state = {
       title: "",
-      image: "",
+      //image: "",
       body: "",
       like: 0,
       coverImage: null,
       show:false,
       previewshow:false,
       preview:{title:"",image:"",body:""},
-      result:""
+      result:"",
+      imageUrl:null
     };
     this.handleTitle = this.handleTitle.bind(this);
-    this.handleImage = this.handleImage.bind(this);
+    //this.handleImage = this.handleImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeFile = this.onChangeFile.bind(this);
     this.handlecategorie=this.handlecategorie.bind(this);
@@ -39,6 +40,7 @@ class BlogEditor extends Component {
   onChangeFile(event) {
     this.setState({
       coverImage: event.target.files[0],
+      imageUrl:URL.createObjectURL(event.target.files[0]),
       loaded:0
     });
   }
@@ -49,7 +51,7 @@ class BlogEditor extends Component {
 
     const blogdetails = {
       title: this.state.title,
-      image: this.state.image,
+      //image: this.state.image,
       body: this.state.body,
       like: this.state.like,
       categorie:this.state.categorie,
@@ -70,7 +72,7 @@ class BlogEditor extends Component {
         console.log("mounted");
         this.setState({
           title: "",
-          image: "",
+          //image: "",
           body: "",
         });
         
@@ -92,11 +94,11 @@ handlecategorie(event){
   });
 }
 
-  handleImage(event) {
+ /*  handleImage(event) {
     this.setState({
       image: event.target.value,
     });
-  }
+  } */
 
   handlemodal(){
     this.setState({show:true}
@@ -150,14 +152,14 @@ handlecategorie(event){
                   </div>
 
                   <div>
-                    <label  className="url-label"> Cover Photo URL </label>{" "}
-                    <input
+                    <label  className="url-label"> Cover Image </label>{" "}
+                    {/* <input
                       className="url-textbox"
                       value={this.state.image}
                       onChange={this.handleImage}
                       type="text"
                       size="80"
-                    />
+                    /> */}
                     <input
                       type="file"
                       filename="image"
@@ -233,7 +235,7 @@ handlecategorie(event){
         <Modal.Header >
           <Modal.Title id="example-custom-modal-styling-title">
             <h3 className="preview-content"><strong>{this.state.title}</strong></h3>
-          <img className="preview-content" src={this.state.image} width="120px" height="120px"/>
+           <img className="preview-content" src={this.state.imageUrl} width="120px" height="100px"/>
            <p>Categorie : {this.state.categorie}</p>
           </Modal.Title>
         </Modal.Header>
