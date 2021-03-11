@@ -19,7 +19,7 @@ class HomeNavbar extends Component{
     
     </Navbar.Brand>
     <Nav className="mr-auto navigations">
-      <Nav.Link as={Link} to='/'>Home</Nav.Link>
+      <Nav.Link as={Link} to='../User/Directory'>Directory</Nav.Link>
       <Nav.Link as={Link} to="../AboutUs">About</Nav.Link>
       <Nav.Link as={Link} to="../Events" >Event</Nav.Link>
       <Nav.Link as={Link} to="../Gallery">Gallery</Nav.Link>
