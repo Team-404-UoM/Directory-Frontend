@@ -1,5 +1,4 @@
 .sidebar {
-    margin-top: 76px;
     height: 100%;
     /* 100% Full-height */
     width: 50%;
@@ -10,7 +9,7 @@
     /* Stay on top */
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: rgb(228, 220, 220);
     /* Black*/
     overflow-x: hidden;
     /* Disable horizontal scroll */
