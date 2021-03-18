@@ -4,7 +4,7 @@ import Bloginterface from './component/Blog/Bloginterface';
 import Forum from './component/Forum/Forum';
 import './component/Blog/Texteditor.css';
 import HomeNavbar from './component/Navbar/HomeNavbar';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Router } from "react-router-dom";
 import BlogEditor from './component/Blog/BlogEditor';
 import Bloguploader from './component/Blog/Bloguploader';
 import BlogView from './component/Blog/BlogView';
@@ -24,9 +24,11 @@ import PastStudent from './component/User/SignUp/PastStudent';
 import AcademicStaff from './component/User/SignUp/AcademicStaff';
 import Selection from './component/User/SignUp/Selection';
 import Login from './component/User/SignIn/Login';
+import Forget from './component/User/SignIn/forget';
 import AboutUs from './component/AboutUs/AboutUs';
 import Settings from './component/Settings/Settings';
 import ProfileEdit from './component/User/Profile/ProfileEditMode';
+import history from './config/history';
 
 import 'bootstrap/dist/css/bootstrap.css';
 //test commit 2
@@ -39,6 +41,7 @@ const App = () => {
     return ( <BrowserRouter>
 
         <div>
+        <Router history={history}>
         <Switch>
         <React.Fragment>
         <div>
@@ -74,7 +77,7 @@ const App = () => {
 
         <Route path = "/Blog/BlogEditPost" exact component = {BlogEditPost}/>
 
-
+        <Route path="/forget" exact component={Forget} />
       
        <Route path = "/events" component = {EventPage}/> 
 
@@ -102,13 +105,10 @@ const App = () => {
         </div> 
         </React.Fragment> 
         </Switch> 
+        </Router>
         </div> 
         </BrowserRouter>
     );
 }
 
 export default App;
-//testing
-//test commit 2
-//jdsnc
-//shdjchjsd

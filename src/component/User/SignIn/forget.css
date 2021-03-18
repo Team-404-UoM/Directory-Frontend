@@ -1,0 +1,16 @@
+.forget-pass-container {
+    background-color: rgb(235, 222, 215);
+    border-radius: 15px;
+    width: 100%;
+  }
+  
+  
+  .login-inputs{
+  
+    border-Style: 'solid';
+     border-Width: "2px";
+      border-radius: '10px';
+  }
+  .email-p-2{
+    width: 100%;
+  }
