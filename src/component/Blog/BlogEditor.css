@@ -17,7 +17,7 @@
 }
 
 .topic-textbox {
-    border-radius: 25px
+    border-radius: 10px
 }
 
 .url-textbox {
@@ -25,7 +25,13 @@
 }
 
 .categorie-select {
-    border-radius: 25px
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.image-select {
+    border-radius: 5px;
+    margin-left: 30px;
 }
 
 .Button {
@@ -65,17 +71,21 @@
 }
 
 .link-topic-textbox {
-    border-radius: 25px
+    border-radius: 10px
 }
 
 .link-imgurl-textbox {
-    border-radius: 25px
+    border-radius: 10px
 }
 
 .link-url-textbox {
-    border-radius: 25px
+    border-radius: 10px
 }
 
 .preview-content {
     margin-left: 20rem;
+}
+
+.editor {
+    margin-left: 150px;
 }

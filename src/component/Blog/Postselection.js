@@ -11,7 +11,7 @@ class Postselection extends Component{
     <Nav.Link as={Link} to="./BlogEditor">Writer</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-    <Nav.Link as={Link}to="./Bloguploader">Link</Nav.Link>
+    <Nav.Link as={Link} to="./Bloguploader">Link</Nav.Link>
   </Nav.Item>
 </Nav>
         )}

@@ -7,11 +7,6 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import pic2 from "../Forum/pic2.jpg";
-import { GrLike } from "react-icons/gr";
-import { BsHeart } from "react-icons/bs";
-import { BiDislike, BiLike } from "react-icons/bi";
-import boxicons from "boxicons";
-import bootstrap from "bootstrap";
 import moment from "moment";
 class Bloginterface extends Component {
   constructor(props) {
@@ -350,7 +345,7 @@ this.updateviews(id)
                     <strong>Categorie | {blog.categorie}</strong>
                    {/*  <box-icon  style={{marginLeft:"235px"}} name='time' animation='flashing' size="xs" ></box-icon> */}
                     <span className="blog-date">
-                      {moment(blog.updatedAt).format("MMM DD ,YYYY")}
+                      {moment(blog.createdAt).format("MMM DD ,YYYY")}
                     </span>
                   </span>
                   
