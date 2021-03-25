@@ -3,11 +3,12 @@ import {Navbar,Nav} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import logo from './Team404.jpg';
 import './Nav.css'; 
+import boxicons from 'boxicons';
 
 class HomeNavbar extends Component{
     render(){
         return(<div>
-<Navbar bg="dark" variant="dark">
+<Navbar bg="red" variant="dark" className="navigation">
     <Navbar.Brand href="#home">
       <img
         alt=""
@@ -27,8 +28,12 @@ class HomeNavbar extends Component{
       <Nav.Link as={Link} to="../Forum" >Forum</Nav.Link>
       <Nav.Link as={Link} to="../Test" >Test</Nav.Link>
       <Nav.Link as={Link} to="../Settings" >Settings</Nav.Link>
+      
+      
     </Nav>
+    <Nav><box-icon className="mr-sm-2" name='bell' type="solid" color="white"></box-icon></Nav>
   </Navbar>
+  
 
   </div>
         )

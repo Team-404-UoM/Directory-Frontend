@@ -4,10 +4,10 @@ import axios from "axios";
 import pic2 from "../Forum/pic2.jpg";
 import "./Blogview.css";
 import moment from "moment";
-import boxicons from "boxicons";
-import Toast from "react-bootstrap/Toast";
-import { Modal,Card } from "react-bootstrap";
-//import { getBlog } from "../../../../Backend/controllers/blogcontroller";
+
+
+import { Card } from "react-bootstrap";
+
 
 class BlogView extends Component {
   constructor(props) {
@@ -116,7 +116,7 @@ handledDeleteComment(body){
 
               <div
                 className={"sidebar"}
-                style={this.state.width /* || this.state.color */}
+                style={this.state.width }
               >
                 <button
                   onClick={this.handleCloseSidebar}
@@ -157,7 +157,7 @@ handledDeleteComment(body){
                       }}
                     />
                     <strong>Anushka Praveen </strong></p></Card.Title>
-                 <Card.Subtitle className="mb-2 text-muted ">{moment(comment.date).fromNow()}</Card.Subtitle><br/>
+                 <Card.Subtitle className="mb-2 text-muted "><small>{moment(comment.date).fromNow()}</small></Card.Subtitle><br/>
                  
                  <Card.Text>
                  {comment.body}
@@ -172,7 +172,7 @@ handledDeleteComment(body){
               <React.Fragment>
                 <div>
                   <h1 style={{ textAlign: "center", marginTop: "20px" }}>
-                    {this.state.title}
+                   <b>{this.state.title}</b> 
                   </h1>
                   <p style={{ fontSize: "13px", textAlign: "center" }}>
                     <img
