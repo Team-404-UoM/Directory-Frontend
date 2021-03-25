@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
 import "./bootstrap.min.css"
-//import axios from 'axios'
 import './AcademicStaff.css';
 import lecturer from "./lecturer.png";
 import { Row, Col, Button, Jumbotron } from 'react-bootstrap';
 import Questionform from './Questionform';
+import { firebaseAuth } from '../../../config/FirebaseConfig';
+import history from '../../../config/history';
+import { axiosInstance } from '../../../services/services';
 
 
+const initialState = {
+    firstName: '',
+    lastName: '',
+    faculty: '',
+    department: '',
+    gender: '',
+    email: '',
+    password: '',
+    showSignUp: false,
+    firstNameError: "",
+    lastNameError: "",
+    emailError: "",
+    facultyError: "",
+    departmentError: "",
+    genderError: "",
+    passwordError: "",
+
+
+
+}
 class create extends Component {
     constructor() {
         super()
-        this.state = {
-            firstName: '',
-            lastName: '',
-            faculty: '',
-            gender: '',
-            email: '',
-            password: '',
-            showSignUp: false
-        }
+        this.state = initialState;
+
         // this.changeFirstName = this.changeFirstName.bind(this)
         // this.changeLastName = this.changeLastName.bind(this)
         // this.changeFaculty = this.changeFaculty.bind(this)
@@ -43,6 +58,12 @@ class create extends Component {
             faculty: event.target.value
         })
     }
+
+    changeDepartment(event) {
+        this.setState({
+            department: event.target.value
+        })
+    }
     changeGender(event) {
         this.setState({
             gender: event.target.value
@@ -60,31 +81,122 @@ class create extends Component {
             password: event.target.value
         })
     }
-    // onSubmit(event) {
-    //     event.preventDefault()
+    //validating
+    validate = () => {
+        let firstNameError;
+        let lastNameError;
+        let emailError;
+        let passwordError;
+        let facultyError;
+        let departmentError;
+        let genderError;
 
-    //     const registered = {
-    //         firstName: this.state.firstName,
-    //         lastName: this.state.lastName,
-    //         faculty: this.state.faculty,
-    //         gender: this.state.gender,
-    //         email: this.state.email,
-    //         password: this.state.password
-    //     }
-    //     /* axios.post('http://localhost:4000/app/signup', registered )
-    //      .then(response => console.log(response.data))*/
 
-    //     this.setState({
-    //         firstName: '',
-    //         lastName: '',
-    //         faculty: '',
-    //         gender: '',
-    //         email: '',
-    //         password: ''
-    //     })
-    // }
+        if (!this.state.firstNameError) {
+
+            firstNameError = "First name required";
+        }
+        if (!this.state.lastNameError) {
+
+            lastNameError = "Last name required";
+        }
+        if (!this.state.passwordError) {
+
+            passwordError = "password required";
+        }
+        if (!this.state.facultyError) {
+
+            facultyError = "Faculty required";
+        }
+        if (!this.state.departmentError) {
+
+            departmentError = "Department required";
+        }
+        if (!this.state.genderError) {
+
+            genderError = "Gender required";
+        }
+        if (!this.state.email.includes('@')) {
+            emailError = 'invalid email';
+
+        }
+        if (emailError || firstNameError || lastNameError || passwordError || facultyError || departmentError || genderError) {
+            this.setState({ emailError, firstNameError, lastNameError, passwordError, facultyError, departmentError, genderError });
+            return false;
+        }else {
+            return true;
+        }
+        
+    };//till here
+
+    async onSubmit(event) {
+        event.preventDefault()
+
+
+//newly added email verification
+    await firebaseAuth.currentUser.sendEmailVerification();
+
+          alert(" Successfully loged to the system. Check Email For Verification");
+          this.setState({ loading: false });
+//till here
+
+        //huh
+        const isValid = this.validate();
+
+        const registered = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            faculty: this.state.faculty,
+            department: this.state.department,
+            gender: this.state.gender,
+            email: this.state.email,
+            password: this.state.password
+        }
+        /* axios.post('http://localhost:4000/app/signup', registered )
+         .then(response => console.log(response.data))*/
+        try {
+            alert(registered);
+            const response = await axiosInstance.post('/signup', registered, {
+                params: {
+                    type: "ACADEMIC"
+                }
+            })
+
+            const customeToken = response.data;
+            //here
+          /*  if (isValid) {
+                console.log(customeToken);
+                this.setState(initialState)
+            }*/
+            console.log(customeToken);
+            //clear form
+            if (isValid) {
+
+            const userDeatils = await firebaseAuth.signInWithCustomToken(customeToken);
+            history.push("/waiting");
+            this.setState({
+                firstName: '',
+                lastName: '',
+                faculty: '',
+                department: '',
+                gender: '',
+                email: '',
+                password: ''
+            })
+        }
+        this.setState(initialState)
+    }
+        catch (e) {
+            alert(e);
+
+
+        }
+    }
+
     render() {
-        return this.state.showSignUp ? (
+        //  this.state.showSignUp 
+        const condition = this.state.showSignUp ;
+        return condition ? (
 
             <div className="academic">
                 <style>
@@ -97,34 +209,44 @@ class create extends Component {
                 <div> <center>  <h3 className='topic '>SignUp - Academic staff</h3></center></div>
 
                 <div >
+
                     <Jumbotron className="jumboaca">
-                        <form onSubmit={this.onSubmit}>
+                        <form onSubmit={(e) => this.onSubmit(e)}>
                             <Row>
                                 <Col className="acatype">
 
+
                                     <input type='text'
                                         placeholder='First Name'
-                                        onChange={this.changeFirstName}
+                                        onChange={(e) => this.changeFirstName(e)}
                                         value={this.state.firstName}
                                         className='form-control form-group'
                                         size="sm"
 
                                     />
+
+                                    <div style={{ color: "red" }}>{this.state.firstNameError} </div>
+
                                 </Col>
+
+
+
+
                                 <Col className="acatype">
 
                                     <input type='text'
                                         placeholder='Last Name'
-                                        onChange={this.changeLastName}
+                                        onChange={(e) => this.changeLastName(e)}
                                         value={this.state.lastName}
                                         className='form-control form-group'
                                     />
+                                      <div style={{ color: "red" }}>{this.state.lastNameError} </div>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col className="acatype">
-                                    <select className='form-control form-group' name="gender" id="gender"
-                                    // onChange={this.changeGender}
+                                    <select className='form-control form-group' name="faculty" id="faculty"
+                                        onChange={(e) => this.changeFaculty(e)}
                                     >
                                         <option value="" selected disabled hidden>
                                             Faculty
@@ -135,19 +257,22 @@ class create extends Component {
                                         <option value="Faculty of Business">Faculty of Business</option>
 
                                     </select>
+                                    <div style={{ color: "red" }}>{this.state.facultyError} </div>
 
                                 </Col>
                                 <Col className="acatype">
-                                    <select className='form-control form-group' name="gender" id="gender"
-                                    // onChange={this.changeGender}
+                                    <select className='form-control form-group' name="department" id="department"
+                                        onChange={(e) => this.changeDepartment(e)}
                                     >
                                         <option value="" selected disabled hidden>
                                             Department
                                         </option>
-                                        <option value="department1">Department 1</option>
-                                        <option value="department2">Department 2</option>
+                                        <option value="department1">IDS Department </option>
+                                        <option value="department2">Computational Mathematics Department </option>
+                                        <option value="department2">IT Department </option>
 
                                     </select>
+                                    <div style={{ color: "red" }}>{this.state.departmentError} </div>
                                 </Col>
                             </Row>
                             <Row>
@@ -156,14 +281,15 @@ class create extends Component {
 
                                     <input type='text'
                                         placeholder='E-mail'
-                                        onChange={this.changeEmail}
+                                        onChange={(e) => this.changeEmail(e)}
                                         value={this.state.email}
                                         className='form-control form-group'
                                     />
+                                    <div style={{ color: "red" }}>{this.state.emailError} </div>
                                 </Col>
                                 <Col className="acatype">
                                     <select className='form-control form-group acatype2' name="gender" id="gender"
-                                    // onChange={this.changeGender}
+                                    onChange={(e)=>this.changeGender(e)}
                                     >
                                         <option value="" selected disabled hidden>
                                             Gender
@@ -172,6 +298,7 @@ class create extends Component {
                                         <option value="female">Female</option>
 
                                     </select>
+                                    <div style={{ color: "red" }}>{this.state.genderError} </div>
                                 </Col>
                             </Row>
                             <Row>
@@ -180,16 +307,21 @@ class create extends Component {
 
                                     <input type='password'
                                         placeholder='Password'
-                                        onChange={this.changePassword}
+                                        onChange={(e) => this.changePassword(e)}
                                         value={this.state.password}
                                         className='form-control form-group'
-                                    /></Col>
+                                    />
+                                    <div style={{ color: "red" }}>{this.state.passwordError} </div>
+                                </Col>
 
                                 <Col></Col>
                             </Row>
                             <Col>
-                                <center>    <Button variant="dark" as="input" type="submit" value="Submit" />{' '}</center>
-                                <br /><br />
+                                <center> < Button variant="dark" as="input"
+                                    type="Button"
+                                    onClick={(e) => this.onSubmit(e)}
+                                    value="Submit" /> {' '} </center>
+                                <br /> <br />
 
                             </Col>
                         </form>
@@ -204,11 +336,11 @@ class create extends Component {
 
 
         ) : <Questionform onValidationPass={() => {
-            
-            this.setState({ showSignUp: true }, ()=>{
+
+            this.setState({ showSignUp: true }, () => {
                 console.log(this.state);
             });
-            
+
         }} />;
 
     }
