@@ -9,11 +9,11 @@
     /* Stay on top */
     top: 0;
     left: 0;
-    background-color: #122;
+    background-color: rgba(5, 5, 5, 0.8);
     /* Black*/
     overflow-x: hidden;
     /* Disable horizontal scroll */
-    padding-top: 20px;
+    padding-top: 60px;
     /* Place content 60px from the top */
     transition: 0.5s;
     /* 0.5 second transition effect to slide in the sidebar */

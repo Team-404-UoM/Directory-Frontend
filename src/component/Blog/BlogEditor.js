@@ -11,6 +11,7 @@ import axios from "axios";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {Link} from 'react-router-dom';
+import MyUploadAdapter from './UploadAdapter';
 
 class BlogEditor extends Component {
   constructor(props) {
@@ -25,7 +26,11 @@ class BlogEditor extends Component {
       previewshow:false,
       preview:{title:"",image:"",body:""},
       result:"",
-      imageUrl:null
+      imageUrl:null,
+      id: props.id,
+      content: props.content,
+      handleWYSIWYGInput: props.handleWYSIWYGInput,
+      editor: ClassicEditor
     };
     this.handleTitle = this.handleTitle.bind(this);
     //this.handleImage = this.handleImage.bind(this);
@@ -126,7 +131,7 @@ handlecategorie(event){
       <div class="container-fluid">
         <div className="row">
           <div className="col-12">
-            <Postselection />
+            <Postselection/>
             <div className="center">
               <h6> Write and Publish Your Article Here </h6>
             </div>
@@ -161,6 +166,7 @@ handlecategorie(event){
                       size="80"
                     /> */}
                     <input
+                    className="image-select"
                       type="file"
                       filename="image"
                       onChange={this.onChangeFile}
@@ -200,11 +206,20 @@ handlecategorie(event){
                       placeholder="write"
                       editor={ClassicEditor}
                       data={this.state.body}
+                      config={{ckfinder: {
+                        // Upload the images to the server using the CKFinder QuickUpload command.
+                        uploadUrl: 'https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                      }}} 
+                     /*  onInit={editor => {
+                        // Connect the upload adapter using code below 
+                        editor.plugins.get("FileRepository").createUploadAdapter = function(loader) {
+                           return new MyUploadAdapter(loader);
+                        }}} */
                       onReady={(editor) => {
                         // You can store the "editor" and use when it is needed.
                         console.log("Editor is ready to use!", editor);
                       }}
-                      onChange={(event, editor) => {
+                        onChange={(event, editor) => {
                         const data = editor.getData();
                         this.setState({ body: data });
                       }}
@@ -235,7 +250,7 @@ handlecategorie(event){
         <Modal.Header >
           <Modal.Title id="example-custom-modal-styling-title">
             <h3 className="preview-content"><strong>{this.state.title}</strong></h3>
-           <img className="preview-content" src={this.state.imageUrl} width="120px" height="100px"/>
+           <img className="preview-content" src={this.state.imageUrl} alt='preview-img' width="120px" height="100px"/>
            <p>Categorie : {this.state.categorie}</p>
           </Modal.Title>
         </Modal.Header>
@@ -243,7 +258,7 @@ handlecategorie(event){
           <p  dangerouslySetInnerHTML={{ __html: this.state.body }}>
          
           </p>
-          <Button onClick={this.handleClosePreviewModal}>close</Button>
+          <Button onClick={this.handleClosePreviewModal}>Close</Button>
         </Modal.Body>
       </Modal>
 
@@ -263,7 +278,7 @@ handlecategorie(event){
                     >
                       Cancel
                     </Button></Link> 
-                    {(this.state.title=="" && this.state.image=="" && this.state.body=="" )||(
+                    {(this.state.title ==="" || this.state.image ==="" || this.state.body ==="" )||(
                     <Button
                       className="button2"
                       variant="primary"

@@ -24,7 +24,7 @@ class Forum extends Component {
       visiblequestions: 10,
       visibletype: "",
       faculty:"",
-     
+
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -156,10 +156,11 @@ class Forum extends Component {
    }else{
      console.log("no");
    }
-    const test=this.state.posts._id
+    
     console.log(this.state.timenow);
+    
   }
-
+ 
   
 
   render() {
@@ -190,18 +191,18 @@ class Forum extends Component {
                 aria-label="Default select example"
                 onChange={this.handletypechange}
               >
-                <option selected>Select Type</option>
+                <option defaultValue hidden>Select Type</option>
                 <option value="all">All</option>
                 <option value="academic">Academic</option>
                 <option value="student">Student</option>
               </select>
-              {this.state.visibletype == "student" && (
+              {this.state.visibletype === "student" && (
                 <select
                   className="form-select-sm select"
                   aria-label="Default select example"
                   onChange={this.handlefaculty}
                 >
-                  <option selected>Select Faculty</option>
+                  <option defaultValue hidden>Select Faculty</option>
                   <option value="All">All</option>
                   <option value="Engineering">Engineering</option>
                   <option value="Information Technology">
@@ -269,15 +270,20 @@ class Forum extends Component {
                       </Badge>
                     </Button>
                   </Link>
-                  {(moment(post.createdAt).add(420,'seconds')>moment())&&
+
+                  {(moment(post.createdAt).add(420,'seconds')>moment())&&(
+
+                  
+                 
                   <Button
+                  
                     variant="outline-info"
                     className="cardbutton"
                     size="sm"
                     onClick={this.editPost.bind(this, post._id, post.message)}
                   >
                     Edit
-                  </Button>}
+                  </Button>)}
                   <Button
                     variant="outline-danger"
                     className="carddeletebutton"
