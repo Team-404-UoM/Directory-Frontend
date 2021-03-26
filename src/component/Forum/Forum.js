@@ -24,7 +24,7 @@ class Forum extends Component {
       visiblequestions: 10,
       visibletype: "",
       faculty:"",
-      timenow:moment().format('LT')
+     
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -269,7 +269,7 @@ class Forum extends Component {
                       </Badge>
                     </Button>
                   </Link>
-                 {this.state.timenow < moment(post.createdAt).format('LT') &&
+                  {(moment(post.createdAt).add(420,'seconds')>moment())&&
                   <Button
                     variant="outline-info"
                     className="cardbutton"
