@@ -166,7 +166,7 @@ class Forum extends Component {
   render() {
     return (
       <div>
-        <div class="sidenav">
+        <div className="sidenav">
           <h5 style={{ textAlign: "center", color: "white" }}>
             Notification Bar
           </h5>
@@ -271,12 +271,8 @@ class Forum extends Component {
                     </Button>
                   </Link>
 
-                  {(moment(post.createdAt).add(420,'seconds')>moment())&&(
-
-                  
-                 
+                  {(moment(post.createdAt).add(6,'hours')>moment())&&(
                   <Button
-                  
                     variant="outline-info"
                     className="cardbutton"
                     size="sm"
@@ -297,7 +293,7 @@ class Forum extends Component {
                 </Card.Body>
               </Card>
             ))}
-          <div class="col-md-12 p-3 text-center">
+          <div className="col-md-12 p-3 text-center">
             {this.state.visiblequestions < this.state.posts.length && (
               <button
                 type="button"
