@@ -1,11 +1,29 @@
 import React, { Component } from "react";
 import './directory.css';
 import pic2 from "./pic2.jpg";
-
-
-
+import axios from "axios";
 
 class directory extends Component{
+    constructor(props) {
+        super(props);
+    this.state={
+        allprofile:[],
+
+    }
+    }
+
+
+    componentDidMount(){
+        this.getProfile();
+        
+    }
+
+    getProfile(){
+        axios.get('http://localhost:4000/home')
+        .then((res)=>this.setState({allprofile:res.data.reverse()}))
+      
+    }
+
     render(){
       return (
         <div>
