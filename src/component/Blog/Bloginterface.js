@@ -277,7 +277,11 @@ this.updateviews(id)
 
   render() {
     return (
+      
       <div style={{ backgroundColor: "rgba(192,192,192,0.3)" }}>
+        <style>
+@import url('https://fonts.googleapis.com/css2?family=B612:wght@400;700&display=swap');
+</style> 
         <Button
           style={{ marginLeft: "40px", marginTop: "20px" }}
           as={Link}
@@ -318,6 +322,8 @@ this.updateviews(id)
                     borderStyle: "outset",
                     borderWidth: "2px",
                     borderColor: "black",
+                    boxShadow:'10px 10px 5px #aaaaaa',
+                    fontFamily:'B612'
                   }}
                 >
                   <p style={{ fontSize: "13px" }}>
@@ -465,6 +471,8 @@ this.updateviews(id)
                       borderStyle: "outset",
                       borderWidth: "2px",
                       borderColor: "black",
+                      boxShadow:'10px 10px 5px #aaaaaa',
+                      fontFamily:'B612'
                     }}
                   >
                     <p style={{ fontSize: "13px" }}>

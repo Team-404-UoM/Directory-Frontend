@@ -4,6 +4,7 @@ import axios from "axios";
 import pic2 from "../Forum/pic2.jpg";
 import "./Blogview.css";
 import moment from "moment";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 import { Card } from "react-bootstrap";
@@ -190,6 +191,7 @@ handledDeleteComment(body){
                     <strong>Anushka Praveen </strong>
                     <span style={{ marginLeft: "40px" }}>
                       <box-icon
+                      className='mt-2 mr-2'
                         name="time"
                         animation="flashing"
                         size="xs"
