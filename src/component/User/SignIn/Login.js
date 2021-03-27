@@ -117,18 +117,18 @@ export default class Home extends Component {
     const email = this.state.todo_email;
 
     const password = this.state.todo_password;
-    alert(" Successfully loged to the system");
+    //alert(" Successfully loged to the system");
 
                         //newly added email verification
-                        /*await firebaseAuth.currentUser.sendEmailVerification();
+                        await firebaseAuth.currentUser.sendEmailVerification();
 
                         alert(" Successfully loged to the system. Check Email For Verification");
-                        this.setState({ loading: false });*/
+                        this.setState({ loading: false });
                         //till here
 
     try {
       const signInresponse = await firebaseAuth.signInWithEmailAndPassword(email, password);
-      history.push('/ProfileEditMode');
+      history.push('/User/Directory');
     } catch (e) {
       console.error(e);
     }

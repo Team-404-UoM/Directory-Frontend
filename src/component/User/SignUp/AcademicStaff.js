@@ -139,6 +139,11 @@ class create extends Component {
           alert(" Successfully loged to the system. Check Email For Verification");
           this.setState({ loading: false });
 //till here
+try {
+    history.push('/signin');
+  } catch (e) {
+    console.error(e);
+  }
 
         //huh
         const isValid = this.validate();
