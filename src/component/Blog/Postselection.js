@@ -13,7 +13,10 @@ class Postselection extends Component{
   <Nav.Item>
     <Nav.Link as={Link} to="./Bloguploader">Link</Nav.Link>
   </Nav.Item>
+  
 </Nav>
+
+
         )}
 }
 export default Postselection;

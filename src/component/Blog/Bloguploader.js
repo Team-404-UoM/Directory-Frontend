@@ -89,7 +89,7 @@ class BlogEditor extends Component {
   render() {
     return (
       <div>
-        <Postselection />
+        <Postselection/>
 
         <div className="center">
           <h6> Link Your Article Here </h6>
