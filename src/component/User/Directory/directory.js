@@ -15,6 +15,7 @@ class directory extends Component{
 
     componentDidMount(){
         this.getProfile();
+       
         
     }
 
@@ -27,42 +28,31 @@ class directory extends Component{
     render(){
       return (
         <div>
-         <h1>Web Member Directory</h1>
+            <style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Montserrat:wght@800;900&display=swap');
+</style> 
+         <h1 style={{fontFamily: "Montserrat"}}>Web Member Directory</h1>
+         <div className="serachbar-div" >
+         <input className="searchBox" type="text" name="search" placeholder="Search.."/> 
+            
+
+         </div>
          <div class ="container">
         <div class ="row">
+        {this.state.allprofile.map((profile)=>(
             <div class="col-md-4">
                 <div class="user-review">
-                    <p> <div>Faculty of Business </div>
+                    <p> <div>{profile.faculty} </div>
                         <div>Batch 14</div>
                         <div>Manager at Commercial Credit PLC</div>
                     </p>
-                        <h5>Nirasha Wimalasooriya</h5>
+                        <h5>{profile.firstName} {profile.lastName}</h5>
                         <small>Colombo</small>
                 </div>
                 <img className="profile-img" src ={pic2}/>
-            </div>
-            <div class="col-md-4">
-                <div class="user-review">
-                    <p> <div>Faculty of Business </div>
-                        <div>Batch 14</div>
-                        <div>Manager at Commercial Credit PLC</div>
-                    </p>
-                        <h5>Nirasha Wimalasooriya</h5>
-                        <small>Colombo</small>
-                </div>
-                <img className="profile-img" src ={pic2}/>
-            </div>
-            <div class="col-md-4">
-                <div class="user-review">
-                    <p> <div>Faculty of Business </div>
-                        <div>Batch 14</div>
-                        <div>Manager at Commercial Credit PLC</div>
-                    </p>
-                        <h5>Nirasha Wimalasooriya</h5>
-                        <small>Colombo</small>
-                </div>
-                <img className="profile-img" src ={pic2}/>
-            </div>
+            </div>))}
+           
+           
             </div>
             </div>
            
