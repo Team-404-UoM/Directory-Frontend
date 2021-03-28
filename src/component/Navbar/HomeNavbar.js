@@ -1,9 +1,12 @@
 import React,{Component} from 'react';
-import {Navbar,Nav} from 'react-bootstrap';
+import {Navbar,Nav, NavDropdown} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import logo from './Team404.jpg';
 import './Nav.css'; 
 import boxicons from 'boxicons';
+
+
+
 
 class HomeNavbar extends Component{
     render(){
@@ -32,6 +35,10 @@ class HomeNavbar extends Component{
       
     </Nav>
     <Nav><box-icon className="mr-sm-2" name='bell' type="solid" color="white"></box-icon></Nav>
+   
+   <NavDropdown title="User name">
+     <NavDropdown.Item>Logout</NavDropdown.Item>
+   </NavDropdown>
   </Navbar>
   
 
