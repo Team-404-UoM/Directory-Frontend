@@ -123,29 +123,38 @@ class create extends Component {
         if (emailError || firstNameError || lastNameError || passwordError || facultyError || departmentError || genderError) {
             this.setState({ emailError, firstNameError, lastNameError, passwordError, facultyError, departmentError, genderError });
             return false;
-        }else {
+        } else {
             return true;
         }
-        
+
     };//till here
 
     async onSubmit(event) {
         event.preventDefault()
 
 
-//newly added email verification
-    await firebaseAuth.currentUser.sendEmailVerification();
+        //newly added email verification
+        // await firebaseAuth.currentUser.sendEmailVerification();
 
-          alert(" Successfully loged to the system. Check Email For Verification");
-          this.setState({ loading: false });
-//till here
+        alert(" Successfully loged to the system. Check Email For Verification");
+        this.setState({ loading: false });
+        //till here
+
+
+        //pushhh
+
+        try {
+            history.push('/signin');
+        } catch (e) {
+            console.error(e);
+        }
 
         //huh
         const isValid = this.validate();
 
         const registered = {
             firstName: this.state.firstName,
-            lastName: this.state.lastName,
+            lastName: this.state.lastName, 
             faculty: this.state.faculty,
             department: this.state.department,
             gender: this.state.gender,
@@ -164,28 +173,28 @@ class create extends Component {
 
             const customeToken = response.data;
             //here
-          /*  if (isValid) {
-                console.log(customeToken);
-                this.setState(initialState)
-            }*/
-            console.log(customeToken);
+            /*  if (isValid) {
+                  console.log(customeToken);
+                  this.setState(initialState)
+              }*/
+            // console.log(customeToken);
             //clear form
             if (isValid) {
 
-            const userDeatils = await firebaseAuth.signInWithCustomToken(customeToken);
-            history.push("/waiting");
-            this.setState({
-                firstName: '',
-                lastName: '',
-                faculty: '',
-                department: '',
-                gender: '',
-                email: '',
-                password: ''
-            })
+                const userDeatils = await firebaseAuth.signInWithCustomToken(customeToken);
+                history.push("/waiting");
+                this.setState({
+                    firstName: '',
+                    lastName: '',
+                    faculty: '',
+                    department: '',
+                    gender: '',
+                    email: '',
+                    password: ''
+                })
+            }
+            this.setState(initialState)
         }
-        this.setState(initialState)
-    }
         catch (e) {
             alert(e);
 
@@ -195,7 +204,7 @@ class create extends Component {
 
     render() {
         //  this.state.showSignUp 
-        const condition = this.state.showSignUp ;
+        const condition = true;
         return condition ? (
 
             <div className="academic">
@@ -240,7 +249,7 @@ class create extends Component {
                                         value={this.state.lastName}
                                         className='form-control form-group'
                                     />
-                                      <div style={{ color: "red" }}>{this.state.lastNameError} </div>
+                                    <div style={{ color: "red" }}>{this.state.lastNameError} </div>
                                 </Col>
                             </Row>
                             <Row>
@@ -264,7 +273,7 @@ class create extends Component {
                                     <select className='form-control form-group' name="department" id="department"
                                         onChange={(e) => this.changeDepartment(e)}
                                     >
-                                        <option value="" selected disabled hidden>
+                                        <option value="" disabled selected hidden >
                                             Department
                                         </option>
                                         <option value="department1">IDS Department </option>
@@ -289,9 +298,9 @@ class create extends Component {
                                 </Col>
                                 <Col className="acatype">
                                     <select className='form-control form-group acatype2' name="gender" id="gender"
-                                    onChange={(e)=>this.changeGender(e)}
+                                        onChange={(e) => this.changeGender(e)}
                                     >
-                                        <option value="" selected disabled hidden>
+                                        <option defaultValue='Gender'>
                                             Gender
                                         </option>
                                         <option value="male">Male</option>

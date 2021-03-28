@@ -55,8 +55,25 @@
                 border: 1px solid #ccc;
             }
             
-            .select {
+            .select-type {
                 width: 100px;
                 margin: 10px;
                 margin-left: 20px;
+            }
+            
+            .select-faculty {
+                width: 180px;
+                margin: 10px;
+                margin-left: 20px;
+            }
+            
+            .select-description {
+                margin-left: 20px;
+                margin-bottom: -8px;
+            }
+            
+            .select-description-faculty {
+                margin-left: 30%;
+                margin-bottom: -8px;
+                margin-top: -23px;
             }

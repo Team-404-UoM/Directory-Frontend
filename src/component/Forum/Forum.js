@@ -186,24 +186,28 @@ class Forum extends Component {
               </Card.Text>
             </Card.Body>
             <div>
+              <p className="select-description">Select Type</p>
+              {this.state.visibletype === "student" && (
+              <p className="select-description-faculty">Select Faculty</p>)}
               <select
-                className="form-select-sm select"
+                className="form-select-sm select-type"
                 aria-label="Default select example"
                 onChange={this.handletypechange}
               >
-                <option defaultValue hidden>Select Type</option>
-                <option value="all">All</option>
+                
+                <option defaultValue="all">All</option>
                 <option value="academic">Academic</option>
                 <option value="student">Student</option>
               </select>
+              
               {this.state.visibletype === "student" && (
                 <select
-                  className="form-select-sm select"
+                  className="form-select-sm select-faculty"
                   aria-label="Default select example"
                   onChange={this.handlefaculty}
                 >
-                  <option defaultValue hidden>Select Faculty</option>
-                  <option value="All">All</option>
+                  
+                  <option defaultValue="All">All</option>
                   <option value="Engineering">Engineering</option>
                   <option value="Information Technology">
                     Information Technology
@@ -271,7 +275,7 @@ class Forum extends Component {
                     </Button>
                   </Link>
 
-                  {(moment(post.createdAt).add(6,'hours')>moment())&&(
+                  {(moment(post.createdAt).add(6,'hours')>moment()||(post.reply.length)===0)&&(
                   <Button
                     variant="outline-info"
                     className="cardbutton"
