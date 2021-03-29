@@ -27,6 +27,10 @@ class BlogEditor extends Component {
       preview:{title:"",image:"",body:""},
       result:"",
       imageUrl:null,
+      bodyvalidate:"",
+      coverimagevalidate:"",
+      categorievalidate:"",
+      titlevalidate:"",
       id: props.id,
       content: props.content,
       handleWYSIWYGInput: props.handleWYSIWYGInput,
@@ -42,6 +46,33 @@ class BlogEditor extends Component {
     this.handlePreviewModal=this.handlePreviewModal.bind(this);
     this.handleClosePreviewModal=this.handleClosePreviewModal.bind(this);
   }
+
+  validate=()=>{
+    let titlevalidate="";
+    let coverimagevalidate="";
+    let categorievalidate="";
+    let bodyvalidate="";
+
+    if(!this.state.title){
+      titlevalidate="Title Cannot be blank";
+    }
+    if(!this.state.body){
+      bodyvalidate="Body Cannot be blank";
+    }
+    if(!this.state.coverImage){
+      coverimagevalidate="Cover Image Cannot be blank";
+    }
+    if(!this.state.categorie){
+categorievalidate="Catgorie Cannot be blank"
+    }
+    if (titlevalidate || bodyvalidate || coverimagevalidate || categorievalidate) {
+      this.setState({ titlevalidate, bodyvalidate, coverimagevalidate, categorievalidate});
+      return false;
+  } else {
+      return true;
+  }
+ }
+
   onChangeFile(event) {
     this.setState({
       coverImage: event.target.files[0],
@@ -52,8 +83,10 @@ class BlogEditor extends Component {
 
   handleSubmit(event) {
     console.log(this.state.title);
+    const isValid=this.validate();
     event.preventDefault();
 
+    if(isValid){
     const blogdetails = {
       title: this.state.title,
       //image: this.state.image,
@@ -86,7 +119,7 @@ class BlogEditor extends Component {
       
       })
 
-        }
+  }}
 
   handleTitle(event) {
     this.setState({
@@ -153,7 +186,7 @@ handlecategorie(event){
                         value={this.state.title}
                         onChange={this.handleTitle}
                       />
-                   
+                    <div style={{color:'red',fontSize:12,marginLeft:'13%'}}>{this.state.titlevalidate}</div>
                   </div>
 
                   <div>
@@ -171,10 +204,11 @@ handlecategorie(event){
                       filename="image"
                       onChange={this.onChangeFile}
                     />
+                     <div style={{color:'red',fontSize:12,marginLeft:'13%'}}>{this.state.coverimagevalidate}</div>
                   </div>
                   <label className="categorie-label" for="categorie">Choose a Category:</label>
-                  <select className="categorie-select" name="categorie" onChange={this.handlecategorie} id="catrgories">
-                  <option value="select">Select the Category</option>
+                  <select className="categorie-select" value={this.state.categorie} name="categorie" onChange={this.handlecategorie} id="catrgories">
+                  <option defaultvalue="select" hidden>Select the Category</option>
                     <option value="Economic">Economic</option>
                     <option value="Finance">Finance</option>
                     <option value="Gaming">Gaming</option>
@@ -197,7 +231,7 @@ handlecategorie(event){
                     <option value="Design">Design</option>
                     <option value="Other">Other</option>
                   </select>
-
+                  <div style={{color:'red',fontSize:12,marginLeft:'13%'}}>{this.state.categorievalidate}</div>
                   <div className="label1">
                     <label> Description </label>
                   </div>
@@ -224,9 +258,11 @@ handlecategorie(event){
                         this.setState({ body: data });
                       }}
                     />
+                     
                   </div>
+                  <div style={{color:'red',fontSize:12,marginLeft:'13%'}}>{this.state.bodyvalidate}</div>
                   <Modal show={this.state.show} >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton onClick={this.handleclosemodal}>
           <Modal.Title>Save Article</Modal.Title>
         </Modal.Header>
         <Modal.Body>Do you want Post this Article?</Modal.Body>

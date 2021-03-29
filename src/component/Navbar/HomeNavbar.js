@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Navbar,Nav, NavDropdown} from 'react-bootstrap';
+import {Navbar,Nav, NavDropdown,DropdownButton,Dropdown} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import logo from './Team404.jpg';
 import './Nav.css'; 
@@ -35,6 +35,13 @@ class HomeNavbar extends Component{
       
     </Nav>
     <Nav><box-icon className="mr-sm-2" name='bell' type="solid" color="white"></box-icon></Nav>
+    <Nav><Dropdown>
+  <Dropdown.Toggle variant="success" id="dropdown-basic">
+  <box-icon className="mr-sm-2" name='bell' type="solid" color="white"></box-icon>
+  </Dropdown.Toggle>
+  </Dropdown>
+  </Nav>
+    
    
    <NavDropdown title="User name">
      <NavDropdown.Item>Logout</NavDropdown.Item>

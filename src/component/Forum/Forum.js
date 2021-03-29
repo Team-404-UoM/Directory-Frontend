@@ -24,6 +24,7 @@ class Forum extends Component {
       visiblequestions: 10,
       visibletype: "",
       faculty:"",
+      messagevalidate:""
 
     };
 
@@ -39,9 +40,24 @@ class Forum extends Component {
     this.setState({ message: event.target.value });
   }
 
+  validate=()=>{
+    let messagevalidate="";
+
+    if(!this.state.message){
+      messagevalidate="Question Cannot be blank";
+      this.setState({messagevalidate});
+      return false;
+    }
+    return true;
+
+  }
+
   handleClick(event) {
     console.log(this.state.message);
+    const isValid=this.validate();
+    
     event.preventDefault();
+    if(isValid){
     const message = { message: this.state.message ,faculty:this.state.faculty,privacytype:this.state.visibletype};
 
     axios.post("http://localhost:4000/Forum", message).then((res) => {
@@ -50,17 +66,17 @@ class Forum extends Component {
       this.handleCloseModal();
       this.getAllPosts();
     });
-
+    
     this.setState({
       message: "",
     });
-  }
+  }}
 
   componentDidMount() {
     this.getAllPosts();
     this.timelimit();
-   
   }
+  
 
   getAllPosts = () => {
     axios
@@ -183,6 +199,7 @@ class Forum extends Component {
                   value={this.state.message}
                   onChange={this.handleChange}
                 />
+                <div style={{color:'red',fontSize:12}}>{this.state.messagevalidate}</div>
               </Card.Text>
             </Card.Body>
             <div>
@@ -339,6 +356,7 @@ class Forum extends Component {
             <Modal.Title>Post Question</Modal.Title>
           </Modal.Header>
           <Modal.Body>Do you want post this Question?</Modal.Body>
+          <div style={{color:'red',fontSize:15,marginLeft:'20px',marginTop:"-10px",marginBottom:'5px'}}>{this.state.messagevalidate}</div>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleCloseModal}>
               Close
