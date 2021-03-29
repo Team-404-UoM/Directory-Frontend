@@ -17,7 +17,12 @@ class BlogEditor extends Component {
       title: "",
       image: "",
       url: "",
+      categorie:"",
       show: false,
+      titlevalidate:"",
+      imagevalidate:"",
+      urlvalidate:"",
+      categorievalidate:""
     };
     this.handleTitle = this.handleTitle.bind(this);
     this.handleImage = this.handleImage.bind(this);
@@ -28,10 +33,38 @@ class BlogEditor extends Component {
     this.handlecategorie=this.handlecategorie.bind(this);
   }
 
+  validate=()=>{
+    let titlevalidate="";
+    let imagevalidate="";
+    let categorievalidate="";
+    let urlvalidate="";
+
+    if(!this.state.title){
+      titlevalidate="Title Cannot be blank";
+    }
+    if(!this.state.url){
+      urlvalidate="URL Cannot be blank";
+    }
+    if(!this.state.image){
+      imagevalidate="Cover Image Cannot be blank";
+    }
+    if(!this.state.categorie){
+      categorievalidate="Categorie Cannot be blank"
+    }
+    if (titlevalidate || urlvalidate || imagevalidate || categorievalidate) {
+      this.setState({ titlevalidate, urlvalidate, imagevalidate, categorievalidate});
+      return false;
+  } else {
+      return true;
+  }
+ }
+
+
   handleSubmit(event) {
     console.log(this.state.title);
+    const isValid=this.validate();
     event.preventDefault();
-
+    if(isValid){
     const blogdetails = {
       title: this.state.title,
       image: this.state.image,
@@ -52,7 +85,7 @@ class BlogEditor extends Component {
           url: "",
         });
       });
-  }
+  }}
 
   handleTitle(event) {
     this.setState({
@@ -106,6 +139,7 @@ class BlogEditor extends Component {
                 value={this.state.title}
                 onChange={this.handleTitle}
               />
+              <div style={{color:'red',fontSize:12,marginLeft:'10.5%'}}>{this.state.titlevalidate}</div>
             </div>
             <div >
               <label className="link-imgurl-label"> Cover Photo URL </label>
@@ -116,6 +150,7 @@ class BlogEditor extends Component {
                 value={this.state.image}
                 onChange={this.handleImage}
               />
+              <div style={{color:'red',fontSize:12,marginLeft:'10.5%'}}>{this.state.imagevalidate}</div>
             </div>
             <div >
               <label className="link-url-label"> Blog URL </label>
@@ -126,10 +161,11 @@ class BlogEditor extends Component {
                 value={this.state.url}
                 onChange={this.handleUrl}
               />
+              <div style={{color:'red',fontSize:12,marginLeft:'10.5%'}}>{this.state.urlvalidate}</div>
             </div>
             <label className="categorie-label" for="categorie">Choose a Category:</label>
-                  <select className="categorie-select" name="categorie" onChange={this.handlecategorie} id="catrgories">
-                  <option value="select">Select the Category</option>
+                  <select className="categorie-select" value={this.state.categorie} name="categorie" onChange={this.handlecategorie} id="catrgories">
+                  <option defaultvalue="select" hidden>Select the Category</option>
                     <option value="Economic">Economic</option>
                     <option value="Finance">Finance</option>
                     <option value="Gaming">Gaming</option>
@@ -152,11 +188,16 @@ class BlogEditor extends Component {
                     <option value="Design">Design</option>
                     <option value="Other">Other</option>
                   </select>
+                  <div style={{color:'red',fontSize:12,marginLeft:'10.5%'}}>{this.state.categorievalidate}</div>
             <Modal show={this.state.show}>
-              <Modal.Header closeButton>
+              <Modal.Header closeButton onClick={this.handleclosemodal}>
                 <Modal.Title>Save Article</Modal.Title>
               </Modal.Header>
               <Modal.Body>Do you want Post this Article?</Modal.Body>
+              <span style={{color:'red',fontSize:12,marginLeft:'3%',marginTop:'-15px'}}>{this.state.titlevalidate}</span>
+              <span style={{color:'red',fontSize:12,marginLeft:'3%'}}>{this.state.imagevalidate}</span>
+              <span style={{color:'red',fontSize:12,marginLeft:'3%'}}>{this.state.urlvalidate}</span>
+              <span style={{color:'red',fontSize:12,marginLeft:'3%',marginBottom:'5px'}}>{this.state.categorievalidate}</span>
               <Modal.Footer>
                 <Button variant="secondary" onClick={this.handleclosemodal}>
                   Close

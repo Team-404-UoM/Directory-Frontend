@@ -13,6 +13,7 @@ class ForumReply extends Component {
       message: "",
       createtime: "",
       replymessage: "",
+      replyvalidate:"",
       updatetime: "",
       replies: [],
       visiblereply: 5,
@@ -30,6 +31,26 @@ class ForumReply extends Component {
   componentDidMount() {
     this.getquestion();
   }
+
+  validate=()=>{
+    let replyvalidate="";
+
+    if(!this.state.replymessage){
+     replyvalidate="Question Cannot be blank";
+      this.setState({replyvalidate});
+      return false;
+    }
+    return true;
+
+  }
+
+
+
+
+
+
+
+
   getquestion() {
     axios
       .get("http://localhost:4000/Forum/" + this.props.location.query.id)
@@ -57,6 +78,8 @@ class ForumReply extends Component {
   };
 
   handleReply() {
+    const isValid=this.validate();
+    if(isValid){
     const reply = {
       body: this.state.replymessage,
       date: Date.now(),
@@ -68,7 +91,7 @@ class ForumReply extends Component {
         reply
       )
       .then((res) => this.getquestion(), this.setState({ replymessage: "" }));
-  }
+  }}
 
   handleDelete(index) {
     console.log(index);
@@ -216,10 +239,11 @@ cancleEdit = () => {
                   <Card.Text>
                     <textarea
                       placeholder="Please Type reply here"
-                      style={{ width: "460px" }}
+                      style={{ width: "580px"}}
                       value={this.state.replymessage}
                       onChange={this.handleChange}
                     />{" "}
+                    <div style={{color:'red',fontSize:12}}>{this.state.replyvalidate}</div>
                   </Card.Text>
                 </Card.Body>{" "}
                
