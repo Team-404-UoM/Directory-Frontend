@@ -43,7 +43,7 @@ class directory extends Component{
             <div class="col-md-4">
                 <div class="user-review">
                     <p> <div>{profile.faculty} </div>
-                        <div>Batch 14</div>
+                    <div>{profile.gender} </div>
                         <div>Manager at Commercial Credit PLC</div>
                     </p>
                         <h5>{profile.firstName} {profile.lastName}</h5>
