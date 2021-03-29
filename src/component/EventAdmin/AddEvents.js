@@ -3,8 +3,12 @@ import {
   getEvents,
   addEvent,
   deleteEvent,
-  updateEvent
-} from "../../config/api_calls";  
+  updateEvent,
+  postponeEvent,
+  updateEventState,
+  updateEventStateResume,
+  sendReminderAlerts
+} from "../../config/api_calls";
 import {
   CDataTable,
   CButton,
@@ -19,11 +23,14 @@ import {
   CDropdownToggle
 } from "@coreui/react";
 import { AiFillEdit } from "react-icons/ai";
+import { AiFillAlert } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 import { HiPlus } from "react-icons/hi";
 import { AiOutlineClear } from "react-icons/ai";
 import { GiPartyFlags } from "react-icons/gi";
 import { RiCalendarEventFill } from "react-icons/ri";
+
+import Dropdown from "react-bootstrap/Dropdown";
 
 const AddEvents = (props) => {
   const [events, setevents] = useState([]);
@@ -42,6 +49,13 @@ const AddEvents = (props) => {
   const [edate, setedate] = useState([]);
   const [epaid, setepaid] = useState(false);
 
+  const [alert, setalert] = useState("");
+  const [reasonp, setreasonp] = useState("");
+  const [response, setresponse] = useState(false);
+  const [postponeformmodal, setpostponeformmodal] = useState(false);
+  const [alertformmodal, setalertformmodal] = useState(false);
+  
+
   useState(() => {
     getEvents().then((result) => {
       setevents(result);
@@ -56,9 +70,32 @@ const AddEvents = (props) => {
     seteditformmodal(!editformmodal);
   };
 
+  const togglePostponeForm = () => {
+    setpostponeformmodal(!postponeformmodal);
+  };
+
+  const toggleAlertForm = () => {
+    setalertformmodal(!alertformmodal);
+  };
+
   const onChangeFile = (e) => {
     console.log(e.target.file[0]);
     setimage(e.target.file)
+  }
+
+  const getDateDifference = (date) => {
+    let date1 = new Date(); 
+    let date2 = new Date(date);
+
+    let Difference_In_Time = date2.getTime() - date1.getTime(); 
+
+    let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
+
+    if(Difference_In_Days <= 0){
+      return true
+    }else{
+      return false
+    }
   }
 
   const [details, setDetails] = useState([]);
@@ -259,8 +296,8 @@ const AddEvents = (props) => {
               <div>
               <CCollapse show={details.includes(index)}>
                 <CCardBody>
-                  <button
-                    className="btn btn-warning"
+                <button
+                    className="btn btn-success"
                     style={{ marginRight: 20 }}
                     onClick={() => {
                      toggleEditForm()
@@ -268,6 +305,29 @@ const AddEvents = (props) => {
                   >
                     Edit Event<AiFillEdit />
                   </button>
+                  {item.postpone ? 
+                  <a
+                    href={`/admin/events`}
+                    className="btn btn-warning"
+                    style={{ marginRight: 20 }}
+                    onClick={() => {
+                     updateEventStateResume(item._id)
+                    }}
+                  >
+                    Resume Event<AiFillAlert />
+                  </a>
+                  :
+                  <a
+                    className="btn btn-info"
+                    style={{ marginRight: 20 }}
+                    onClick={() => {
+                     togglePostponeForm()
+                    }}
+                  >
+                    Send Alerts<AiFillAlert />
+                  </a>
+                  }
+                  {getDateDifference(item.date) ?  
                   <a
                     href={`/admin/events`}
                     className="btn btn-danger"
@@ -276,7 +336,16 @@ const AddEvents = (props) => {
                     }}
                   >
                     Remove Event <AiFillDelete />
-                  </a>
+                  </a> : <button
+                    className="btn btn-primary"
+                    style={{ marginRight: 20 }}
+                    onClick={() => {
+                     toggleAlertForm()
+                    }}
+                  >
+                    Send Reminder<AiFillAlert />
+                  </button>}
+                  
                 </CCardBody>
               </CCollapse>
               <CModal show={editformmodal} onClose={toggleEditForm}>
@@ -348,6 +417,90 @@ const AddEvents = (props) => {
                 </form>
               </CModalBody>
             </CModal>
+            <CModal show={alertformmodal} onClose={toggleAlertForm}>
+              <CModalHeader closeButton><h5>Create Email Body <AiFillAlert/></h5></CModalHeader>
+              <CModalBody>
+              <form onSubmit={(e) => e.preventDefault && false} encType="multipart/form-data" >
+                  <div className="form-group">
+                        <label for="body">Email Body </label>
+                        <textarea
+                          type="text"
+                          className="form-control"
+                          id="body"
+                          name="body"
+                          rows={10}
+                          value={alert}
+                          onChange={(e) => {
+                            setalert(e.target.value);
+                          }}
+                        ></textarea>
+                    </div>
+                    {response ?
+                    <div class="progress" style={{marginTop: "1rem"}}>
+                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style={{width: "100%"}}>Sending Alerts</div>
+                    </div> :
+                    <button
+                    type="submit"
+                    className="btn btn-success btn-block"
+                    onClick={() => {
+                      setresponse(true)
+                      sendReminderAlerts(item._id,alert).then(res => {
+                        if(res){
+                          toggleAlertForm()
+                        }
+                      })
+                    }}
+                  >
+                    Send Alert
+                  </button>
+                    }
+              </form>
+              </CModalBody>
+            </CModal>
+            <CModal show={postponeformmodal} onClose={togglePostponeForm}>
+              <CModalHeader closeButton><h5>Create Email Body <AiFillAlert/></h5></CModalHeader>
+              <CModalBody>
+              <form onSubmit={(e) => e.preventDefault && false} encType="multipart/form-data" >
+                  <div className="form-group">
+                        <label for="body">Email Body </label>
+                        <textarea
+                          type="text"
+                          className="form-control"
+                          id="body"
+                          name="body"
+                          rows={10}
+                          value={reasonp}
+                          onChange={(e) => {
+                            setreasonp(e.target.value);
+                          }}
+                        ></textarea>
+                    </div>
+                    {response ?
+                    <div class="progress" style={{marginTop: "1rem"}}>
+                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style={{width: "100%"}}>Sending Alerts</div>
+                    </div> :
+                    <button
+                    type="submit"
+                    className="btn btn-success btn-block"
+                    onClick={() => {
+                      updateEventState(item._id)
+                      setresponse(true)
+                      postponeEvent(item._id,reasonp).then(res => {
+                        if(res){
+                          togglePostponeForm()
+                          setresponse(false)
+                          setreasonp("")
+                        }
+                      })
+                    }}
+                  >
+                    Update Event Participants
+                  </button>
+                    }
+              </form>
+              </CModalBody>
+            </CModal>
+            
               </div>
             );
           },

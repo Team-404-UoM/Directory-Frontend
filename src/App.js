@@ -12,12 +12,18 @@ import BlogEditPost from './component/Blog/BlogEditPost';
 import Test from './component/Test/Test';
 import ForumReply from './component/Forum/ForumReply';
 
+
+//import AlertTemplate from 'react-alert-template-basic'
+//import { transitions, positions, Provider as AlertProvider, types } from 'react-alert'
+import 'bootstrap/dist/css/bootstrap.css';
+
 import EventPage from './component/Events/Event_page';
 import PayemetForm from './component/Events/PayemetForm';
 import Albums from './component/Gallery/Main';
 import View from './component/Gallery/View';
 import Directory from './component/User/Directory/directory';
-//import EventAdminHome from './components/EventAdmin/EventAdminHome';
+import EventAdminHome from './component/EventAdmin/EventAdminHome';
+import JobView from './component/Jobs/JobView'
 
 
 import PastStudent from './component/User/SignUp/PastStudent';
@@ -42,13 +48,23 @@ const App = () => {
 
         <div>
         <Router history={history}>
+
+       
+        
+
         <Switch>
+       
         <React.Fragment>
         <div>
 
         <HomeNavbar/>
+ 
         <Route path = "/">
-        </Route> <Route path = "/SignUp/PastStudent/" exact component = {PastStudent}/>
+        </Route> 
+
+        <Route path="/admin/events" component={EventAdminHome} />
+
+        <Route path = "/SignUp/PastStudent/" exact component = {PastStudent}/>
 
         <Route path = "/SignUp/AcademicStaff/" exact component = {AcademicStaff}/> 
         <Route path = "/SignIn" exact component = {Login}/> 
@@ -78,24 +94,22 @@ const App = () => {
         <Route path = "/Blog/BlogEditPost" exact component = {BlogEditPost}/>
 
         <Route path="/forget" exact component={Forget} />
-      
-       <Route path = "/events" component = {EventPage}/> 
 
+
+
+
+
+        <Route path = "/events" component = {EventPage}/> 
         <Route path = "/payments/:id" component = {PayemetForm}/>
-
         <Route path = "/Gallery" component = {Albums}/>
-
         <Route path = "/albums/:category/:id" component = {View}/>
+        <Route path="/jobs" component={JobView} />
 
 
 
-
-
-        <Route path = "/Forum/ForumReply" exact component = {ForumReply}/>
-
-        <Route path = "/Settings" exact component = {Settings}/>
-
-        <Route path = "/ProfileEdit" exact component = {ProfileEdit}/>
+       <Route path = "/Forum/ForumReply" exact component = {ForumReply}/>
+       <Route path = "/Settings" exact component = {Settings}/>
+       <Route path = "/ProfileEdit" exact component = {ProfileEdit}/>
 
 
 
