@@ -80,11 +80,11 @@ class ForumReply extends Component {
       )
       .then((res) => console.log(res)); */
   }
-
-handleTest(body){
-  console.log(body)
+0
+handleTest(id){
+  console.log(id)
   
-  axios.delete("http://localhost:4000/Forum/reply/" + this.props.location.query.id +"/?name="+body)
+  axios.delete("http://localhost:4000/Forum/reply/" + this.props.location.query.id +"/?name="+id)
   .then((res)=>this.getquestion())    
 
 }
@@ -184,7 +184,7 @@ cancleEdit = () => {
                        <Button
                         variant="outline-danger"
                         size="sm"
-                        onClick={()=>this.handleTest(reply.body)}
+                        onClick={()=>this.handleTest(reply._id)}
                       >
                         
                         Delete

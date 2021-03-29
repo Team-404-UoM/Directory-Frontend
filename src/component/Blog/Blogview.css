@@ -42,7 +42,8 @@
 }
 
 .comment-size {
-    width: 80%
+    width: 80%;
+    padding: 10px;
 }
 
 .comment-reply {
