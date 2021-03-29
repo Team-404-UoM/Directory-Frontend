@@ -134,7 +134,7 @@ class create extends Component {
 
 
         //newly added email verification
-        // await firebaseAuth.currentUser.sendEmailVerification();
+        await firebaseAuth.currentUser.sendEmailVerification();
 
         alert(" Successfully loged to the system. Check Email For Verification");
         this.setState({ loading: false });
@@ -154,7 +154,7 @@ class create extends Component {
 
         const registered = {
             firstName: this.state.firstName,
-            lastName: this.state.lastName, 
+            lastName: this.state.lastName,
             faculty: this.state.faculty,
             department: this.state.department,
             gender: this.state.gender,
@@ -204,7 +204,7 @@ class create extends Component {
 
     render() {
         //  this.state.showSignUp 
-        const condition = true;
+        const condition = this.state.showSignUp ;
         return condition ? (
 
             <div className="academic">

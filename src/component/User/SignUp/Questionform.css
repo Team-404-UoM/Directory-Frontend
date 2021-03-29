@@ -1,0 +1,37 @@
+.form {
+    margin-left: 250px;
+    width: 1000px;
+    height: 750px;
+  
+    background-image: linear-gradient(to bottom right, rgb(202, 192, 183), rgb(146, 116, 88));
+    
+}
+.form1 {
+    margin-left: 200px;
+    width: 1000px;
+    height: 500px;
+ 
+ 
+    
+}
+.h1{
+    font-style:normal;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+}
+
+.formgroup{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-right: 100px;
+}
+
+/*questions*/
+.formlabel{
+
+    font-weight: bolder;
+}
+
+.formcheck{
+    margin-right: 50px;
+}

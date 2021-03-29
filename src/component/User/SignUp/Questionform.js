@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from "axios"
-import { Form, Row, Col, Button } from "react-bootstrap";
+import { Form, Row, Col, Button, Container } from "react-bootstrap";
+import './Questionform.css';
+import Jumbotron from 'react-bootstrap/Jumbotron'
 
 export default class Questionform extends Component {
 
@@ -46,16 +48,20 @@ export default class Questionform extends Component {
 
     render() {
         return (
-            <Form>
-                {
+            <Jumbotron className="form">
+                  <Container>
+                  <h2 className="h1">Question form</h2>
+            <Form className="form1" >
+               <br/>
+                { 
                     this.state.questions.map((question, questionIndex) => {
-                        return <Form.Group as={Row} key={questionIndex}>
-                            <Form.Label as="legend" column sm={2}>
+                        return <Form.Group as={Row} key={questionIndex} className="formgroup">
+                            <Form.Label as="legend" column sm={5} className="formlabel">
                                 {question.question}
                             </Form.Label>
                             <Col sm={10}>
                                 {question.possible_answers.map((answer, index) =>
-                                    <Form.Check
+                                    <Form.Check className="formcheck"
                                         type="radio"
                                         onChange={(e) => {
                                             const newAnswers = this.state.answers.map((one, answerIndex) => {
@@ -70,17 +76,18 @@ export default class Questionform extends Component {
                                         value={answer}
                                         name={questionIndex}
 
-                                    />)}
+                                 />)}
                             </Col>
                         </Form.Group>
-                    })
-                }
+                      })
+                 }
+                <br/>
                 <Form.Group as={Row}>
                     <Col sm={{ span: 10, offset: 2 }}>
                         <Button onClick={() => this.onClickSubmit()}>Submit Answer</Button>
                     </Col>
                 </Form.Group>
-            </Form>
+            </Form> </Container></Jumbotron>
         )
     }
 }

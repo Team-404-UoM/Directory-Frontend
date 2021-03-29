@@ -1,20 +1,20 @@
 .academic {
     background-color: transparent;
     margin: 0px;
-    background-image: linear-gradient(to bottom right, rgb(230, 223, 243), rgb(134, 168, 202));
+    background-image: linear-gradient(to bottom right, rgb(202, 192, 183), rgb(146, 116, 88));
     padding: 35px
 }
 
 .lec {
     margin-left: 30px;
 }
-
 .jumboaca {
     margin-left: 350px;
     width: 800px;
     height: 400px;
-    background-Image: linear-gradient(to bottom right, rgba(5, 128, 54, 0.83), rgb(11, 189, 138))
+    background-Image: linear-gradient(to bottom right, rgba(180, 99, 45, 0.83), rgb(182, 160, 142))
 }
+
 
 .acatype {
     margin-bottom: 20px;
