@@ -75,9 +75,9 @@ class BlogView extends Component {
 
 } 
 
-handledDeleteComment(body){
-  console.log(body)
- axios.delete("http://localhost:4000/Blog/comment/" + this.props.location.query.id +"/?name="+body)
+handledDeleteComment(id){
+  console.log(id)
+ axios.delete("http://localhost:4000/Blog/comment/" + this.props.location.query.id +"/?name="+id)
   .then((res)=>this.getBlog())    
  
 }
@@ -165,7 +165,7 @@ handledDeleteComment(body){
                  </Card.Text>
                  {/* <Card.Link href="#">Card Link</Card.Link>
                  <Card.Link href="#">Another Link</Card.Link> */}
-                 <box-icon style={{float:'right'}} color='red' name='trash' onClick={()=>this.handledDeleteComment(comment.body)}></box-icon>
+                 <box-icon style={{float:'right'}} color='red' name='trash' onClick={()=>this.handledDeleteComment(comment._id)}></box-icon>
                </Card.Body>
              </Card>))}
               </div>
