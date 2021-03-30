@@ -13,8 +13,8 @@ import Test from './component/Test/Test';
 import ForumReply from './component/Forum/ForumReply';
 
 
-//import AlertTemplate from 'react-alert-template-basic'
-//import { transitions, positions, Provider as AlertProvider, types } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+import { transitions, positions, Provider as AlertProvider, types } from 'react-alert'
 import 'bootstrap/dist/css/bootstrap.css';
 
 import EventPage from './component/Events/Event_page';
@@ -39,9 +39,14 @@ import history from './config/history';
 import 'bootstrap/dist/css/bootstrap.css';
 //test commit 2
 
-
-
-
+const options = {
+    position: positions.TOP_RIGHT,
+    timeout: 5000,
+    offset: '10px',
+    transition: transitions.FADE,
+    type: types.INFO
+  }
+  
 
 const App = () => {
     return ( <BrowserRouter>
@@ -49,11 +54,9 @@ const App = () => {
         <div>
         <Router history={history}>
 
-       
-        
 
         <Switch>
-       
+        <AlertProvider template={AlertTemplate} {...options}>
         <React.Fragment>
         <div>
 
@@ -111,13 +114,9 @@ const App = () => {
        <Route path = "/Settings" exact component = {Settings}/>
        <Route path = "/ProfileEdit" exact component = {ProfileEdit}/>
 
-
-
-
-
-
         </div> 
         </React.Fragment> 
+        </AlertProvider>
         </Switch> 
         </Router>
         </div> 
