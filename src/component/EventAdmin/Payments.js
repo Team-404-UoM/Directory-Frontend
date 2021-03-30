@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
-  getPaymentCollections,
-  getPaymentRecords
+  getEventNames,
+  getPaymentRecords,
+  getEvents
 } from "../../config/api_calls";
 import {
   CDataTable,
@@ -22,17 +23,16 @@ const Questions = (props) => {
   const [list, setList] = useState([]);
   const [payments, setpayments] = useState([]);
   const [formmodal, setFormmodal] = useState(false);
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [keywords, setKeywords] = useState([]);
-  const [keyword, setKeyword] = useState("");
   const [selected, setSelected] = useState("");
+  const [events, setevents] = useState([]);
 
   useState(() => {
-    getPaymentCollections().then((result) => {
-      console.log(result);
+    getEventNames().then((result) => {
       setpayments(result);
     });
+    getEvents().then(result =>{
+      setevents(result)
+    })
   }, []);
 
   const handleSelect = (e) => {
@@ -85,9 +85,11 @@ const Questions = (props) => {
         onSelect={handleSelect}
       >
         {payments.map((item, i) => {
+          if(item.paid){
           return (
-            <Dropdown.Item eventKey={item}>{item}</Dropdown.Item>
+            <Dropdown.Item eventKey={item._id}>{item.title}</Dropdown.Item>
           );
+          }
         })}
       </DropdownButton>
       <CDataTable
