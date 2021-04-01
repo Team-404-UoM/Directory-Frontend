@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import {
   getAlbums,
   updateApproval,
-  deleteAlbum
+  deleteAlbum,
+  approveAlbumAlerts
 } from "../../config/api_calls";
 import {
   CDataTable,
@@ -14,6 +15,7 @@ import {
 } from "@coreui/react";
 import { MdAddAPhoto } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
+import { AiOutlineFolderView } from "react-icons/ai"
 import {FaTruckMonster} from 'react-icons/fa';
 
 const AlbumApproval = (props) => {
@@ -120,6 +122,7 @@ const AlbumApproval = (props) => {
                     style={{ marginRight: 20 }}
                     onClick={() => {
                      updateApproval(item._id)
+                     approveAlbumAlerts(item._id)
                      toggle()
                     }}
                   >
@@ -134,6 +137,7 @@ const AlbumApproval = (props) => {
                   >
                     Remove Album <AiFillDelete />
                   </a>
+                  
                   </div>
                   :
                   <div>
@@ -145,6 +149,13 @@ const AlbumApproval = (props) => {
                     }}
                   >
                     Remove Album <AiFillDelete />
+                  </a>
+                  <a
+                    href={`/albums/${item.category}/${item._id}`}
+                    className="btn btn-info"
+                    style={{marginLeft: "2rem"}}
+                  >
+                    View Album <AiOutlineFolderView />
                   </a>
                   </div>
                   }

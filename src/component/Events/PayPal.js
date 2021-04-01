@@ -1,7 +1,7 @@
 import React, { useRef, useEffect,useState } from "react";
 import { CModal, CModalHeader, CModalBody,CModalFooter,CButton } from "@coreui/react";
 
-import { addPaymentData } from "../../config/api_calls"
+import { addPaymentData } from '../../config/api_calls'
 import {FaTruckMonster} from 'react-icons/fa';
 
 export default function Paypal({props}) {
@@ -14,7 +14,13 @@ export default function Paypal({props}) {
   const [phone, setphone] = useState(props['phone']);
   const [nic, setnic] = useState(props['nic']);
   const [id, setid] = useState(props['id'])
+  const [price, setprice] = useState(props['price'])
   const [modal, setModal] = useState(false);
+
+  const usdLkr = amount / 180
+  const usvalue = Number((usdLkr).toFixed(1));
+
+  console.log(usvalue);
   
   const print = () =>{
     console.log('done payment');
@@ -35,7 +41,7 @@ export default function Paypal({props}) {
                 description: "Cool looking table",
                 amount: {
                   currency_code: "USD",
-                  value: props['amount'],
+                  value: usvalue,
                 },
               },
             ],
@@ -45,7 +51,7 @@ export default function Paypal({props}) {
           const order = await actions.order.capture();
           print();
           console.log(order);
-          addPaymentData(id ,name, phone, email, nic, amount, tickets).then(res => {
+          addPaymentData(id ,name, phone, email, nic, amount, tickets, price).then(res => {
             toggle()
           });
         },

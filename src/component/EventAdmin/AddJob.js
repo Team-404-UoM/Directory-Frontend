@@ -21,8 +21,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { HiPlus } from "react-icons/hi";
 import { AiOutlineClear } from "react-icons/ai";
 import { BsFillBriefcaseFill } from "react-icons/bs";
-import { RiCalendarEventFill } from "react-icons/ri";
-import { IoMdCheckmarkCircle } from "react-icons/io";
+
 
 const AddJob = (props) => {
   const [jobs, setjobs] = useState([]);
@@ -82,7 +81,7 @@ const AddJob = (props) => {
   return (
     <div style={{ marginTop: 40, marginLeft: 120, marginRight: 120 }}>
       <CModal show={formmodal} onClose={toggleForm}>
-        <CModalHeader closeButton><h5>Add New Event <RiCalendarEventFill/></h5></CModalHeader>
+        <CModalHeader closeButton><h5>Add New Job <BsFillBriefcaseFill/></h5></CModalHeader>
         <CModalBody>
           <form onSubmit={(e) => e.preventDefault && false}>
             <div className="form-group">
@@ -174,7 +173,7 @@ const AddJob = (props) => {
                 toggleForm();
               }}
             >
-              Add New Event
+              Add New Job
             </button>
           </form>
         </CModalBody>
