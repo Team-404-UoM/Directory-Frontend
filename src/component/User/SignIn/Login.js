@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import { MdMail } from "react-icons/md";
 import { firebaseAuth } from '../../../config/FirebaseConfig';
 import history from '../../../config/history';
+import {Usercontext,user} from '../../../context/context';
 
 
 export default class Home extends Component {
+  static contextType=Usercontext;
   constructor(props) {
     super(props);
     this.state = {
@@ -120,18 +122,22 @@ export default class Home extends Component {
     //alert(" Successfully loged to the system");
 
                         //newly added email verification
-                        await firebaseAuth.currentUser.sendEmailVerification();
+                       /*  await firebaseAuth.currentUser.sendEmailVerification();
 
                         alert(" Successfully loged to the system. Check Email For Verification");
-                        this.setState({ loading: false });
+                        this.setState({ loading: false }); */
                         //till here
 
     try {
-      const signInresponse = await firebaseAuth.signInWithEmailAndPassword(email, password);
+      const signInresponse = await firebaseAuth.signInWithEmailAndPassword(email, password).then((res)=>{
+        console.log(res);
+      })
+      user.loggedInUser={username:"praveen"}
       history.push('/User/Directory');
     } catch (e) {
       console.error(e);
-    }
+    } 
+    
 
     this.setState({
 
@@ -167,7 +173,7 @@ export default class Home extends Component {
                 <strong>Sign In</strong>
               </Button>
             </Form>
-            <p style={{ marginTop: '5px', color: 'white', fontWeight: 'bold' }}>Don't have account yet?<a style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', marginLeft: '5px' }} href='/signUp/selection'>SignUp</a></p>
+            <p style={{ marginTop: '5px', color: 'white', fontWeight: 'bold' }}>Don't have account yet?{this.context.loggedInUser.username}<a style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', marginLeft: '5px' }} href='/signUp/selection'>SignUp</a></p>
             <div className="mt-3">
               <Link to="/forget" style={{ color: "black" }}>
                 <b className="text-secondary">Forget Password</b>

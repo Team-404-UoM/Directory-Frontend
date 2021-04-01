@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import './directory.css';
 import pic2 from "./pic2.jpg";
 import axios from "axios";
-
+import {Usercontext,user} from '../../../context/context';
 class directory extends Component{
+    static contextType=Usercontext;
     constructor(props) {
         super(props);
     this.state={
@@ -15,6 +16,7 @@ class directory extends Component{
 
     componentDidMount(){
         this.getProfile();
+        console.log(this.context.loggedInUser.username);
        
         
     }

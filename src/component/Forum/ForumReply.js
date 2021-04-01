@@ -36,7 +36,7 @@ class ForumReply extends Component {
     let replyvalidate="";
 
     if(!this.state.replymessage){
-     replyvalidate="Question Cannot be blank";
+     replyvalidate="Reply Cannot be blank";
       this.setState({replyvalidate});
       return false;
     }
