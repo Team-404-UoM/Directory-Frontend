@@ -23,6 +23,7 @@ class BlogView extends Component {
       coverImage: "",
       comment:"",
       comments:[],
+      commentvalidate:"",
       show: false,
       width: { width: "0%" },
       color: { backgroundColor: "white" },
@@ -31,6 +32,19 @@ class BlogView extends Component {
     this.handleCloseSidebar = this.handleCloseSidebar.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleComment=this.handleComment.bind(this);
+  }
+
+
+  validate=()=>{
+    let commentvalidate="";
+
+    if(!this.state.comment){
+      commentvalidate="Comment Cannot be blank";
+      this.setState({commentvalidate});
+      return false;
+    }
+    return true;
+
   }
 
   componentDidMount() {
@@ -63,6 +77,8 @@ class BlogView extends Component {
   }
 
  handleComment(){
+  const isValid=this.validate();
+  if(isValid){
   const comment={
     body:this.state.comment,
     date:Date.now()
@@ -73,7 +89,7 @@ class BlogView extends Component {
    
   }))
 
-} 
+ }} 
 
 handledDeleteComment(id){
   console.log(id)
@@ -129,6 +145,7 @@ handledDeleteComment(id){
                 <center>
                   <textarea className="comment-size" placeholder="Type comment here" value={this.state.comment} onChange={this.handleChange}></textarea>
                 </center>
+                <div style={{color:'red',fontSize:12,marginLeft:'5%'}}>{this.state.commentvalidate}</div>
                 <button className="btn btn-primary comment-post-button" onClick={this.handleComment}>
                   Post
                 </button> 

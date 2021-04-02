@@ -35,6 +35,7 @@ import AboutUs from './component/AboutUs/AboutUs';
 import Settings from './component/Settings/Settings';
 import ProfileEdit from './component/User/Profile/ProfileEditMode';
 import history from './config/history';
+import {Usercontext,user} from './context/context';
 
 import 'bootstrap/dist/css/bootstrap.css';
 //test commit 2
@@ -49,7 +50,9 @@ const options = {
   
 
 const App = () => {
-    return ( <BrowserRouter>
+    return ( 
+    <Usercontext.Provider value={user}>
+    <BrowserRouter>
 
         <div>
         <Router history={history}>
@@ -121,6 +124,7 @@ const App = () => {
         </Router>
         </div> 
         </BrowserRouter>
+        </Usercontext.Provider>
     );
 }
 
