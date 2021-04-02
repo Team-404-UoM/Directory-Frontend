@@ -170,8 +170,8 @@ class Bloginterface extends Component {
     this.getAllPosts();
     this.getAllUploadPosts();
     console.log(this.context.loggedInUser.username);
-    console.log(this.context.UserDetails.test);
-    console.log(this.context.UserDetails.firstname);
+    console.log(this.context.UserDetails.firstName);
+    
   }
 
   getAllPosts() {
@@ -344,7 +344,7 @@ this.updateviews(id)
                         borderRadius: "2px",
                       }}
                     />
-                    <strong>Anushka Praveen Shared by</strong>
+                    <strong>{blog.firstname} {blog.lastname} Shared by</strong>
                   </p>
                   <span
                     style={{
@@ -402,6 +402,7 @@ this.updateviews(id)
                             query: { id: blog._id },
                           }}
                         >
+                          {(blog.firebaseId==this.context.UserDetails.firebaseUserId) &&(
                           <Button
                             className=""
                             variant="success"
@@ -409,8 +410,9 @@ this.updateviews(id)
                             size="sm"
                           >
                             Edit
-                          </Button>
+                          </Button>)}
                         </Link>
+                        {(blog.firebaseId==this.context.UserDetails.firebaseUserId) &&(
                         <Button
                           style={{ marginLeft: "5px", marginRight: "5px" }}
                           variant="danger"
@@ -420,7 +422,7 @@ this.updateviews(id)
                           } /* onClick={this.deletePost.bind(this,blog._id)} */
                         >
                           Delete
-                        </Button>
+                        </Button>)}
                         <div>
                           <p>
                             <span class="badge rounded-pill bg-dark blog-views">
@@ -493,7 +495,7 @@ this.updateviews(id)
                           borderRadius: "2px",
                         }}
                       />
-                      <strong>Anushka Praveen Shared by</strong>
+                      <strong>{blog.firstname} {blog.lastname} Shared by</strong>
                     </p>
                     <span
                       style={{
@@ -533,7 +535,7 @@ this.updateviews(id)
                       >
                         Read
                       </Button>
-
+                      {(blog.firebaseId==this.context.UserDetails.firebaseUserId) &&(
                       <Button
                         style={{ marginLeft: "5px", marginRight: "5px" }}
                         variant="danger"
@@ -541,7 +543,7 @@ this.updateviews(id)
                         onClick={() => this.handleuploadmodal(blog._id)}
                       >
                         Delete
-                      </Button>
+                      </Button>)}
                       <div style={{ float: "right" }}>
                         <box-icon
                           onClick={this.uploadupdatedislike.bind(

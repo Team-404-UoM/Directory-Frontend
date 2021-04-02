@@ -9,8 +9,10 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import { Link } from "react-router-dom";
 import Postselection from "./Postselection";
 import axios from "axios";
+import {Usercontext,user} from '../../context/context';
 
 class BlogEditor extends Component {
+  static contextType=Usercontext;
   constructor(props) {
     super(props);
     this.state = {
@@ -69,7 +71,10 @@ class BlogEditor extends Component {
       title: this.state.title,
       image: this.state.image,
       url: this.state.url,
-      categorie:this.state.categorie
+      categorie:this.state.categorie,
+      firebaseId:this.context.UserDetails.firebaseUserId,
+      firstname:this.context.UserDetails.firstName,
+      lastname:this.context.UserDetails.lastName,
     };
 
     axios
