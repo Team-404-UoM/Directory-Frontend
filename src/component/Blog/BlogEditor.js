@@ -12,8 +12,9 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {Link} from 'react-router-dom';
 import MyUploadAdapter from './UploadAdapter';
-
+import {Usercontext,user} from '../../context/context';
 class BlogEditor extends Component {
+  static contextType=Usercontext;
   constructor(props) {
     super(props);
     this.state = {
@@ -89,10 +90,12 @@ categorievalidate="Catgorie Cannot be blank"
     if(isValid){
     const blogdetails = {
       title: this.state.title,
-      //image: this.state.image,
       body: this.state.body,
       like: this.state.like,
       categorie:this.state.categorie,
+      firebaseId:this.context.UserDetails.firebaseUserId,
+      firstname:this.context.UserDetails.firstName,
+      lastname:this.context.UserDetails.lastName,
       
     };
     const data = new FormData() 
@@ -110,7 +113,6 @@ categorievalidate="Catgorie Cannot be blank"
         console.log("mounted");
         this.setState({
           title: "",
-          //image: "",
           body: "",
         });
         
