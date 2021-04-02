@@ -130,9 +130,10 @@ export default class Home extends Component {
 
     try {
       const signInresponse = await firebaseAuth.signInWithEmailAndPassword(email, password).then((res)=>{
-        console.log(res);
+        console.log(res.user.X.X);
+        user.loggedInUser={username:res.user.X.X}
       })
-      user.loggedInUser={username:"praveen"}
+      
       history.push('/User/Directory');
     } catch (e) {
       console.error(e);

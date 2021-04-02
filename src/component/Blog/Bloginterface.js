@@ -8,7 +8,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import pic2 from "../Forum/pic2.jpg";
 import moment from "moment";
+import {Usercontext,user} from '../../context/context';
 class Bloginterface extends Component {
+  static contextType=Usercontext;
   constructor(props) {
     super(props);
 
@@ -167,6 +169,9 @@ class Bloginterface extends Component {
   componentDidMount() {
     this.getAllPosts();
     this.getAllUploadPosts();
+    console.log(this.context.loggedInUser.username);
+    console.log(this.context.UserDetails.test);
+    console.log(this.context.UserDetails.firstname);
   }
 
   getAllPosts() {
