@@ -163,7 +163,7 @@ handlecategorie(event){
 
   render() {
     return (
-      <div class="container-fluid">
+      <div className="container-fluid">
         <div className="row">
           <div className="col-12">
             <Postselection/>
@@ -208,9 +208,9 @@ handlecategorie(event){
                     />
                      <div style={{color:'red',fontSize:12,marginLeft:'13%'}}>{this.state.coverimagevalidate}</div>
                   </div>
-                  <label className="categorie-label" for="categorie">Choose a Category:</label>
+                  <label className="categorie-label">Choose a Category:</label>
                   <select className="categorie-select" value={this.state.categorie} name="categorie" onChange={this.handlecategorie} id="catrgories">
-                  <option defaultvalue="select" hidden>Select the Category</option>
+                  <option defaultValue="select" hidden>Select the Category</option>
                     <option value="Economic">Economic</option>
                     <option value="Finance">Finance</option>
                     <option value="Gaming">Gaming</option>

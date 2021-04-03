@@ -8,9 +8,11 @@ import axios from "axios";
 import moment from "moment";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import {Usercontext,user} from '../../context/context';
 //import  '../NotificationBar/SideNotification.css';
 
 class Forum extends Component {
+  static contextType=Usercontext;
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +26,9 @@ class Forum extends Component {
       visiblequestions: 10,
       visibletype: "",
       faculty:"",
-      messagevalidate:""
+      messagevalidate:"",
+      visibletypevalidate:"",
+     
 
     };
 
@@ -42,10 +46,18 @@ class Forum extends Component {
 
   validate=()=>{
     let messagevalidate="";
+    let visibletypevalidate="";
+    let facultyvalidate="";
 
     if(!this.state.message){
       messagevalidate="Question Cannot be blank";
-      this.setState({messagevalidate});
+    }
+    if(!this.state.visibletype){
+      visibletypevalidate="Type Cannot be blank";
+    }
+    
+     if(messagevalidate||visibletypevalidate)
+     { this.setState({messagevalidate,visibletypevalidate});
       return false;
     }
     return true;
@@ -58,7 +70,15 @@ class Forum extends Component {
     
     event.preventDefault();
     if(isValid){
-    const message = { message: this.state.message ,faculty:this.state.faculty,privacytype:this.state.visibletype};
+    const message = { message: this.state.message,
+      faculty:this.state.faculty,
+      privacytype:this.state.visibletype,
+      firebaseId:this.context.UserDetails.firebaseUserId,
+      userId:this.context.UserDetails._id,
+      firstname:this.context.UserDetails.firstName,
+      lastname:this.context.UserDetails.lastName,
+      userType:this.context.UserDetails.type
+    };
 
     axios.post("http://localhost:4000/Forum", message).then((res) => {
       console.log(res);
@@ -204,15 +224,19 @@ class Forum extends Component {
             </Card.Body>
             <div>
               <p className="select-description">Select Type</p>
+              <div style={{color:'red',fontSize:12}}>{this.state.visibletypevalidate}</div>
               {this.state.visibletype === "student" && (
-              <p className="select-description-faculty">Select Faculty</p>)}
+              <p className="select-description-faculty">Select Faculty</p>
+              )}
               <select
                 className="form-select-sm select-type"
                 aria-label="Default select example"
+               value={this.state.visibletype}
                 onChange={this.handletypechange}
-              >
                 
-                <option defaultValue="all">All</option>
+              >
+                <option defaultValue="type" hidden>Type</option>
+                <option value="all">All</option>
                 <option value="academic">Academic</option>
                 <option value="student">Student</option>
               </select>
@@ -221,10 +245,11 @@ class Forum extends Component {
                 <select
                   className="form-select-sm select-faculty"
                   aria-label="Default select example"
+                  value={this.state.faculty}
                   onChange={this.handlefaculty}
                 >
-                  
-                  <option defaultValue="All">All</option>
+                  <option defaultValue="faculty" hidden>Faculty</option>
+                  <option value="all">All</option>
                   <option value="Engineering">Engineering</option>
                   <option value="Information Technology">
                     Information Technology
@@ -265,7 +290,7 @@ class Forum extends Component {
                     className="rounded mr-2"
                     alt=""
                   />
-                  Anushka Praveen
+                  {post.firstname} {post.lastname}
                   <small style={{ float: "right" }}>
                     {moment(post.createdAt).fromNow()}
                   </small>
@@ -292,7 +317,7 @@ class Forum extends Component {
                     </Button>
                   </Link>
 
-                  {(moment(post.createdAt).add(6,'hours')>moment()||(post.reply.length)===0)&&(
+                  {((moment(post.createdAt).add(6,'hours')>moment()||(post.reply.length)===0) && (post.firebaseId===this.context.UserDetails.firebaseUserId))&&(
                   <Button
                     variant="outline-info"
                     className="cardbutton"
@@ -301,6 +326,7 @@ class Forum extends Component {
                   >
                     Edit
                   </Button>)}
+                  {(post.firebaseId===this.context.UserDetails.firebaseUserId) &&(
                   <Button
                     variant="outline-danger"
                     className="carddeletebutton"
@@ -310,7 +336,7 @@ class Forum extends Component {
                     } /* {this.deletePost.bind(this, post._id)} */
                   >
                     <RiDeleteBin6Line />
-                  </Button>
+                  </Button>)}
                 </Card.Body>
               </Card>
             ))}
@@ -318,7 +344,7 @@ class Forum extends Component {
             {this.state.visiblequestions < this.state.posts.length && (
               <button
                 type="button"
-                class="btn btn-outline-info"
+                className="btn btn-outline-info"
                 onClick={this.loadmore}
               >
                 Read more

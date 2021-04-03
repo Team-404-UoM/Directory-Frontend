@@ -186,7 +186,7 @@ export default class Home extends Component {
                 <strong>Sign In</strong>
               </Button>
             </Form>
-            <p style={{ marginTop: '5px', color: 'white', fontWeight: 'bold' }}>Don't have account yet?{this.context.loggedInUser.username}<a style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', marginLeft: '5px' }} href='/signUp/selection'>SignUp</a></p>
+            <p style={{ marginTop: '5px', color: 'white', fontWeight: 'bold' }}>Don't have account yet?<a style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', marginLeft: '5px' }} href='/signUp/selection'>SignUp</a></p>
             <div className="mt-3">
               <Link to="/forget" style={{ color: "black" }}>
                 <b className="text-secondary">Forget Password</b>

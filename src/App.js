@@ -50,6 +50,7 @@ const options = {
   
 
 const App = () => {
+   
     return ( 
     <Usercontext.Provider value={user}>
     <BrowserRouter>
@@ -65,7 +66,7 @@ const App = () => {
 
         <HomeNavbar/>
  
-        <Route path = "/">
+        <Route path = "/" exact component = {Login}>
         </Route> 
 
         <Route path="/admin/events" component={EventAdminHome} />
