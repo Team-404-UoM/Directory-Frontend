@@ -81,7 +81,7 @@ const App = () => {
 
 
         <Route path = "/Forum" exact component = {Forum}/>
-
+        
 
         <Route path = "/Blog/BlogEditor" exact>
         <BlogEditor/>

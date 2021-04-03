@@ -90,7 +90,7 @@ class directory extends Component{
                         <div>Manager at Commercial Credit PLC</div>
                     </p>
                         <h5>{profile.firstName} {profile.lastName}</h5>
-                        <small>Colombo</small>
+                        <small>{profile.type}</small>
                 </div>
                 <img className="profile-img" src ={pic2}/>
             </div>))}
