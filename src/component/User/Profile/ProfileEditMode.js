@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './ProfileEditMode.css';
-import { Row, Col, Button, Jumbotron } from 'react-bootstrap';
+import { Row, Col, Button, Jumbotron,Image } from 'react-bootstrap';
 import boxicons from 'boxicons';
+
 
 class ProfileForm extends Component {
   componentDidMount() {
@@ -16,15 +17,26 @@ class ProfileForm extends Component {
             <Col className="col-2">
               <center> 
                 <div className="row">
-                <input type="file" accept="image/*" multiple = "false" />
+                <Image src="holder.js/171x180" roundedCircle input type="file" accept="image/*" multiple = "false"/>
+                
                 
       
                 </div></center>
             </Col>
             <Col>
-              <center> <h2>Name</h2></center>
-              <center> <h2>Type</h2></center>
-              <center> <h2>Faculty</h2></center>
+              <center> <h2>Name Name</h2></center>
+              <center> <h3>Type...</h3></center>
+              <center> <h3>Faculty of IT</h3></center>
+            </Col>
+            <Col>
+            <div className="mb-2">
+    <Button variant="primary" size="lg">
+      Get Help
+    </Button>
+   
+  </div>
+  
+            
             </Col>
           </Row>
           <br /><br />	<br /><br />	<br /><br />
