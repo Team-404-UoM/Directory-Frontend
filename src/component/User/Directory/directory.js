@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './directory.css';
-import pic2 from "./pic2.jpg";
+import pic5 from "./pic5.png";
 import axios from "axios";
 import {Usercontext,user} from '../../../context/context';
 class directory extends Component{
@@ -90,9 +90,9 @@ class directory extends Component{
                         <div>Manager at Commercial Credit PLC</div>
                     </p>
                         <h5>{profile.firstName} {profile.lastName}</h5>
-                        <small>Colombo</small>
+                        <small>{profile.type}</small>
                 </div>
-                <img className="profile-img" src ={pic2}/>
+                <img className="profile-img" src ={pic5}/>
             </div>))}
            
            
