@@ -6,11 +6,12 @@ import "./Blogview.css";
 import moment from "moment";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
+import {Usercontext,user} from '../../context/context';
 import { Card } from "react-bootstrap";
 
 
 class BlogView extends Component {
+  static contextType=Usercontext;
   constructor(props) {
     super(props);
     this.state = {
@@ -81,7 +82,11 @@ class BlogView extends Component {
   if(isValid){
   const comment={
     body:this.state.comment,
-    date:Date.now()
+    date:Date.now(),
+    firebaseId:this.context.UserDetails.firebaseUserId,
+    userId:this.context.UserDetails._id,
+    firstname:this.context.UserDetails.firstName,
+    lastname:this.context.UserDetails.lastName
   }
   axios.patch('http://localhost:4000/Blog/comment/'+this.props.location.query.id,comment)
   .then((res)=> this.getBlog(),this.setState({
@@ -174,7 +179,7 @@ handledDeleteComment(id){
                         borderRadius: "2px",
                       }}
                     />
-                    <strong>Anushka Praveen </strong></p></Card.Title>
+                    <strong>{comment.firstname} {comment.lastname} </strong></p></Card.Title>
                  <Card.Subtitle className="mb-2 text-muted "><small>{moment(comment.date).fromNow()}</small></Card.Subtitle><br/>
                  
                  <Card.Text>
@@ -182,7 +187,8 @@ handledDeleteComment(id){
                  </Card.Text>
                  {/* <Card.Link href="#">Card Link</Card.Link>
                  <Card.Link href="#">Another Link</Card.Link> */}
-                 <box-icon style={{float:'right'}} color='red' name='trash' onClick={()=>this.handledDeleteComment(comment._id)}></box-icon>
+                 {(comment.firebaseId==this.context.UserDetails.firebaseUserId) &&(
+                 <box-icon style={{float:'right'}} color='red' name='trash' onClick={()=>this.handledDeleteComment(comment._id)}></box-icon>)}
                </Card.Body>
              </Card>))}
               </div>

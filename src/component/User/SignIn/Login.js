@@ -7,6 +7,7 @@ import { MdMail } from "react-icons/md";
 import { firebaseAuth } from '../../../config/FirebaseConfig';
 import history from '../../../config/history';
 import {Usercontext,user} from '../../../context/context';
+import axios from "axios";
 
 
 export default class Home extends Component {
@@ -15,7 +16,8 @@ export default class Home extends Component {
     super(props);
     this.state = {
       input: {},
-      errors: {}
+      errors: {},
+      firstname:""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -132,6 +134,8 @@ export default class Home extends Component {
       const signInresponse = await firebaseAuth.signInWithEmailAndPassword(email, password).then((res)=>{
         console.log(res.user.X.X);
         user.loggedInUser={username:res.user.X.X}
+        this.getuserprofile(res.user.X.X)
+
       })
       
       history.push('/User/Directory');
@@ -149,6 +153,14 @@ export default class Home extends Component {
 
 
   }
+  getuserprofile(username){
+    console.log(username);
+    axios.get('http://localhost:4000/user/'+username)
+    .then((res)=>user.UserDetails=res.data) 
+       
+}
+
+
   render() {
     return (<div className="backgrnd">
       <style>

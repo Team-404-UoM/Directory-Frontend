@@ -11,8 +11,7 @@ class directory extends Component{
         allprofile:[],
         profiles:[],
         userprofile:[],
-        teststate:"",
-        firstname:""
+        
 
     }
     this.handleTextSearch = this.handleTextSearch.bind(this);
@@ -22,22 +21,15 @@ class directory extends Component{
     componentDidMount(){
         this.getProfile();
         console.log(this.context.loggedInUser.username);
-        this.getuserprofile();
+        console.log(this.context.UserDetails.firstName);
         
-        this.getUserDetail();
        
         
     }
 
    
 
-getuserprofile(){
-    axios.get('http://localhost:4000/user/'+this.context.loggedInUser.username)
-    .then((res)=>this.setState({firstname:res.data.firstName}))
 
-    
-    
-}
 
 
     getProfile(){
@@ -74,10 +66,7 @@ getuserprofile(){
       };
 
 
-  getUserDetail(){
-       user.UserDetails={test:this.state.teststate,firstname:this.state.firstname}
-        
-    } 
+  
 
     render(){
       return (
@@ -85,8 +74,7 @@ getuserprofile(){
             <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Montserrat:wght@800;900&display=swap');
 </style> 
-         <h1 style={{fontFamily: "Montserrat"}}>Web Member Directory{this.state.firstname}</h1>
-        <li>{this.state.userprofile.firstName}</li>
+         <h1 style={{fontFamily: "Montserrat"}}>Web Member Directory</h1>
          <div className="serachbar-div" >
          <input className="searchBox" type="text" name="search" placeholder="Search.." onChange={this.handleTextSearch}/> 
             
