@@ -20,8 +20,8 @@ class directory extends Component{
 
     componentDidMount(){
         this.getProfile();
-        console.log(this.context.loggedInUser.username);
-        console.log(this.context.UserDetails.firstName);
+        
+       
         
        
         
@@ -80,11 +80,11 @@ class directory extends Component{
             
 
          </div>
-         <div class ="container">
-        <div class ="row">
+         <div className ="container">
+        <div className ="row">
         {this.state.allprofile.map((profile)=>(
-            <div class="col-md-4">
-                <div class="user-review">
+            <div key={profile._id} className="col-md-4">
+                <div  className="user-review">
                     <p> <div>{profile.faculty} </div>
                     <div>{profile.gender} </div>
                         <div>Manager at Commercial Credit PLC</div>

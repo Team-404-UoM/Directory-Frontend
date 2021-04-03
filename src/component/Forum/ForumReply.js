@@ -5,8 +5,10 @@ import "./ForumReply.css";
 import pic2 from "./pic2.jpg";
 import axios from "axios";
 import moment from "moment";
+import {Usercontext,user} from '../../context/context';
 
 class ForumReply extends Component {
+  static contextType=Usercontext;
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +17,9 @@ class ForumReply extends Component {
       replymessage: "",
       replyvalidate:"",
       updatetime: "",
+      firstname:"",
+      lastname:"",
+      firebaseId:"",
       replies: [],
       visiblereply: 5,
       deletereply:"",
@@ -60,6 +65,9 @@ class ForumReply extends Component {
           createtime: res.data.forum.createdAt,
           updatetime: res.data.forum.updatedAt,
           replies: res.data.forum.reply.reverse(),
+          firstname:res.data.forum.firstname,
+          lastname:res.data.forum.lastname,
+          firebaseId:res.data.forum.firebaseId
         }))
       );
   }
@@ -83,6 +91,10 @@ class ForumReply extends Component {
     const reply = {
       body: this.state.replymessage,
       date: Date.now(),
+      userId:this.context.UserDetails._id,
+      firebaseId:this.context.loggedInUser.username,
+      firstname:this.context.UserDetails.firstName,
+      lastname:this.context.UserDetails.lastName
     };
 
     axios
@@ -156,7 +168,7 @@ cancleEdit = () => {
                       className="rounded mr-2"
                       alt=""
                     />{" "}
-                    Anushka Praveen{" "}
+                    {this.state.firstname} {this.state.lastname}{" "}
                   </Card.Title>{" "}
                   <Card.Subtitle className="mb-2 text-muted">
                     {" "}
@@ -187,7 +199,7 @@ cancleEdit = () => {
                         className="rounded mr-2"
                         alt=""
                       />{" "}
-                      Anushka Praveen{" "}
+                      {reply.firstname} {reply.lastname}{" "}
                       <small style={{ float: "right" }}>{moment(reply.date).fromNow()} </small>
                     </Card.Header>
                     <Card.Body>
@@ -195,6 +207,7 @@ cancleEdit = () => {
                         <p> {reply.body} </p>{" "}
                         
                       </Card.Text>
+                      {(reply.firebaseId==this.context.UserDetails.firebaseUserId) &&(
                       <Button
                         className="cardbutton"
                         variant="outline-info"
@@ -203,7 +216,8 @@ cancleEdit = () => {
                       >
                         {" "}
                         Edit{" "}
-                      </Button>                     
+                      </Button> )}  
+                      {(reply.firebaseId==this.context.UserDetails.firebaseUserId) &&(                  
                        <Button
                         variant="outline-danger"
                         size="sm"
@@ -211,7 +225,7 @@ cancleEdit = () => {
                       >
                         
                         Delete
-                      </Button>{" "}
+                      </Button>)}{" "}
                     </Card.Body>{" "}
                   </Card>
                 ))}{" "}
