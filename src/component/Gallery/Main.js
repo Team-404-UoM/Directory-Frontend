@@ -198,7 +198,7 @@ const [events, setevents] = useState([]);
                     toggleForm();
                 }}
                 >
-                Add New Event
+                Add New Album
                 </button>
             </form>
             </CModalBody>
