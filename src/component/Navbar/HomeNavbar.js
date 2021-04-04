@@ -5,6 +5,7 @@ import logo from './Team404.jpg';
 import './Nav.css'; 
 import boxicons from 'boxicons';
 import history from '../../config/history';
+import {Usercontext,user} from '../../context/context';
 
 const logout = () => {
 
@@ -13,7 +14,28 @@ const logout = () => {
 
 
 class HomeNavbar extends Component{
+  static contextType=Usercontext;
+  constructor(props) {
+    super(props);
+    this.state = {
+islogged:"",
+    }
+    
+  }
+  componentDidMount() {
+    this.getusername();
+   
+  }
+
+
+  getusername(){
+    this.setState({islogged:this.context.loggedInUser.username})
+  }
+  
     render(){
+      const islogged=this.context.loggedInUser.username? true:false;
+      console.log(islogged);
+      console.log(this.context.loggedInUser.username);
         return(<div>
 <Navbar bg="red" variant="dark" className="navigation">
     <Navbar.Brand href="#home">
@@ -26,6 +48,7 @@ class HomeNavbar extends Component{
       />{' '}
     
     </Navbar.Brand>
+
     <Nav className="mr-auto navigations">
       <Nav.Link as={Link} to='../User/Directory'>Directory</Nav.Link>
       <Nav.Link as={Link} to="../AboutUs">About</Nav.Link>
@@ -37,22 +60,16 @@ class HomeNavbar extends Component{
       <Nav.Link as={Link} to="../Settings" >Settings</Nav.Link>
       
       
-    </Nav>
-    <Nav><box-icon className="mr-sm-2" name='bell' type="solid" color="white"></box-icon></Nav>
-    <Nav><Dropdown>
-  <Dropdown.Toggle variant="success" id="dropdown-basic">
-  <box-icon className="mr-sm-2" name='bell' type="solid" color="white"></box-icon>
-  </Dropdown.Toggle>
-  </Dropdown>
-  </Nav>
+    </Nav> 
+    
     
    
-   <NavDropdown title="User name">
+   <NavDropdown title="User Name">
      <NavDropdown.Item onClick={() => { logout() }}>Logout</NavDropdown.Item>
    </NavDropdown>
   </Navbar>
   
-
+      
   </div>
         )
     }

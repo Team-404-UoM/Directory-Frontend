@@ -120,6 +120,8 @@ class create extends Component {
             emailError = 'invalid email';
 
         }
+    
+        
         if (emailError || firstNameError || lastNameError || passwordError || facultyError || departmentError || genderError) {
             this.setState({ emailError, firstNameError, lastNameError, passwordError, facultyError, departmentError, genderError });
             return false;
@@ -204,7 +206,7 @@ class create extends Component {
 
     render() {
         //  this.state.showSignUp 
-        const condition = this.state.showSignUp ;
+        const condition = true;
         return condition ? (
 
             <div className="academic">

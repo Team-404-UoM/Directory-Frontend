@@ -26,7 +26,7 @@ export default function Albums() {
                 {thumbs.map(item => {
                     return item.filename === items.thumbnail && items.approval === true ? 
                     <div class="card bg-light backgrounds" 
-                    style={{background: `url(http://localhost:5000/gallery/image/${item.filename})`, backgroundSize: '400px', borderRadius: 15}}
+                    style={{background: `url(http://localhost:4000/gallery/image/${item.filename})`, backgroundSize: '400px', borderRadius: 15}}
                     >
                         <div class="card-body text-center" style={{color: 'black', fontWeight: 'bold'}}>
                             <button className="btn btn-dark text-center" style={{opacity: 0.6, height: 130, borderRadius: 10}}>

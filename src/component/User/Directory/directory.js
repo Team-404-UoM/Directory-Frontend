@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './directory.css';
-import pic2 from "./pic2.jpg";
+import pic5 from "./pic5.png";
 import axios from "axios";
 import {Usercontext,user} from '../../../context/context';
 class directory extends Component{
@@ -20,8 +20,8 @@ class directory extends Component{
 
     componentDidMount(){
         this.getProfile();
-        console.log(this.context.loggedInUser.username);
-        console.log(this.context.UserDetails.firstName);
+        
+       
         
        
         
@@ -80,19 +80,19 @@ class directory extends Component{
             
 
          </div>
-         <div class ="container">
-        <div class ="row">
+         <div className ="container">
+        <div className ="row">
         {this.state.allprofile.map((profile)=>(
-            <div class="col-md-4">
-                <div class="user-review">
+            <div key={profile._id} className="col-md-4">
+                <div  className="user-review">
                     <p> <div>{profile.faculty} </div>
                     <div>{profile.gender} </div>
                         <div>Manager at Commercial Credit PLC</div>
                     </p>
                         <h5>{profile.firstName} {profile.lastName}</h5>
-                        <small>Colombo</small>
+                        <small>{profile.type}</small>
                 </div>
-                <img className="profile-img" src ={pic2}/>
+                <img className="profile-img" src ={pic5}/>
             </div>))}
            
            

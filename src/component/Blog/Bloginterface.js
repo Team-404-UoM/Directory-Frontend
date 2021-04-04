@@ -402,7 +402,7 @@ this.updateviews(id)
                             query: { id: blog._id },
                           }}
                         >
-                          {(blog.firebaseId==this.context.UserDetails.firebaseUserId) &&(
+                          {(blog.firebaseId===this.context.UserDetails.firebaseUserId) &&(
                           <Button
                             className=""
                             variant="success"
@@ -412,7 +412,7 @@ this.updateviews(id)
                             Edit
                           </Button>)}
                         </Link>
-                        {(blog.firebaseId==this.context.UserDetails.firebaseUserId) &&(
+                        {(blog.firebaseId===this.context.UserDetails.firebaseUserId) &&(
                         <Button
                           style={{ marginLeft: "5px", marginRight: "5px" }}
                           variant="danger"
@@ -535,7 +535,7 @@ this.updateviews(id)
                       >
                         Read
                       </Button>
-                      {(blog.firebaseId==this.context.UserDetails.firebaseUserId) &&(
+                      {(blog.firebaseId===this.context.UserDetails.firebaseUserId) &&(
                       <Button
                         style={{ marginLeft: "5px", marginRight: "5px" }}
                         variant="danger"
