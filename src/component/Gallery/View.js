@@ -51,7 +51,7 @@ export default function View(props) {
         <div class="card-columns" style={{marginTop: 20}}>
             {images.map(item =>{
             return <div>
-            <div class="card bg-light backgrounds" style={{background: `url(${item})`,backgroundRepeat: 'no-repeat', backgroundSize: '400px', borderRadius: 15}}>
+            <div class="card bg-light backgrounds" style={{backgroundImage: `url(${item})`,backgroundRepeat: 'no-repeat', backgroundSize: '400px', borderRadius: 15}}>
                 <div class="card-body text-center" style={{color: 'black', fontWeight: 'bold',height: 200}}>     
                 </div>
                 <div className="card-footer"  style={{border: 'none'}}>

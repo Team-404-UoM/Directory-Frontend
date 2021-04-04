@@ -170,7 +170,7 @@ const AlbumApproval = (props) => {
                   <CModalHeader closeButton>Change Done</CModalHeader>
                   <CModalBody>
                           <p>
-                            Change that tou done has been completed Successfully!
+                            Changes that you have done has been completed Successfully!
                           </p>
                   </CModalBody>
                   <CModalFooter>
