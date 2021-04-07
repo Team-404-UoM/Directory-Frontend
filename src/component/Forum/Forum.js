@@ -224,7 +224,7 @@ class Forum extends Component {
             </Card.Body>
             <div>
               <p className="select-description">Select Type</p>
-              <div style={{color:'red',fontSize:12}}>{this.state.visibletypevalidate}</div>
+              <div style={{color:'red',fontSize:12,marginLeft:18,marginTop:5}}>{this.state.visibletypevalidate}</div>
               {this.state.visibletype === "student" && (
               <p className="select-description-faculty">Select Faculty</p>
               )}
@@ -383,6 +383,7 @@ class Forum extends Component {
           </Modal.Header>
           <Modal.Body>Do you want post this Question?</Modal.Body>
           <div style={{color:'red',fontSize:15,marginLeft:'20px',marginTop:"-10px",marginBottom:'5px'}}>{this.state.messagevalidate}</div>
+          <div style={{color:'red',fontSize:15,marginLeft:'20px',marginTop:"-10px",marginBottom:'5px'}}>{this.state.visibletypevalidate}</div>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleCloseModal}>
               Close
