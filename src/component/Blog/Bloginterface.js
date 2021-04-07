@@ -171,6 +171,8 @@ class Bloginterface extends Component {
     this.getAllUploadPosts();
     console.log(this.context.loggedInUser.username);
     console.log(this.context.UserDetails.firstName);
+     
+ 
     
   }
 
