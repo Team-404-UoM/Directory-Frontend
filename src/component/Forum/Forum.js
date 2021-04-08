@@ -100,7 +100,7 @@ class Forum extends Component {
 
   getAllPosts = () => {
     axios
-      .get("http://localhost:4000/Forum/home")
+      .get("http://localhost:4000/Forum/home/?type="+this.context.UserDetails.type)
       .then((res) => this.setState({ posts: res.data.reverse() }));
   };
 
