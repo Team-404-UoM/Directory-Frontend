@@ -121,14 +121,7 @@ export default class Home extends Component {
     const email = this.state.todo_email;
 
     const password = this.state.todo_password;
-    //alert(" Successfully loged to the system");
-
-                        //newly added email verification
-                       /*  await firebaseAuth.currentUser.sendEmailVerification();
-
-                        alert(" Successfully loged to the system. Check Email For Verification");
-                        this.setState({ loading: false }); */
-                        //till here
+    
 
     try {
       const signInresponse = await firebaseAuth.signInWithEmailAndPassword(email, password).then((res)=>{

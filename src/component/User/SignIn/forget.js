@@ -111,9 +111,9 @@ export default class forget extends Component {
               </div>
             </center>
           )}
-          {/* row container ending here */}
+         
         </div>
-        {/* main login container end */}
+     
       </div>
     );
   }

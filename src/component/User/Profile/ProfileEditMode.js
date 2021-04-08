@@ -5,6 +5,7 @@ import { Row, Col, Button, Jumbotron, Image } from "react-bootstrap";
 import boxicons from "boxicons";
 import {Usercontext,user} from '../../../context/context';
 import axios from 'axios';
+import pic5 from "./pic5.png";
 
 class ProfileForm extends Component {
   static contextType=Usercontext;
@@ -47,7 +48,13 @@ class ProfileForm extends Component {
     this.getuserprofile(this.context.loggedInUser.username)
     console.log(this.props.location);
   }
-
+  getuserprofile(username){
+    console.log(username);
+    axios.get('http://localhost:4000/user/'+username)
+    .then((res)=>this.setState({profiledetails:res.data}))
+    .then(console.log(this.profiledetails)) 
+       
+}
   
 
   render() {
@@ -60,8 +67,7 @@ class ProfileForm extends Component {
                 <center>
                   <div className="row">
                     <Image
-                      src="holder.js/171x180"
-                      roundedCircle
+                      src= {pic5}
                       input
                       type="file"
                       accept="image/*"
@@ -906,14 +912,10 @@ class ProfileForm extends Component {
               </div>
 
 
-                    <div className="row">
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" width="100px" height="100px"></img>
-                     </div>
-                     <div className="row">
-                     <button>Edit Photo</button>
-                     </div>
+              <Button variant="success">Save</Button>{' '}
+  <Button variant="danger">Edit</Button>
 					 
-            
+         
             </div>
           </Jumbotron>
         </form>
