@@ -133,6 +133,28 @@ editReply = (id, body) => {
   console.log(this.state);
 };
 
+updateReply = () => {
+  axios
+    .patch("http://localhost:4000/Forum/reply/" +this.props.location.query.id+"/?id="+this.state.editReply.id, {
+      reply: this.state.editReply.body,
+    })
+    .then((res) => {
+      this.setState((currentState) => ({
+        ...currentState,
+        editmode: false,
+      }));
+      this.getquestion();
+    });
+};
+
+onChangehandler = (e) => {
+  e.persist();
+  this.setState((currentState) => ({
+    ...currentState,
+    editReply: { ...currentState.editReply, body: e.target.value },
+  }));
+};
+
 cancleEdit = () => {
   this.setState((currentState) => ({ ...currentState, editmode: false }));
   this.getquestion() ;
@@ -152,6 +174,7 @@ cancleEdit = () => {
           <Row>
             <Col>
               {" "}
+              {/* Question Display */}
               <Card
                 style={{
                   width: "25rem",
@@ -181,6 +204,8 @@ cancleEdit = () => {
                   <Card.Text> {this.state.message} </Card.Text>
                 </Card.Body>{" "}
               </Card>{" "}
+
+              {/* Replies Display */}
               {this.state.replies
                 .slice(0, this.state.visiblereply)
                 .map((reply,index) => (
@@ -207,6 +232,8 @@ cancleEdit = () => {
                         <p> {reply.body} </p>{" "}
                         
                       </Card.Text>
+
+                     {/* Replies Edit Button */}
                       {(reply.firebaseId==this.context.UserDetails.firebaseUserId) &&(
                       <Button
                         className="cardbutton"

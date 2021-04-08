@@ -47,7 +47,7 @@ class BlogEditor extends Component {
     this.handlePreviewModal = this.handlePreviewModal.bind(this);
     this.handleClosePreviewModal = this.handleClosePreviewModal.bind(this);
   }
-
+//validate function
   validate = () => {
     let titlevalidate = "";
     let coverimagevalidate = "";
@@ -91,7 +91,7 @@ class BlogEditor extends Component {
       loaded: 0,
     });
   }
-
+//craete blog
   handleSubmit(event) {
     console.log(this.state.title);
     const isValid = this.validate();
@@ -260,6 +260,7 @@ class BlogEditor extends Component {
                   <div className="label1">
                     <label> Description </label>
                   </div>
+                  
                   <div className="editor">
                     <CKEditor
                       placeholder="write"
@@ -292,6 +293,7 @@ class BlogEditor extends Component {
                   >
                     {this.state.bodyvalidate}
                   </div>
+                  
                   <Modal show={this.state.show}>
                     <Modal.Header closeButton onClick={this.handleclosemodal}>
                       <Modal.Title>Save Article</Modal.Title>
@@ -375,11 +377,11 @@ class BlogEditor extends Component {
                 </form>
               </div>
 
-              <div className="col-2">
+              {/* <div className="col-2">
                 <Button style={{ marginLeft: "40px" }} variant="dark">
                   Templates
                 </Button>
-              </div>
+              </div> */}
             </div>
           </Jumbotron>
         </div>
