@@ -34,6 +34,7 @@ import Forget from './component/User/SignIn/forget';
 import AboutUs from './component/AboutUs/AboutUs';
 import Settings from './component/Settings/Settings';
 import ProfileEdit from './component/User/Profile/ProfileEditMode';
+import Profilemode from './component/User/Profile/Profilemode';
 import history from './config/history';
 import {Usercontext,user} from './context/context';
 
@@ -119,7 +120,7 @@ const App = () => {
        <Route path = "/Forum/ForumReply" exact component = {ForumReply}/>
        <Route path = "/Settings" exact component = {Settings}/>
        <Route path = "/ProfileEdit" exact component = {ProfileEdit}/>
-
+       <Route path = "/Profilemode" exact component = {Profilemode}/>
         </div> 
         </React.Fragment> 
         </AlertProvider>

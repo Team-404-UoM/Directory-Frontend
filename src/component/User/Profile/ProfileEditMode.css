@@ -2,11 +2,17 @@
     background-color:white;
     width: 200px;
     margin: auto;
+     
+    
+}
+.formhandle{
+
+    font-weight: bold;
 }
 .jumboacaq {
     margin-left: 350px;
     width: 950px;
-    height: 1200px;
+    height: 1500px;
     font-weight: bold;
     /* background-Image: linear-gradient(to bottom right, rgba(236, 243, 239, 0.83), rgb(208, 218, 215)) */
 }

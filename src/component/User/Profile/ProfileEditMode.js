@@ -1,45 +1,45 @@
 
 import React, { Component } from "react";
 import "./ProfileEditMode.css";
-import { Row, Col, Button, Jumbotron, Image } from "react-bootstrap";
+import { Row, Col, Button, Jumbotron, Image, Form } from "react-bootstrap";
 import boxicons from "boxicons";
-import {Usercontext,user} from '../../../context/context';
+import { Usercontext, user } from '../../../context/context';
 import axios from 'axios';
 import pic5 from "./pic5.png";
 
 class ProfileForm extends Component {
-  static contextType=Usercontext;
+  static contextType = Usercontext;
   constructor(props) {
     super(props);
-    this.state ={
-      profiledetails:[], 
-        firstname:"",
-        lastname:"",
-        type:"",
-        email: "",
-       faculty:"",
-       department:"",
-       batch:"",
-       status:"",
-       contactno:"",
-       dob:"",
-       workingPlace:"",
-       workingPlaceStart:"",
-       workingPlaceEnd:"",
-       postion:"",
-       positionstart:"",
-       positionend:"",
-       education:"",
-       educationstart:"",
-       educationend:"",
-       expirence:"",
-       expirencestart:"",
-       expirenceend:"",
-       fblink:"",
-       instalink:"",
-       twitterlink:"",
-       linkedinlink:"",
- 
+    this.state = {
+      profiledetails: [],
+      firstname: "",
+      lastname: "",
+      type: "",
+      email: "",
+      faculty: "",
+      department: "",
+      batch: "",
+      status: "",
+      contactno: "",
+      dob: "",
+      workingPlace: "",
+      workingPlaceStart: "",
+      workingPlaceEnd: "",
+      postion: "",
+      positionstart: "",
+      positionend: "",
+      education: "",
+      educationstart: "",
+      educationend: "",
+      expirence: "",
+      expirencestart: "",
+      expirenceend: "",
+      fblink: "",
+      instalink: "",
+      twitterlink: "",
+      linkedinlink: "",
+
 
     }
   }
@@ -48,26 +48,26 @@ class ProfileForm extends Component {
     this.getuserprofile(this.context.loggedInUser.username)
     console.log(this.props.location);
   }
-  getuserprofile(username){
+  getuserprofile(username) {
     console.log(username);
-    axios.get('http://localhost:4000/user/'+username)
-    .then((res)=>this.setState({profiledetails:res.data}))
-    .then(console.log(this.profiledetails)) 
-       
-}
-  
+    axios.get('http://localhost:4000/user/' + username)
+      .then((res) => this.setState({ profiledetails: res.data }))
+      .then(console.log(this.profiledetails))
+
+  }
+
 
   render() {
     return (
       <div className="container-fluid">
-        <form>
+        <Form>
           <Jumbotron className="jumboacaq mt-5">
             <Row>
               <Col className="col-2">
                 <center>
                   <div className="row">
                     <Image
-                      src= {pic5}
+                      src={pic5}
                       input
                       type="file"
                       accept="image/*"
@@ -104,51 +104,60 @@ class ProfileForm extends Component {
             <br />
             <div className="row">
               <div className="col-5">
-                
-                <Row>
+                <Form.Row>
+
                   <Col className="mb-3">
-                    <label>First Name</label>
+                    <Form.Label>First Name</Form.Label>
                     <br />
-                    <input type="text" value={this.state.profiledetails.firstName} className="form-field" />
+                    <Form.Control input type="text" value={this.state.profiledetails.firstName} className="form-field" />
                   </Col>
 
                   <Col className="mb-3">
                     <label>Email</label>
                     <br />
-                    <input type="email" value={this.state.profiledetails.email} className="form-field" />
+                    <Form.Control input type="email" value={this.state.profiledetails.email} className="form-field" />
                   </Col>
-                </Row>
+                </Form.Row>
 
-                <div className="mb-3">
-                  <label>Department</label>
-                  <select className="mb-3" value={this.state.profiledetails.department}>
-                    <option value="FIT">Select</option>
-                    <option value="FIT">IDS Department</option>
-                    <option value="FE">
-                      Computational Mathematics Department
-                    </option>
-                    <option value="FB">IT Department</option>
-                    <option value="FA">Mechanical Department</option>
-                  </select>
-                </div>
+                <Form.Label className="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
+                  Department
+  </Form.Label>
+                <Form.Control
+                  as="select"
+                  className="my-1 mr-sm-2"
+                  id="inlineFormCustomSelectPref"
+                  custom value={this.state.profiledetails.department} size ="sm"
+                >
+                  <option value="0">Choose...</option>
+                  <option value="IDS Department">IDS Department</option>
+                  <option value="Computational Mathematics Department">Computational Mathematics Department</option>
+                  <option value="IT Department">IT Department</option>
+                </Form.Control>
 
-                <div className="mb-3">
-                  <label>Status</label>
-                  <select className="mb-3" value={this.state.profiledetails.status}>
-                    <option value="FIT">Single</option>
-                    <option value="FE">Married</option>
-                  </select>
-                </div>
+                <Form.Label className="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
+                  Status
+  </Form.Label>
+                <Form.Control
+                  as="select"
+                  className="my-1 mr-sm-2"
+                  id="inlineFormCustomSelectPref"
+                  custom value={this.state.profiledetails.status}
+                >
+                  <option value="0">Choose...</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+
+                </Form.Control>
 
                 <div className="mb-3">
                   <label>Date of Birth</label>
-                  <input type="date" value={this.state.profiledetails.dob}/>
+                  <input type="date" value={this.state.profiledetails.dob} />
                 </div>
 
                 <div className="mb-3">
                   <label>Working Place</label>
                   <br />
-                  <input type="text" className="form-field" value={this.state.profiledetails.workingPlace} />
+                  <Form.Control input type="text" className="form-field" value={this.state.profiledetails.workingPlace} />
                   <select id="year" name="year" value={this.state.profiledetails.workingPlaceStart}>
                     <option value="0"> Start Year</option>
                     <option value="1940">1940</option>
@@ -324,7 +333,7 @@ class ProfileForm extends Component {
                 <div className="mb-3">
                   <label>Expirence</label>
                   <br />
-                  <input type="email" className="form-field" value={this.state.profiledetails.expirence}/>
+                  <Form.Control input type="email" className="form-field" value={this.state.profiledetails.expirence} />
                   <select id="year" name="year" value={this.state.profiledetails.expirencestart}>
                     <option value="0">year</option>
                     <option value="1940">1940</option>
@@ -505,63 +514,55 @@ class ProfileForm extends Component {
                     name="facebook"
                     border="square"
                   ></box-icon>
-                  <input type="email" className="form-field" value={this.state.profiledetails.fblink}/>
-                  <br />
+                  <Form.Control input type="email" className="form-field" value={this.state.profiledetails.fblink} />
+              
                   <box-icon
                     type="logo"
                     name="twitter"
                     border="square"
                   ></box-icon>
-                  <input type="email" className="form-field" value={this.state.profiledetails.twitterlink} />
-                  <br />
+                  <Form.Control input type="email" className="form-field" value={this.state.profiledetails.twitterlink} />
+                
                   <box-icon
                     type="logo"
                     name="instagram"
                     border="square"
                   ></box-icon>
-                  <input type="email" className="form-field" value={this.state.profiledetails.instalink}/>
-                  <br />
+                  <Form.Control input type="email" className="form-field" value={this.state.profiledetails.instalink} />
+                 
                   <box-icon
                     type="logo"
                     name="linkedin"
                     border="square"
                   ></box-icon>
-                  <input type="email" className="form-field" value={this.state.profiledetails.linkedinlink}/>
+                  <Form.Control input type="email" className="form-field" value={this.state.profiledetails.linkedinlink} />
                 </div>
               </div>
 
               <div className="col-3">
                 <div className="mb-3">
                   <label>Last Name</label>
-                  <input type="text" className="form-field" value={this.state.profiledetails.lastName} />
+                  <Form.Control input type="text" className="form-field" value={this.state.profiledetails.lastName} />
                 </div>
                 <div className="mb-3">
                   <label>Faculty</label>
                   <br />
-                  <select className="mb-3" value={this.state.profiledetails.faculty}>
-                    <option value="FIT">Select</option>
-                    <option value="FIT">
-                      Faculty of Information Technology
-                    </option>
-                    <option value="FE">Faculty of Engineering</option>
-                    <option value="FB">Faculty of Business</option>
-                    <option value="FA">Faculty of Architeture</option>
-                  </select>
+                  <Form.Control input type="text" className="form-field" value={this.state.profiledetails.faculty}/>
                 </div>
                 <div className="mb-3">
                   <label>Batch</label>
 
-                  <input type="email" className="form-field" value={this.state.profiledetails.Batch} />
+                  <Form.Control input type="email" className="form-field" value={this.state.profiledetails.Batch} />
                 </div>
                 <div className="mb-3">
                   <label>Contact No</label>
                   <br />
-                  <input type="text" className="form-field" value={this.state.profiledetails.ContactNo}/>
+                  <Form.Control input type="text" className="form-field" value={this.state.profiledetails.ContactNo} />
                 </div>
                 <div className="mb-3">
                   <label>position</label>
                   <br />
-                  <input type="text" className="form-field" value={this.state.profiledetails.position}/>
+                  <Form.Control input type="text" className="form-field" value={this.state.profiledetails.position} />
                   <select id="year" name="year">
                     <option value="0">year</option>
                     <option value="1940">1940</option>
@@ -736,9 +737,9 @@ class ProfileForm extends Component {
                 <div className="mb-3">
                   <label>Education</label>
                   <br />
-                  <input type="text" className="form-field" />
+                  <Form.Control input type="text" className="form-field" />
                   <select id="year" name="year">
- 
+
                     <option value="0">year</option>
                     <option value="1940">1940</option>
                     <option value="1941">1941</option>
@@ -910,15 +911,16 @@ class ProfileForm extends Component {
                   </select>
                 </div>
               </div>
+<br/><br/>
 
 
               <Button variant="success">Save</Button>{' '}
-  <Button variant="danger">Edit</Button>
-					 
-         
+              <Button variant="danger">Edit</Button>
+
+
             </div>
           </Jumbotron>
-        </form>
+        </Form>
       </div>
     );
   }
