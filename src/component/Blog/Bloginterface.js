@@ -529,7 +529,7 @@ this.updateviews(id)
                         </h4>
                       </Card.Title>
                       <Button
-                        onClick={() => console.log("Click")}
+                        target="_blank"
                         href={blog.url}
                         style={{ marginLeft: "5px", marginRight: "5px" }}
                         variant="primary"

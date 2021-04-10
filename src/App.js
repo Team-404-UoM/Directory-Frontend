@@ -37,6 +37,7 @@ import ProfileEdit from './component/User/Profile/ProfileEditMode';
 import history from './config/history';
 import {Usercontext,user} from './context/context';
 
+
 import 'bootstrap/dist/css/bootstrap.css';
 //test commit 2
 
@@ -65,6 +66,7 @@ const App = () => {
         <div>
 
         <HomeNavbar/>
+        
  
         <Route path = "/" exact component = {Login}>
         </Route> 

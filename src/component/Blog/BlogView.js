@@ -22,6 +22,8 @@ class BlogView extends Component {
       createtime: "",
       updatetime: "",
       coverImage: "",
+      firstname:"",
+      lastname:"",
       comment:"",
       comments:[],
       commentvalidate:"",
@@ -61,6 +63,8 @@ class BlogView extends Component {
           title: res.data.blog.title,
           image: res.data.blog.image,
           body: res.data.blog.body,
+          firstname:res.data.blog.firstname,
+          lastname:res.data.blog.lastname,
           coverImage: res.data.blog.coverImage,
           categorie: res.data.blog.categorie,
           createtime: res.data.blog.createdAt,
@@ -211,7 +215,7 @@ handledDeleteComment(id){
                         borderRadius: "2px",
                       }}
                     />
-                    <strong>Anushka Praveen </strong>
+                    <strong>{this.state.firstname} {this.state.lastname}</strong>
                     <span style={{ marginLeft: "40px" }}>
                       <box-icon
                       className='mt-2 mr-2'
