@@ -85,7 +85,7 @@ class directory extends Component{
         {this.state.allprofile.map((profile)=>(
             <div key={profile._id} className="col-md-4">
                 <div  className="user-review">
-                    <p> <div>{profile.faculty} </div>
+                    <p> <div><h6>{profile.faculty}</h6> </div>
                     <div>{profile.gender} </div>
                         <div>Manager at Commercial Credit PLC</div>
                     </p>

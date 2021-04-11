@@ -62,18 +62,27 @@
 
 .features {
     padding: 100px;
-    background-color:rgb(211, 211, 243);
+    background-color:rgb(178, 178, 240);
 }
 
 h1 {
     text-align: center;
     padding-bottom: 30px;
 }
+.col-md-4{
+    background-color:rgb(234, 234, 243);
 
+}
+.feature-details{
+background-color: white;
+
+}
 .feature-img img {
     width: 105%;
 }
-
+.user-review{
+    background-color: white;
+}
 
 
 .feature-img {

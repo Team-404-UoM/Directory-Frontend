@@ -66,12 +66,13 @@ islogged:"",
       
     </Nav> 
     
-    
-    <Notification/>
+
    <NavDropdown title="User Name">
      <NavDropdown.Item onClick={() => { logout() }}>Logout</NavDropdown.Item>
-     <NavDropdown.Item as={Link} to="../ProfileEdit">Profile</NavDropdown.Item>
+     <NavDropdown.Item as={Link} to="../ProfileEdit">Profile Edit</NavDropdown.Item>
+     <NavDropdown.Item as={Link} to="../Profilemode">Profile</NavDropdown.Item>
    </NavDropdown>
+
   </Navbar>
   
       
