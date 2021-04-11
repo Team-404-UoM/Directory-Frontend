@@ -1,19 +1,23 @@
 
 import React, { Component } from "react";
 import "./ProfileEditMode.css";
-import { Row, Col, Button, Jumbotron, Image, Form } from "react-bootstrap";
+import { Row, Col, Button, Jumbotron, Image, Form, Card } from "react-bootstrap";
 import boxicons from "boxicons";
 import { Usercontext, user } from '../../../context/context';
 import axios from 'axios';
 import pic5 from "./pic5.png";
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
+import ModalBody from 'react-bootstrap/ModalBody';
+import ModalTitle from 'react-bootstrap/ModalTitle';
 
 
 class ProfileForm extends Component {
+
     static contextType = Usercontext;
     constructor(props) {
         super(props);
         this.state = {
+
             profiledetails: [],
             firstname: "",
             lastname: "",
@@ -22,11 +26,17 @@ class ProfileForm extends Component {
             faculty: "",
             department: "",
             batch: "",
-
-
+            message: "",
+            show: false
 
         }
+
     }
+    handleModal() {
+        this.setState({ show: !this.state.show })
+    }
+
+
     componentDidMount() {
         console.log(this.context.UserDetails.firstName);
         this.getuserprofile(this.context.loggedInUser.username)
@@ -39,7 +49,7 @@ class ProfileForm extends Component {
             .then(console.log(this.profiledetails))
 
     }
-  
+
 
     render() {
         return (
@@ -75,10 +85,36 @@ class ProfileForm extends Component {
                                 </center>
                             </Col>
                             <Col>
+                            <br/>
                                 <div className="mb-2">
-                                    <Button variant="primary" size="lg" >
+                                    <Button variant="primary" size="lg" onClick={() => { this.handleModal() }}>
                                         Get Help
                   </Button>
+                                    <Card className="forumstyle">
+                                        <Modal show={this.state.show} >
+
+
+
+
+                                            <Card.Header as="h5">Type a message here...</Card.Header>
+                                            <Card.Body>
+                                                <Card.Title></Card.Title>
+                                                <Card.Text>
+                                                    <textarea
+                                                        style={{ width: "460px" }}
+                                                        placeholder="Please write question here..."
+                                                        value={this.state.message}
+
+                                                    />
+                                                    <div style={{ color: 'red', fontSize: 12 }}>{this.state.messagevalidate}</div>
+                                                </Card.Text>
+                                            </Card.Body>
+                                            <Modal.Footer>
+                                                <Button variant="primary" size="lg" onClick={() => { this.handleModal() }} >close </Button>{' '}<Button variant="primary" size="lg"  >Send message </Button>
+                                            </Modal.Footer>
+                                        </Modal>
+                                    </Card>
+
                                 </div>
                             </Col>
                         </Row>
@@ -118,51 +154,48 @@ class ProfileForm extends Component {
                     <input type="email" value={this.state.profiledetails.faculty} className="form-field" />
                   </Col>
 </Row> */}
-<Form>
-  <Form.Row>
-    <Col  className="formhandle">
-      <Form.Control placeholder="First name" input type="text" className="form-field" value={this.state.profiledetails.firstName} />
-    </Col>
-   
-  </Form.Row>
-    <br/>
-   
-  <Form.Row>
-    <Col>
-      <Form.Control placeholder="Last name" input type="text" className="form-field" value={this.state.profiledetails.lastName} />
-    </Col>
-  </Form.Row>
-  <br/>
-  <Form.Row>
-    <Col>
-      <Form.Control placeholder="Gender" input type="text" className="form-field" value={this.state.profiledetails.gender}/>
-    </Col>
-   
-  </Form.Row>
-    <br/>
+                                <Form>
+                                    <Form.Row>
+                                        <Col className="formhandle">
+                                            <Form.Control placeholder="First name" input type="text" className="form-field" value={this.state.profiledetails.firstName} />
+                                        </Col>
+                                    </Form.Row>
+                                    <br />  <br />
 
-  <Form.Row>
-    <Col>
-      <Form.Control placeholder="Type" input type="text" className="form-field" value={this.state.profiledetails.type} />
-    </Col>
-    </Form.Row>
-    <br/>
-    <Form.Row>
-    <Col>
-      <Form.Control placeholder="faculty" input type="text" className="form-field" value={this.state.profiledetails.faculty}/>
-    </Col>
-  
-  </Form.Row>
-  <br/> <br/>
-  <Form.Row>
-      <Col></Col>
-      <Col>
-  <Button variant="danger" >Edit profile</Button>
+                                    <Form.Row>
+                                        <Col>
+                                            <Form.Control placeholder="Last name" input type="text" className="form-field" value={this.state.profiledetails.lastName} />
+                                        </Col>
+                                    </Form.Row>
+                                    <br />
+                                    <Form.Row>
+                                        <Col>
+                                            <Form.Control placeholder="Gender" input type="text" className="form-field" value={this.state.profiledetails.gender} />
+                                        </Col>
 
-</Col>
-  </Form.Row>
+                                    </Form.Row>
+                                    <br />
 
- 
+                                    <Form.Row>
+                                        <Col>
+                                            <Form.Control placeholder="Type" input type="text" className="form-field" value={this.state.profiledetails.type} />
+                                        </Col>
+                                    </Form.Row>
+                                    <br />
+                                    <Form.Row>
+                                        <Col>
+                                            <Form.Control placeholder="faculty" input type="text" className="form-field" value={this.state.profiledetails.faculty} />
+                                        </Col>
+
+                                    </Form.Row>
+                                    <br /> <br />
+                                    <Form.Row>
+                                        <Col></Col>
+                                        <Col>
+                                            <Button variant="danger" >Edit profile</Button>
+
+                                        </Col>
+                                    </Form.Row>
 
 
 
@@ -170,7 +203,9 @@ class ProfileForm extends Component {
 
 
 
-</Form>
+
+
+                                </Form>
 
 
                             </div>
