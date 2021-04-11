@@ -94,13 +94,18 @@ class Forum extends Component {
 
   componentDidMount() {
     this.getAllPosts();
-    this.timelimit();
+   
   }
   
 
   getAllPosts = () => {
+    const userdetails={
+    type:"test",
+    faculty:"test"
+    }
+    console.log(userdetails);
     axios
-      .get("http://localhost:4000/Forum/home/?type="+this.context.UserDetails.type)
+      .get("http://localhost:4000/Forum/home/?type="+this.context.UserDetails.type+"&faculty="+this.context.UserDetails.faculty+"&userid="+this.context.UserDetails._id)
       .then((res) => this.setState({ posts: res.data.reverse() }));
   };
 
@@ -186,16 +191,7 @@ class Forum extends Component {
     );
   }
 
-  timelimit(id){
-   if(this.state.timenow<2.30){
-     console.log("yes");
-   }else{
-     console.log("no");
-   }
-    
-    console.log(this.state.timenow);
-    
-  }
+ 
  
   
 
@@ -250,12 +246,12 @@ class Forum extends Component {
                 >
                   <option defaultValue="faculty" hidden>Faculty</option>
                   <option value="all">All</option>
-                  <option value="Engineering">Engineering</option>
-                  <option value="Information Technology">
+                  <option value="Faculty of Engineering">Engineering</option>
+                  <option value="Faculty of Information Technology">
                     Information Technology
                   </option>
-                  <option value="Architecture">Architecture</option>
-                  <option value="Business">Business</option>
+                  <option value="Faculty of Architecture">Architecture</option>
+                  <option value="Faculty of Business">Business</option>
                 </select>
               )}
             </div>
