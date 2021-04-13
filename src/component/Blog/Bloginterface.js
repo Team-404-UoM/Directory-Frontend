@@ -297,14 +297,16 @@ this.updateviews(id)
           <MdNoteAdd style={{ marginRight: "5px", fontSize: "20px" }} />
           Create Blog
         </Button>
+        <Button style={{ marginLeft: "40px", marginTop: "20px" }} as={Link}
+          to="/blog/blogprofile"><box-icon type='solid' size='xs' color='#ffffff' name='user'></box-icon>  Blog Profile</Button>
 
         <Container>
           <Row>
             <Col>
               <div>
-                <form class="d-flex searchbar">
+                <form className="d-flex searchbar">
                   <input
-                    class="form-control me-2 "
+                    className="form-control me-2 "
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
@@ -427,7 +429,7 @@ this.updateviews(id)
                         </Button>)}
                         <div>
                           <p>
-                            <span class="badge rounded-pill bg-dark blog-views">
+                            <span className="badge rounded-pill bg-dark blog-views">
                              {blog.views}
                             </span>{" "}
                             Views
@@ -608,11 +610,11 @@ this.updateviews(id)
             </Col>
           </Row>
           <Row>
-            <div class="col-md-12 p-3 text-center">
+            <div className="col-md-12 p-3 text-center">
               {this.state.visibleblog < (this.state.blogs.length || this.state.uploadBlogs.length ) && ( 
                 <button
                   type="button"
-                  class="btn btn-outline-info"
+                  className="btn btn-outline-info"
                   onClick={this.loadmore}
                 >
                   Read more

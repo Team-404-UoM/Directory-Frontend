@@ -9,8 +9,10 @@ import BlogEditor from './component/Blog/BlogEditor';
 import Bloguploader from './component/Blog/Bloguploader';
 import BlogView from './component/Blog/BlogView';
 import BlogEditPost from './component/Blog/BlogEditPost';
+import BlogProfile from './component/Blog/blogprofile';
 import Test from './component/Test/Test';
 import ForumReply from './component/Forum/ForumReply';
+import UserForum from './component/Forum/Forumprofile';
 
 
 import AlertTemplate from 'react-alert-template-basic'
@@ -85,6 +87,7 @@ const App = () => {
 
 
         <Route path = "/Forum" exact component = {Forum}/>
+        <Route path = "/forum/forumprofile" exact component = {UserForum}/>
         
 
         <Route path = "/Blog/BlogEditor" exact>
@@ -102,6 +105,7 @@ const App = () => {
 
 
         <Route path = "/Blog/BlogEditPost" exact component = {BlogEditPost}/>
+        <Route path="/blog/blogprofile" exact component={BlogProfile}/>
 
         <Route path="/forget" exact component={Forget} />
 

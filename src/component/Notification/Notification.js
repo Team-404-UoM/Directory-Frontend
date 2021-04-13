@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import boxicons from 'boxicons';
 import './Notification.css';
 import {Toast} from 'react-bootstrap';
+import axios from 'axios';
+
 
 class Notification extends Component{
   constructor(props) {
@@ -9,10 +11,21 @@ class Notification extends Component{
     this.state = {
       show:false,
       padding: { paddingBottom: "0px" },
+      notification:[]
     };
     this.handleSidebar = this.handleSidebar.bind(this);
    
   }
+ componentDidMount(){
+this.getnotification();
+console.log(this.state.notification.UserId);
+ }
+componentDidUpdate(){
+  this.getnotification();
+}
+
+
+
   handleSidebar() {
     if (this.state.show==false){
     this.setState({
@@ -28,6 +41,15 @@ class Notification extends Component{
     console.log(this.state.padding);
   }
 
+getnotification(){
+  const userdetails={
+    userid:"1235"
+  }
+  axios.get('http://localhost:4000/notification/?id='+1235)
+  .then((res)=>{ this.setState((cur) => ({ ...cur, notification: res.data.reverse() }));
+
+  })
+}
   
 render(){
     return(<div className='notification-icon'>
@@ -37,14 +59,13 @@ render(){
 
       <div className={"downbar"} 
       style={this.state.padding}>
-    <Toast>
-      <Toast.Header>
-        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-        <strong className="mr-auto">Bootstrap</strong>
-        <small>just now</small>
-      </Toast.Header>
-      <Toast.Body>See? Just like this.</Toast.Body>
-    </Toast>
+        {this.state.notification.map((message)=>
+  
+    <div style={{color:'white'}}>
+    <h5>{message.UserId}</h5>
+    <hr style={{height:'5px',color:'white',backgroundColor:'white'}}/>
+    </div>
+    )}
   </div>
 
     </div>

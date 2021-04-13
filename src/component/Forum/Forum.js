@@ -198,11 +198,6 @@ class Forum extends Component {
   render() {
     return (
       <div>
-        <div className="sidenav">
-          <h5 style={{ textAlign: "center", color: "white" }}>
-            Notification Bar
-          </h5>
-        </div>
         <div className="divstyle">
           <Card className="forumstyle">
             <Card.Header as="h5">Post Question Here</Card.Header>
@@ -264,7 +259,7 @@ class Forum extends Component {
             Post
           </Button>
         </div>
-
+<Button as={Link} to="/forum/forumprofile" className='profile-btn'><box-icon type='solid' size='xs' color='#ffffff' name='user'></box-icon> Forum Profile</Button>
         <div style={{ backgroundColor: "rgba(192,192,192,0.3)" }}>
           {this.state.posts
             .slice(0, this.state.visiblequestions)
