@@ -19,28 +19,18 @@ class HomeNavbar extends Component{
   constructor(props) {
     super(props);
     this.state = {
-islogged:"",
+islogged:false,
     }
     
   }
-  componentDidMount() {
-    this.getusername();
-   
-  }
+ 
 
 
-  getusername(){
-    this.setState({islogged:this.context.loggedInUser.username})
-  }
+
   
     render(){
-      const islogged=this.context.loggedInUser.username? true:false;
-      console.log(islogged);
-      console.log(this.context.loggedInUser.username);
-
-
-        return(<div>
-          
+       return(<div>
+      
 <Navbar bg="red" variant="dark" className="navigation">
     <Navbar.Brand href="#home">
       <img
@@ -65,7 +55,7 @@ islogged:"",
       
       
     </Nav> 
-    
+    <Notification/>
 
    <NavDropdown title="User Name">
      <NavDropdown.Item onClick={() => { logout() }}>Logout</NavDropdown.Item>
@@ -74,7 +64,7 @@ islogged:"",
    </NavDropdown>
 
   </Navbar>
-  
+
       
   </div>
         )

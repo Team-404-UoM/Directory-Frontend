@@ -1,0 +1,16 @@
+.image-size {
+    width: 100px;
+    height: 200px;
+}
+
+.card-shadow {
+    border-style: outset;
+    border-width: 2px;
+    border-color: black;
+    box-Shadow: 10px 10px 5px #aaaaaa;
+}
+
+.topic {
+    padding-left: 40%;
+    padding-top: 20px;
+}
