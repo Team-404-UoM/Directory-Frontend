@@ -6,6 +6,7 @@ import axios from "axios";
 import { Usercontext, user } from "../../context/context";
 import "./blogprofile.css";
 import { Link } from "react-router-dom";
+import moment from "moment";
 class blogprofile extends Component {
   static contextType = Usercontext;
   constructor(props) {
@@ -91,6 +92,8 @@ class blogprofile extends Component {
         <div className="container-fluid">
           <div className="row">
               <div><h2 className='topic'> Written Blogs</h2></div>
+              {(this.state.profileblog=="")&&(
+          <p style={{padding:'80px 100px 40px 620px'}}>You have not posted any Written Blogs</p>)}
               
             {this.state.profileblog.map((blog) => (
               <div className="col-3 ">
@@ -116,7 +119,7 @@ class blogprofile extends Component {
                     </Card.Title>
                     <p style={{ fontWeight: "bold" }}>
                       Categorie : {blog.categorie}
-                    </p>
+                    </p><span style={{marginTop:'-20px'}}>{moment(blog.createdAt).format("MMM DD ,YYYY")}</span>
                     <div>
                       Views
                       <span className="badge rounded-pill bg-dark blog-views">
@@ -173,7 +176,9 @@ class blogprofile extends Component {
         </div>
         <div className="row">
         <div>
-           <h2 className='topic'>Upload Blogs</h2> </div>
+           <h2 className='topic'>Linked Blogs</h2> </div>
+           {(this.state.uploadprofileblog=="")&&(
+          <p style={{padding:'80px 100px 40px 630px'}}>You have not posted any Linked Blogs</p>)}
            {this.state.uploadprofileblog.map((blog) => (
               <div className="col-3 ">
                 <Card
