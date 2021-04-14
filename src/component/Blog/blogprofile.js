@@ -88,7 +88,7 @@ class blogprofile extends Component {
   render() {
     return (
       <div>
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
               <div><h2 className='topic'> Written Blogs</h2></div>
               
