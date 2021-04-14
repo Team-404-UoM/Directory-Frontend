@@ -138,7 +138,7 @@ class create extends Component {
         //newly added email verification
         await firebaseAuth.currentUser.sendEmailVerification();
 
-        alert(" Successfully loged to the system. Check Email For Verification");
+        alert(" Successfully loged to the system...");
         this.setState({ loading: false });
         //till here
 

@@ -9,6 +9,7 @@ import pic5 from "./pic5.png";
 import Modal from 'react-bootstrap/Modal';
 import ModalBody from 'react-bootstrap/ModalBody';
 import ModalTitle from 'react-bootstrap/ModalTitle';
+import { Link } from "react-router-dom";
 
 
 class ProfileForm extends Component {
@@ -93,9 +94,6 @@ class ProfileForm extends Component {
                                     <Card className="forumstyle">
                                         <Modal show={this.state.show} >
 
-
-
-
                                             <Card.Header as="h5">Type a message here...</Card.Header>
                                             <Card.Body>
                                                 <Card.Title></Card.Title>
@@ -157,6 +155,7 @@ class ProfileForm extends Component {
                                 <Form>
                                     <Form.Row>
                                         <Col className="formhandle">
+                                        <Form.Label>First Name</Form.Label>
                                             <Form.Control placeholder="First name" input type="text" className="form-field" value={this.state.profiledetails.firstName} />
                                         </Col>
                                     </Form.Row>
@@ -164,12 +163,14 @@ class ProfileForm extends Component {
 
                                     <Form.Row>
                                         <Col>
+                                        <Form.Label>Last Name</Form.Label>
                                             <Form.Control placeholder="Last name" input type="text" className="form-field" value={this.state.profiledetails.lastName} />
                                         </Col>
                                     </Form.Row>
                                     <br />
                                     <Form.Row>
                                         <Col>
+                                        <Form.Label>Gender</Form.Label>
                                             <Form.Control placeholder="Gender" input type="text" className="form-field" value={this.state.profiledetails.gender} />
                                         </Col>
 
@@ -178,12 +179,14 @@ class ProfileForm extends Component {
 
                                     <Form.Row>
                                         <Col>
+                                        <Form.Label>Membership Type</Form.Label>
                                             <Form.Control placeholder="Type" input type="text" className="form-field" value={this.state.profiledetails.type} />
                                         </Col>
                                     </Form.Row>
                                     <br />
                                     <Form.Row>
                                         <Col>
+                                        <Form.Label>Faculty</Form.Label>
                                             <Form.Control placeholder="faculty" input type="text" className="form-field" value={this.state.profiledetails.faculty} />
                                         </Col>
 
@@ -192,7 +195,9 @@ class ProfileForm extends Component {
                                     <Form.Row>
                                         <Col></Col>
                                         <Col>
+                                        <Link to="/ProfileEdit" >
                                             <Button variant="danger" >Edit profile</Button>
+                                           </Link>
 
                                         </Col>
                                     </Form.Row>
