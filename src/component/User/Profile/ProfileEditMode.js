@@ -38,7 +38,8 @@ class ProfileForm extends Component {
       fblink: "",
       instalink: "",
       twitterlink: "",
-      linkedinlink: "",
+      linkedinlink: ""
+
 
 
     }
@@ -57,6 +58,7 @@ class ProfileForm extends Component {
   }
 
 
+
   render() {
     return (
       <div className="container-fluid">
@@ -66,13 +68,8 @@ class ProfileForm extends Component {
               <Col className="col-2">
                 <center>
                   <div className="row">
-                    <Image
-                      src={pic5}
-                      input
-                      type="file"
-                      accept="image/*"
-                      multiple="false"
-                    />
+
+
                   </div>
                 </center>
               </Col>
@@ -126,7 +123,7 @@ class ProfileForm extends Component {
                   as="select"
                   className="my-1 mr-sm-2"
                   id="inlineFormCustomSelectPref"
-                  custom value={this.state.profiledetails.department} size ="sm"
+                  custom value={this.state.profiledetails.department} size="sm"
                 >
                   <option value="0">Choose...</option>
                   <option value="IDS Department">IDS Department</option>
@@ -515,21 +512,21 @@ class ProfileForm extends Component {
                     border="square"
                   ></box-icon>
                   <Form.Control input type="email" className="form-field" value={this.state.profiledetails.fblink} />
-              
+
                   <box-icon
                     type="logo"
                     name="twitter"
                     border="square"
                   ></box-icon>
                   <Form.Control input type="email" className="form-field" value={this.state.profiledetails.twitterlink} />
-                
+
                   <box-icon
                     type="logo"
                     name="instagram"
                     border="square"
                   ></box-icon>
                   <Form.Control input type="email" className="form-field" value={this.state.profiledetails.instalink} />
-                 
+
                   <box-icon
                     type="logo"
                     name="linkedin"
@@ -547,7 +544,7 @@ class ProfileForm extends Component {
                 <div className="mb-3">
                   <label>Faculty</label>
                   <br />
-                  <Form.Control input type="text" className="form-field" value={this.state.profiledetails.faculty}/>
+                  <Form.Control input type="text" className="form-field" value={this.state.profiledetails.faculty} />
                 </div>
                 <div className="mb-3">
                   <label>Batch</label>
@@ -911,10 +908,10 @@ class ProfileForm extends Component {
                   </select>
                 </div>
               </div>
-<br/><br/>
+              <br /><br />
 
 
-              <Button variant="success">Save</Button>{' '}
+              <Button variant="success" onClick={this.onUpdateprofileHandler}>Save</Button>{' '}
               <Button variant="danger">Edit</Button>
 
 
