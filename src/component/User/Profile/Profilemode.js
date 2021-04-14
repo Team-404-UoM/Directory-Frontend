@@ -9,6 +9,7 @@ import pic5 from "./pic5.png";
 import Modal from 'react-bootstrap/Modal';
 import ModalBody from 'react-bootstrap/ModalBody';
 import ModalTitle from 'react-bootstrap/ModalTitle';
+import { Link } from "react-router-dom";
 
 
 class ProfileForm extends Component {
@@ -194,7 +195,9 @@ class ProfileForm extends Component {
                                     <Form.Row>
                                         <Col></Col>
                                         <Col>
+                                        <Link to="/ProfileEdit" >
                                             <Button variant="danger" >Edit profile</Button>
+                                           </Link>
 
                                         </Col>
                                     </Form.Row>

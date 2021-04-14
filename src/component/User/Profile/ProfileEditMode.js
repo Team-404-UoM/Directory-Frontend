@@ -87,13 +87,7 @@ class ProfileForm extends Component {
                   <h3>{this.state.profiledetails.faculty}</h3>
                 </center>
               </Col>
-              <Col>
-                <div className="mb-2">
-                  <Button variant="primary" size="lg">
-                    Get Help
-                  </Button>
-                </div>
-              </Col>
+              
             </Row>
             <br />
             <br /> <br />
