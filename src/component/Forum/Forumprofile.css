@@ -1,0 +1,15 @@
+.profile {
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    box-Shadow: 10px 10px 5px #aaaaaa;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 25px;
+}
+
+.timeslot {
+    margin-left: -250px;
+    font-weight: 400;
+    float: left;
+}
