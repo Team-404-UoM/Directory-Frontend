@@ -28,16 +28,21 @@ handleclosechange(){
     width:{width:'0%'}
   })
 }
+handlelocal(){
+  localStorage.removeItem("testvalue")
+}
 
 
 
 render() {
-  
+ const value=localStorage.getItem('testvalue')
   return(<div>
 <div className={'sidebar'} style={this.state.width}>
 <button onClick={this.handleclosechange} type="button" class="btn-close btn-close-white closeButton" aria-label="Close"></button>
 <h1>hello</h1></div>
 <button onClick={this.handlechnage}>Side bar</button>
+<button onClick={this.handlelocal}>cler bar</button>
+<h1>{value}</h1>
   </div>)
 }
 }

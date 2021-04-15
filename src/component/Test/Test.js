@@ -51,10 +51,11 @@ getallurl=()=>{
 componentDidMount() {
   this.getallurl();
   console.log(this.state.allurl);
+  
 } 
 
     render() {
-    
+    const value=localStorage.getItem('testvalue');
       return (
         <div>
             
@@ -62,6 +63,7 @@ componentDidMount() {
               File Upload using React!
             </h3>
             <div>
+              <h1>{value}</h1>
                 <input type="file" onChange={this.onChangeHandler} />
                 <button onClick={this.onClickHandler}>
                   Upload!

@@ -42,6 +42,7 @@ class ProfileForm extends Component {
         console.log(this.context.UserDetails.firstName);
         this.getuserprofile(this.context.loggedInUser.username)
         console.log(this.props.location);
+        
     }
     getuserprofile(username) {
         console.log(username);
@@ -49,6 +50,13 @@ class ProfileForm extends Component {
             .then((res) => this.setState({ profiledetails: res.data }))
             .then(console.log(this.profiledetails))
 
+    }
+
+
+    getuserdetails(){
+        console.log(this.props.match.params.id);
+        axios.get(`http://localhost:4000/user/${this.props.match.params.id}`)
+        .then((res)=>{console.log(res.data.firstName)})
     }
 
 
