@@ -127,8 +127,9 @@ export default class Home extends Component {
       const signInresponse = await firebaseAuth.signInWithEmailAndPassword(email, password).then((res)=>{
         console.log(res.user.X.X);
         user.loggedInUser={username:res.user.X.X}
-        this.getuserprofile(res.user.X.X)
-
+        /* this.getuserprofile(res.user.X.X) */
+        this.setlocal(res.user.X.X);
+        
       })
       
       history.push('/User/Directory');
@@ -153,6 +154,11 @@ export default class Home extends Component {
        
 }
 
+setlocal(id){
+  localStorage.setItem('firebaseId',id);
+  const userid=localStorage.getItem('firebaseId')
+  this.getuserprofile(userid)
+}
 
   render() {
     return (<div className="backgrnd">

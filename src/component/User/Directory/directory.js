@@ -3,6 +3,7 @@ import './directory.css';
 import pic5 from "./pic5.png";
 import axios from "axios";
 import {Usercontext,user} from '../../../context/context';
+import { Link } from "react-router-dom";
 class directory extends Component{
     static contextType=Usercontext;
     constructor(props) {
@@ -84,12 +85,16 @@ class directory extends Component{
         <div className ="row">
         {this.state.allprofile.map((profile)=>(
             <div key={profile._id} className="col-md-4">
+             
                 <div  className="user-review">
                     <p> <div><h6>{profile.faculty}</h6> </div>
                     <div>{profile.gender} </div>
                         <div>Manager at Commercial Credit PLC</div>
                     </p>
-                        <h5>{profile.firstName} {profile.lastName}</h5>
+                    <Link to={{
+                            pathname: `/profileview/${profile.firebaseUserId}`,
+                            query: { id: profile._id },
+                          }}>    <h5>{profile.firstName} {profile.lastName}</h5></Link>
                         <small>{profile.type}</small>
                 </div>
                 <img className="profile-img" src ={pic5}/>

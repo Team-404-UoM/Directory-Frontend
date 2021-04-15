@@ -37,6 +37,7 @@ import AboutUs from './component/AboutUs/AboutUs';
 import Settings from './component/Settings/Settings';
 import ProfileEdit from './component/User/Profile/ProfileEditMode';
 import Profilemode from './component/User/Profile/Profilemode';
+import ProfileView from './component/User/Profile/profileview';
 import history from './config/history';
 import {Usercontext,user} from './context/context';
 
@@ -125,6 +126,7 @@ const App = () => {
        <Route path = "/Settings" exact component = {Settings}/>
        <Route path = "/ProfileEdit" exact component = {ProfileEdit}/>
        <Route path = "/Profilemode" exact component = {Profilemode}/>
+       <Route path = "/profileview/:id" exact component = {ProfileView}/>
         </div> 
         </React.Fragment> 
         </AlertProvider>

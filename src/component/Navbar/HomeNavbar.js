@@ -9,9 +9,11 @@ import {Usercontext,user} from '../../context/context';
 import Notification from '../Notification/Notification';
 
 const logout = () => {
-
+  
   history.push('/signin');
 }
+
+
 
 
 class HomeNavbar extends Component{
@@ -20,11 +22,26 @@ class HomeNavbar extends Component{
     super(props);
     this.state = {
 islogged:false,
+username:"test",
     }
     
   }
  
+/* componentDidMount(){
+  this.changeusername(); 
+}
+componentDidUpdate(){
+  this.changeusername();
+}
 
+
+
+changeusername(){
+  this.setState({
+    username:this.context.UserDetails.firstName
+  })
+  console.log(this.state.username);
+} */
 
 
   
@@ -57,7 +74,7 @@ islogged:false,
     </Nav> 
     <Notification/>
 
-   <NavDropdown title="User Name">
+   <NavDropdown title={this.state.username}>
      <NavDropdown.Item onClick={() => { logout() }}>Logout</NavDropdown.Item>
      <NavDropdown.Item as={Link} to="../ProfileEdit">Profile Edit</NavDropdown.Item>
      <NavDropdown.Item as={Link} to="../Profilemode">Profile</NavDropdown.Item>
