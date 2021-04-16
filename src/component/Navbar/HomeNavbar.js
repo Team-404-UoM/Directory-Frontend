@@ -7,11 +7,20 @@ import boxicons from 'boxicons';
 import history from '../../config/history';
 import {Usercontext,user} from '../../context/context';
 import Notification from '../Notification/Notification';
+import firebase from "firebase/app";
+import "firebase/auth";
 
-const logout = () => {
+/* const logout = () => {
+  firebase.auth().signOut().then(() => {
+    console.log("Logout Successfully");
+    this.setState({userid:null})
+    console.log(this.state.userid);
+  }).catch((error) => {
+    // An error happened.
+  });
   
   history.push('/signin');
-}
+} */
 
 
 
@@ -23,31 +32,64 @@ class HomeNavbar extends Component{
     this.state = {
 islogged:false,
 username:"test",
+userid:null,
+details:[]
     }
-    
+    this.logout= this.logout.bind(this);
   }
  
-/* componentDidMount(){
-  this.changeusername(); 
-}
-componentDidUpdate(){
-  this.changeusername();
+componentDidMount(){
+  this.firebasefunction(); 
+  this.details();
 }
 
 
 
-changeusername(){
+
+
+ logout(){
+  firebase.auth().signOut().then(() => {
+    this.setState({details:""})
+    localStorage.clear();
+    console.log("Logout Successfully");
+    console.log(this.state.userid);
+    console.log(this.state.details.firstName);
+   
+  }).catch((error) => {
+    console.log(error);
+  });
+  
+  history.push('/signin');
+} 
+
+
+firebasefunction(){
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.log("done");
+      console.log(user.uid);
+      this.setState({userid:true})
+      console.log(this.state.userid);
+    } else {
+      this.setState({userid:false})
+      // No user is signed in.
+    }
+  }.bind(this));
+  
+}
+
+
+details(){
   this.setState({
-    username:this.context.UserDetails.firstName
+    details:JSON.parse(localStorage.getItem('userdetails'))
   })
-  console.log(this.state.username);
-} */
-
-
+}
   
     render(){
+      const value=JSON.parse(localStorage.getItem('userdetails'));
        return(<div>
-      
+ {this.state.userid==true&&     
 <Navbar bg="red" variant="dark" className="navigation">
     <Navbar.Brand href="#home">
       <img
@@ -73,14 +115,14 @@ changeusername(){
       
     </Nav> 
     <Notification/>
-
-   <NavDropdown title={this.state.username}>
-     <NavDropdown.Item onClick={() => { logout() }}>Logout</NavDropdown.Item>
+<div style={{paddingLeft:'5px'}}>
+   <NavDropdown  title={this.state.details.firstName+" "+" "+ this.state.details.lastName}>
+     <NavDropdown.Item onClick={this.logout}>Logout</NavDropdown.Item>
      <NavDropdown.Item as={Link} to="../ProfileEdit">Profile Edit</NavDropdown.Item>
      <NavDropdown.Item as={Link} to="../Profilemode">Profile</NavDropdown.Item>
    </NavDropdown>
-
-  </Navbar>
+   </div>
+  </Navbar>}
 
       
   </div>
