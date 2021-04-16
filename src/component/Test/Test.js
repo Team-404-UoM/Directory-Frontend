@@ -9,7 +9,8 @@ class Test extends Component {
         selectedFile: null,
         url:null,
         imgname:null,
-        allurl:[]
+        allurl:[],
+        store:null
       }
    
   }
@@ -51,11 +52,14 @@ getallurl=()=>{
 componentDidMount() {
   this.getallurl();
   console.log(this.state.allurl);
+
   
 } 
 
+
+
     render() {
-    const value=localStorage.getItem('testvalue');
+    const value=JSON.parse(localStorage.getItem('userdetails'));
       return (
         <div>
             
@@ -63,7 +67,8 @@ componentDidMount() {
               File Upload using React!
             </h3>
             <div>
-              <h1>{value}</h1>
+              <h1>{value.firstName}</h1>
+              <h1></h1>
                 <input type="file" onChange={this.onChangeHandler} />
                 <button onClick={this.onClickHandler}>
                   Upload!

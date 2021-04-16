@@ -4,6 +4,8 @@ import pic5 from "./pic5.png";
 import axios from "axios";
 import {Usercontext,user} from '../../../context/context';
 import { Link } from "react-router-dom";
+import firebase from "firebase/app";
+import "firebase/auth";
 class directory extends Component{
     static contextType=Usercontext;
     constructor(props) {
@@ -23,12 +25,11 @@ class directory extends Component{
         this.getProfile();
         
        
-        
-       
-        
     }
 
    
+
+
 
 
 
