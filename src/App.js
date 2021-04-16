@@ -27,7 +27,7 @@ import Directory from './component/User/Directory/directory';
 import EventAdminHome from './component/EventAdmin/EventAdminHome';
 import JobView from './component/Jobs/JobView'
 
-
+import Admin from './component/User/SignUp/Admin';
 import PastStudent from './component/User/SignUp/PastStudent';
 import AcademicStaff from './component/User/SignUp/AcademicStaff';
 import Selection from './component/User/SignUp/Selection';
@@ -78,7 +78,7 @@ const App = () => {
         <Route path="/admin/events" component={EventAdminHome} />
 
         <Route path = "/SignUp/PastStudent/" exact component = {PastStudent}/>
-
+        <Route path="/SignUp/Admin/" exact component={Admin} />
         <Route path = "/SignUp/AcademicStaff/" exact component = {AcademicStaff}/> 
         <Route path = "/SignIn" exact component = {Login}/> 
         <Route path = "/SignUp/Selection" exact component = {Selection}/> 

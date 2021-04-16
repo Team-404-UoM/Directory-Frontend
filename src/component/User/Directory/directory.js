@@ -22,17 +22,10 @@ class directory extends Component{
     componentDidMount(){
         this.getProfile();
         
-       
-        
-       
         
     }
 
    
-
-
-
-
     getProfile(){
         axios.get('http://localhost:4000/home')
         .then((res) => {

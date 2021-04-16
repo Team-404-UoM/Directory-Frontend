@@ -34,13 +34,7 @@ class create extends Component {
         super()
         this.state = initialState;
 
-        // this.changeFirstName = this.changeFirstName.bind(this)
-        // this.changeLastName = this.changeLastName.bind(this)
-        // this.changeFaculty = this.changeFaculty.bind(this)
-        // this.changeGender = this.changeGender.bind(this)
-        // this.changeEmail = this.changeEmail.bind(this)
-        // this.changePassword = this.changePassword.bind(this)
-        // this.onSubmit = this.onSubmit.bind(this)
+      
     }
     changeFirstName(event) {
         this.setState({
@@ -179,7 +173,7 @@ class create extends Component {
                   console.log(customeToken);
                   this.setState(initialState)
               }*/
-            // console.log(customeToken);
+            console.log(customeToken);
             //clear form
             if (isValid) {
 
