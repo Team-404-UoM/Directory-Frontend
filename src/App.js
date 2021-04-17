@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext,useEffect} from 'react';
 import './App.css';
 import Bloginterface from './component/Blog/Bloginterface';
 import Forum from './component/Forum/Forum';
@@ -55,9 +55,12 @@ const options = {
   
 
 const App = () => {
-   
+   const userdetail=useContext(Usercontext);
+   useEffect(() => {console.log('test');
+       
+   }, [userdetail.loggedInUser.username])
     return ( 
-    <Usercontext.Provider value={user}>
+        
     <BrowserRouter>
 
         <div>
@@ -69,12 +72,13 @@ const App = () => {
         <React.Fragment>
         <div>
 
-        <HomeNavbar/>
         
+        <HomeNavbar/>
+       
  
         <Route path = "/" exact component = {Login}>
         </Route> 
-
+        
         <Route path="/admin/events" component={EventAdminHome} />
 
         <Route path = "/SignUp/PastStudent/" exact component = {PastStudent}/>
@@ -134,7 +138,8 @@ const App = () => {
         </Router>
         </div> 
         </BrowserRouter>
-        </Usercontext.Provider>
+       
+       
     );
 }
 

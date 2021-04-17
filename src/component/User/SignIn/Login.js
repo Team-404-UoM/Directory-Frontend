@@ -131,6 +131,7 @@ export default class Home extends Component {
         this.setlocal(res.user.X.X);
         
       })
+    
       
       history.push('/User/Directory');
     } catch (e) {
@@ -150,7 +151,8 @@ export default class Home extends Component {
   getuserprofile(username){
     console.log(username);
     axios.get('http://localhost:4000/user/'+username)
-    .then((res)=>user.UserDetails=res.data) 
+    .then((res)=>user.UserDetails=res.data)
+    .then((res)=>localStorage.setItem('userdetails',JSON.stringify(res))) 
        
 }
 
