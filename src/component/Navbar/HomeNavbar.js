@@ -9,6 +9,7 @@ import {Usercontext,user} from '../../context/context';
 import Notification from '../Notification/Notification';
 import firebase from "firebase/app";
 import "firebase/auth";
+import axios from "axios";
 
 /* const logout = () => {
   firebase.auth().signOut().then(() => {
@@ -31,7 +32,8 @@ class HomeNavbar extends Component{
     super(props);
     this.state = {
 islogged:false,
-username:"test",
+userfirstname:"",
+userlastname:"",
 userid:null,
 details:[]
     }
@@ -40,7 +42,7 @@ details:[]
  
 componentDidMount(){
   this.firebasefunction(); 
-  this.details();
+
 }
 
 
@@ -49,7 +51,7 @@ componentDidMount(){
 
  logout(){
   firebase.auth().signOut().then(() => {
-    this.setState({details:""})
+    /* this.setState({details:""}) */
     localStorage.clear();
     console.log("Logout Successfully");
     console.log(this.state.userid);
@@ -71,6 +73,8 @@ firebasefunction(){
       console.log(user.uid);
       this.setState({userid:true})
       console.log(this.state.userid);
+      this.getuserprofile(user.uid)
+
     } else {
       this.setState({userid:false})
       // No user is signed in.
@@ -79,15 +83,21 @@ firebasefunction(){
   
 }
 
-
-details(){
-  this.setState({
-    details:JSON.parse(localStorage.getItem('userdetails'))
-  })
+getuserprofile(userfire){
+  console.log(userfire);
+  axios.get('http://localhost:4000/user/'+userfire)
+  .then((res)=>this.setState({userfirstname:res.data.firstName,userlastname:res.data.lastName})) 
+  .catch((error) => {
+    console.log(error);
+  });
+  console.log(this.state.username);
+ 
+     
 }
+
+
   
     render(){
-      const value=JSON.parse(localStorage.getItem('userdetails'));
        return(<div>
  {this.state.userid==true&&     
 <Navbar bg="red" variant="dark" className="navigation">
@@ -116,7 +126,7 @@ details(){
     </Nav> 
     <Notification/>
 <div style={{paddingLeft:'5px'}}>
-   <NavDropdown  title={this.state.details.firstName+" "+" "+ this.state.details.lastName}>
+   <NavDropdown style={{color:'white'}} title={this.state.userfirstname+" "+" "+this.state.userlastname}>
      <NavDropdown.Item onClick={this.logout}>Logout</NavDropdown.Item>
      <NavDropdown.Item as={Link} to="../ProfileEdit">Profile Edit</NavDropdown.Item>
      <NavDropdown.Item as={Link} to="../Profilemode">Profile</NavDropdown.Item>
