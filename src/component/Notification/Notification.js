@@ -3,7 +3,9 @@ import boxicons from 'boxicons';
 import './Notification.css';
 import {Toast} from 'react-bootstrap';
 import axios from 'axios';
-
+import firebase from "firebase/app";
+import "firebase/auth";
+import moment from "moment";
 
 class Notification extends Component{
   constructor(props) {
@@ -11,7 +13,9 @@ class Notification extends Component{
     this.state = {
       show:false,
       padding: { paddingBottom: "0px" },
-      notification:[]
+      notification:[],
+      firebaseid:"",
+      test:"gdsafsdgksgkjhcxbjbvxcb jvbgf"
     };
     this.handleSidebar = this.handleSidebar.bind(this);
    
@@ -19,11 +23,24 @@ class Notification extends Component{
  componentDidMount(){
 this.getnotification();
 console.log(this.state.notification.UserId);
+this.firebasefunction(); 
  }
 componentDidUpdate(){
   this.getnotification();
+ 
 }
-
+firebasefunction(){
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.log("done");
+      console.log(user.uid);
+      this.setState({firebaseid:user.uid})
+    } else {
+      this.setState({userid:""})
+      // No user is signed in.
+    }
+  }.bind(this))};
 
 
   handleSidebar() {
@@ -45,8 +62,8 @@ getnotification(){
   const userdetails={
     userid:"1235"
   }
-  axios.get('http://localhost:4000/notification/?id='+1235)
-  .then((res)=>{ this.setState((cur) => ({ ...cur, notification: res.data.reverse() }));
+  axios.get('http://localhost:4000/notification/?id='+this.state.firebaseid)
+  .then((res)=>{ this.setState((cur) => ({ ...cur, notification: res.data}));
 
   })
 }
@@ -62,8 +79,13 @@ render(){
         {this.state.notification.map((message)=>
   
     <div style={{color:'white'}}>
-    <h5>{message.UserId}</h5>
-    <hr style={{height:'5px',color:'white',backgroundColor:'white'}}/>
+    
+   
+     <p>{message.NotificationType}{moment(message.Date).fromNow()}</p>
+     <p>{message.Title}</p>
+    <p>{message.Message}</p> 
+    <div className='bar'/>
+  
     </div>
     )}
   </div>

@@ -69,6 +69,7 @@ class BlogView extends Component {
           categorie: res.data.blog.categorie,
           createtime: res.data.blog.createdAt,
           updatetime: res.data.blog.updatedAt,
+          firebaseid:res.data.blog.firebaseId,
           comments:res.data.blog.comments.reverse()
         })
       )
@@ -97,8 +98,21 @@ class BlogView extends Component {
     comment:"",
    
   }))
-
+  this.createNotification();
  }} 
+
+
+ createNotification(){
+  const notification={
+    NotificationType:"Blog Comment",
+    Title:this.state.title,
+    Message:"You have new comment for this blog",
+    OwnerfirebaseId:this.state.firebaseid,
+    Date:Date.now()
+  }
+  axios.post("http://localhost:4000/notification",notification)
+}
+
 
 handledDeleteComment(id){
   console.log(id)
