@@ -40,6 +40,8 @@ import Profilemode from './component/User/Profile/Profilemode';
 import ProfileView from './component/User/Profile/profileview';
 import history from './config/history';
 import {Usercontext,user} from './context/context';
+import firebase from "firebase/app";
+import "firebase/auth";
 
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -52,6 +54,17 @@ const options = {
     transition: transitions.FADE,
     type: types.INFO
   }
+  
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      console.log(user.uid);
+      //console/log("user logged")
+      // User is signed in.
+    } else {
+      console.log("user is not logged");
+      // No user is signed in.
+    }
+  });
   
 
 const App = () => {
