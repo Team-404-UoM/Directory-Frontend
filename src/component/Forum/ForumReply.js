@@ -20,6 +20,7 @@ class ForumReply extends Component {
       firstname:"",
       lastname:"",
       firebaseId:"",
+      uid:"",
       replies: [],
       visiblereply: 5,
       deletereply:"",
@@ -67,7 +68,8 @@ class ForumReply extends Component {
           replies: res.data.forum.reply.reverse(),
           firstname:res.data.forum.firstname,
           lastname:res.data.forum.lastname,
-          firebaseId:res.data.forum.firebaseId
+          firebaseId:res.data.forum.firebaseId,
+          uid:res.data.forum.userId
         }))
       );
   }
@@ -103,7 +105,21 @@ class ForumReply extends Component {
         reply
       )
       .then((res) => this.getquestion(), this.setState({ replymessage: "" }));
+      this.createNotification();
   }}
+
+createNotification(){
+  const notification={
+    NotificationType:"Forum Reply",
+    Title:this.state.message,
+    Message:"You have new reply for this question",
+    OwnerUserId:this.state.uid,
+    OwnerfirebaseId:this.state.firebaseId,
+    Date:Date.now()
+  }
+  axios.post("http://localhost:4000/notification",notification)
+}
+
 
   handleDelete(index) {
     console.log(index);
