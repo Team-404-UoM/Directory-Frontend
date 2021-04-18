@@ -107,7 +107,7 @@ class create extends Component {
 
             passwordError = "password required";
         }
-        if (!this.state.facultyError) {
+        if (!this.state.facultyError  || this.state.facultyError.length == 0) {
 
             facultyError = "Faculty required";
         }
@@ -134,12 +134,12 @@ class create extends Component {
 
     async onSubmit(event) {
         event.preventDefault()
-        //newly added email verification
-        await firebaseAuth.currentUser.sendEmailVerification();
+        // //newly added email verification
+        // await firebaseAuth.currentUser.sendEmailVerification();
 
-        alert(" Successfully loged to the system. Check Email For Verification");
-        this.setState({ loading: false });
-        //till here
+        // alert(" Successfully loged to the system. Check Email For Verification");
+        // this.setState({ loading: false });
+        // //till here
 
         //huh
         const isValid = this.validate();
@@ -233,7 +233,7 @@ class create extends Component {
                                 <Row>
                                     <Col className='type'>
                                         <select className='form-control form-group' name="gender" id="gender"
-                                            onChange={(e) => this.changeGender(e)}
+                                            onChange={(e) => this.changeFaculty(e)}
                                         >
                                             <option value="" selected disabled hidden>
                                                 Faculty

@@ -6,6 +6,7 @@ import boxicons from "boxicons";
 import { Usercontext, user } from '../../../context/context';
 import axios from 'axios';
 import pic5 from "./pic5.png";
+import { axiosInstance } from "../../../services/services";
 
 class ProfileForm extends Component {
   static contextType = Usercontext;
@@ -35,7 +36,7 @@ class ProfileForm extends Component {
       expirence: "",
       expirencestart: "",
       expirenceend: "",
-      fblink: "",
+      socialLinkFB: "",
       instalink: "",
       twitterlink: "",
       linkedinlink: ""
@@ -56,10 +57,22 @@ class ProfileForm extends Component {
       .then(console.log(this.profiledetails))
 
   }
+  onUpdateprofileHandler= (e)=>{
+    e.preventDefault();
+    axiosInstance.put('/users', this.state).then(
+      (e)=> alert("saved successfully")
+    );
+
+  }
+  onChangeTextField = (e)=> {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+    console.log(this.state);
+  }
 
 
-
-  render() {
+  render() { 
     return (
       <div className="container-fluid">
         <Form>
@@ -505,7 +518,7 @@ class ProfileForm extends Component {
                     name="facebook"
                     border="square"
                   ></box-icon>
-                  <Form.Control input type="email" className="form-field" value={this.state.profiledetails.fblink} />
+                  <Form.Control name="socialLinkFB" onChange={(e)=> this.onChangeTextField(e)} input type="email" className="form-field" value={this.state.profiledetails.socialLinkFB} />
 
                   <box-icon
                     type="logo"
@@ -905,7 +918,7 @@ class ProfileForm extends Component {
               <br /><br />
 
 
-              <Button variant="success" onClick={this.onUpdateprofileHandler}>Save</Button>{' '}
+              <Button variant="success" onClick={(e)=> this.onUpdateprofileHandler(e)}>Save</Button>{' '}
               <Button variant="danger">Edit</Button>
 
 
