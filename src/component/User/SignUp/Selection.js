@@ -43,6 +43,18 @@ export default class selection extends Component {
                             </div>
 
                         </Col>
+                        <Col style={{marginRight:'200px'}}>
+                            <div className='outerbox'>
+                                <p className='title'>
+                                   Admin
+                            </p>
+                                <div  className="box">
+                                    
+                                   <a href="/SignUp/Admin"> <img src={student} alt="" width="80" height="80" className="Admin" /></a>
+                                </div>
+                            </div>
+
+                        </Col>
                     </Row>
 
                 </div>
