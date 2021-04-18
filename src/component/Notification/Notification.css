@@ -1,6 +1,6 @@
 .notification-icon {
     margin-top: 30px;
-    margin-right: 10%;
+    margin-right: 12%;
     position: absolute;
     top: 0;
     right: 0;
@@ -12,7 +12,7 @@
     width: 30%;
     margin-top: 40px;
     padding-right: 360px;
-    padding-left: 0px;
+    padding-left: 2px;
     padding-bottom: 500px;
     position: absolute;
     top: 0;
@@ -30,4 +30,10 @@
     top: 0;
     right: 0;
     z-index: 1;
+}
+
+.bar {
+    padding: 1px;
+    background-color: white;
+    width: 23rem;
 }
