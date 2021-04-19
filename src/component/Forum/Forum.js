@@ -18,6 +18,7 @@ class Forum extends Component {
     this.state = {
       message: "",
       posts: [],
+      filterposts:[],
       showModel: false,
       showConfirm: false,
       showDeleteConfirm: false,
@@ -37,6 +38,7 @@ class Forum extends Component {
     this.loadmore = this.loadmore.bind(this);
     this.handletypechange = this.handletypechange.bind(this);
     this.handlefaculty = this.handlefaculty.bind(this);
+    this.handlesearch=this.handlesearch.bind(this)
     
   }
 
@@ -77,7 +79,8 @@ class Forum extends Component {
       userId:this.context.UserDetails._id,
       firstname:this.context.UserDetails.firstName,
       lastname:this.context.UserDetails.lastName,
-      userType:this.context.UserDetails.type
+      userType:this.context.UserDetails.type,
+      userimage:this.context.UserDetails.photo
     };
 
     axios.post("http://localhost:4000/Forum", message).then((res) => {
@@ -106,7 +109,8 @@ class Forum extends Component {
     console.log(userdetails);
     axios
       .get("http://localhost:4000/Forum/home/?type="+this.context.UserDetails.type+"&faculty="+this.context.UserDetails.faculty+"&userid="+this.context.UserDetails._id)
-      .then((res) => this.setState({ posts: res.data.reverse() }));
+      .then((res) => this.setState({ posts: res.data.reverse(),filterposts:res.data})
+      )
   };
 
   deletePost = (id) => {
@@ -191,6 +195,22 @@ class Forum extends Component {
     );
   }
 
+
+  filterContent(posts ,searchTerme) {
+    const result = posts.filter((post) =>
+      post.message.toLowerCase().includes(searchTerme)
+    );
+
+    this.setState((cur) => ({ ...cur, posts: result }));
+    
+  }
+
+
+handlesearch=(e)=>{
+  const searchTerm=e.currentTarget.value
+  this.filterContent(this.state.filterposts,searchTerm)
+
+}
  
  
   
@@ -205,11 +225,11 @@ class Forum extends Component {
               <Card.Title></Card.Title>
               <Card.Text>
                 <textarea
-                  style={{ width: "460px" }}
-                  placeholder="Please write question here..."
+                  style={{ width: "460px",height:"90px",paddingLeft:"5px" }}
+                  placeholder="Describe yourself here..."
                   value={this.state.message}
                   onChange={this.handleChange}
-                />
+                ></textarea>
                 <div style={{color:'red',fontSize:12}}>{this.state.messagevalidate}</div>
               </Card.Text>
             </Card.Body>
@@ -260,6 +280,8 @@ class Forum extends Component {
           </Button>
         </div>
 <Button as={Link} to="/forum/forumprofile" className='profile-btn'><box-icon type='solid' size='xs' color='#ffffff' name='user'></box-icon> Forum Profile</Button>
+<label className="label-search">Search here your questions . . .</label>
+<div className="searchbox"><input className="input" type="text"  placeholder="Search.." aria-label="Search.." onChange={this.handlesearch}/></div>
         <div style={{ backgroundColor: "rgba(192,192,192,0.3)" }}>
           {this.state.posts
             .slice(0, this.state.visiblequestions)
@@ -276,7 +298,7 @@ class Forum extends Component {
               >
                 <Card.Header>
                   <img
-                    src={pic2}
+                    src={`http://localhost:4000/images/${post.userimage}`}
                     style={{ width: "20px" }}
                     className="rounded mr-2"
                     alt=""

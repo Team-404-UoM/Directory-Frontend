@@ -38,6 +38,7 @@ class ProfileView extends Component {
             instalink:"",
             twitterlink:"",
             linkedinlink:"",
+            userimage:"",
             message: "",
             show: false
 
@@ -71,7 +72,8 @@ class ProfileView extends Component {
             education:res.data.education,
             experience:res.data.experience,
             position:res.data.position,
-            workingplace:res.data.workingPlace
+            workingplace:res.data.workingPlace,
+            userimage:res.data.photo
 }))
     }
 
@@ -163,7 +165,11 @@ class ProfileView extends Component {
                    
 
                     
-                    </div>                
+                    </div> 
+                    <div className="col-4">{this.state.userimage?
+                        <Image width={'180px'} height={'195px'} src={`http://localhost:4000/images/${this.state.userimage}`}></Image>:
+                        <Image width={'150px'} height={'165px'} src={pic5}></Image>}
+                        </div>               
                     </div>  
                     </Jumbotron>
             </div>

@@ -6,7 +6,10 @@ import boxicons from "boxicons";
 import { Usercontext, user } from '../../../context/context';
 import axios from 'axios';
 import pic5 from "./pic5.png";
+import firebase from "firebase/app";
+import "firebase/auth";
 import { axiosInstance } from "../../../services/services";
+
 
 class ProfileForm extends Component {
   static contextType = Usercontext;
@@ -39,17 +42,46 @@ class ProfileForm extends Component {
       socialLinkFB: "",
       instalink: "",
       twitterlink: "",
-      linkedinlink: ""
+      linkedinlink: "",
+      photo:null,
+      image:"",
+      firebaseid:""
 
 
 
     }
+    this.onchangeFile = this.onchangeFile.bind(this);
+    this.imagehandle=this.imagehandle.bind(this);
   }
   componentDidMount() {
     console.log(this.context.UserDetails.firstName);
     this.getuserprofile(this.context.loggedInUser.username)
     console.log(this.props.location);
+    this.firebasefunction()
+    this.imagevalidate();
+    
   }
+
+  componentDidUpdate(){
+    this.getuserprofile(this.context.loggedInUser.username)
+  }
+
+  firebasefunction(){
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        console.log("done");
+        console.log(user.uid);
+        this.setState({firebaseid:user.uid})
+      } else {
+        this.setState({firebaseid:""})
+        // No user is signed in.
+      }
+    }.bind(this))};
+
+
+
+
   getuserprofile(username) {
     console.log(username);
     axios.get('http://localhost:4000/user/' + username)
@@ -71,6 +103,39 @@ class ProfileForm extends Component {
     console.log(this.state);
   }
 
+  imagehandle(){
+    const data = new FormData();
+      data.append("file", this.state.photo);
+      console.log(data);
+      console.log(this.state.firebaseid);
+    axios.put("http://localhost:4000/file/userupload/" + this.state.firebaseid,data)
+    .then((res) => {
+      console.log(res);
+    }).catch((err)=>{console.log(err);})
+
+  }
+
+  imagevalidate(){
+    console.log(this.state.profiledetails.photo);
+    if(this.state.profiledetails.photo!=""){
+      this.setState({
+        image:true
+      })
+    }else{
+      this.setState({
+        image:false
+      })
+    }
+  }
+
+onchangeFile(event){
+  this.setState({
+    photo:event.target.files[0],
+    image:URL.createObjectURL(event.target.files[0]),
+    loaded:0,
+    
+  })
+console.log(this.state.photo)}
 
   render() { 
     return (
@@ -81,8 +146,9 @@ class ProfileForm extends Component {
               <Col className="col-2">
                 <center>
                   <div className="row">
-
-
+                    {this.state.profiledetails.photo ? <Image src={`http://localhost:4000/images/${this.state.profiledetails.photo}`}/> : <Image src={pic5}/>}
+                  <input style={{marginTop:"10px"}}  type="file" filename="image" onChange={this.onchangeFile}></input>
+                  <Button style={{marginTop:"10px"}} onClick={this.imagehandle}>Save Image</Button>
                   </div>
                 </center>
               </Col>

@@ -106,6 +106,7 @@ class BlogEditor extends Component {
         firebaseId: this.context.UserDetails.firebaseUserId,
         firstname: this.context.UserDetails.firstName,
         lastname: this.context.UserDetails.lastName,
+        userimage:this.context.UserDetails.photo,
       };
       const data = new FormData();
       data.append("file", this.state.coverImage);
