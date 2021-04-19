@@ -15,18 +15,18 @@ class Notification extends Component{
       padding: { paddingBottom: "0px" },
       notification:[],
       firebaseid:"",
-      test:"gdsafsdgksgkjhcxbjbvxcb jvbgf"
+      notificationcolor:"white"
     };
     this.handleSidebar = this.handleSidebar.bind(this);
    
   }
  componentDidMount(){
-this.getnotification();
+ this.getnotification(); 
 console.log(this.state.notification.UserId);
 this.firebasefunction(); 
  }
 componentDidUpdate(){
-  this.getnotification();
+  /* this.getnotification(); */
  
 }
 firebasefunction(){
@@ -47,7 +47,8 @@ firebasefunction(){
     if (this.state.show==false){
     this.setState({
       show: true,
-      padding: { paddingBottom: "400px" },
+      padding: { paddingBottom: "400px",
+    notificationcolor:"white" },
     })}else{
       this.setState({
         show: false,
@@ -59,19 +60,18 @@ firebasefunction(){
   }
 
 getnotification(){
-  const userdetails={
-    userid:"1235"
-  }
+ 
   axios.get('http://localhost:4000/notification/?id='+this.state.firebaseid)
-  .then((res)=>{ this.setState((cur) => ({ ...cur, notification: res.data}));
+  .then((res)=>{ this.setState((cur) => ({ ...cur, notification: res.data,notificationcolor:"red"}));
 
-  })
+  }).catch((err)=>{console.log("Error in notifcation" );})
+  console.log(this.state.notificationcolor);
 }
   
 render(){
     return(<div className='notification-icon'>
       <div className='icon'>
-      <box-icon type='solid' name='bell' color='#ffffff' onClick={this.handleSidebar}></box-icon>
+      <box-icon type='solid' name='bell' color={this.state.notificationcolor} onClick={this.handleSidebar}></box-icon>
       </div>
 
       <div className={"downbar"} 

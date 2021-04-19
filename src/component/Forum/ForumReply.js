@@ -21,6 +21,7 @@ class ForumReply extends Component {
       lastname:"",
       firebaseId:"",
       uid:"",
+      userimage:"",
       replies: [],
       visiblereply: 5,
       deletereply:"",
@@ -69,7 +70,8 @@ class ForumReply extends Component {
           firstname:res.data.forum.firstname,
           lastname:res.data.forum.lastname,
           firebaseId:res.data.forum.firebaseId,
-          uid:res.data.forum.userId
+          uid:res.data.forum.userId,
+          userimage:res.data.forum.userimage
         }))
       );
   }
@@ -96,7 +98,8 @@ class ForumReply extends Component {
       userId:this.context.UserDetails._id,
       firebaseId:this.context.loggedInUser.username,
       firstname:this.context.UserDetails.firstName,
-      lastname:this.context.UserDetails.lastName
+      lastname:this.context.UserDetails.lastName,
+      userimage:this.context.UserDetails.photo
     };
 
     axios
@@ -202,7 +205,7 @@ cancleEdit = () => {
                   <Card.Title>
                     {" "}
                     <img
-                      src={pic2}
+                      src={`http://localhost:4000/images/${this.state.userimage}`}
                       style={{ width: "30px" }}
                       className="rounded mr-2"
                       alt=""
@@ -235,7 +238,7 @@ cancleEdit = () => {
                   >
                     <Card.Header>
                       <img
-                        src={pic2}
+                        src={`http://localhost:4000/images/${reply.userimage}`}
                         style={{ width: "30px" }}
                         className="rounded mr-2"
                         alt=""
@@ -296,10 +299,10 @@ cancleEdit = () => {
                   <Card.Text>
                     <textarea
                       placeholder="Please Type reply here"
-                      style={{ width: "580px"}}
+                      style={{ width: "580px",height:"90px",paddingLeft:"5px"}}
                       value={this.state.replymessage}
                       onChange={this.handleChange}
-                    />{" "}
+                    ></textarea>
                     <div style={{color:'red',fontSize:12}}>{this.state.replyvalidate}</div>
                   </Card.Text>
                 </Card.Body>{" "}

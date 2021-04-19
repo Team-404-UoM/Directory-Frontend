@@ -70,6 +70,7 @@ class BlogView extends Component {
           createtime: res.data.blog.createdAt,
           updatetime: res.data.blog.updatedAt,
           firebaseid:res.data.blog.firebaseId,
+          userimage:res.data.blog.userimage,
           comments:res.data.blog.comments.reverse()
         })
       )
@@ -91,7 +92,8 @@ class BlogView extends Component {
     firebaseId:this.context.UserDetails.firebaseUserId,
     userId:this.context.UserDetails._id,
     firstname:this.context.UserDetails.firstName,
-    lastname:this.context.UserDetails.lastName
+    lastname:this.context.UserDetails.lastName,
+    userimage:this.context.UserDetails.photo
   }
   axios.patch('http://localhost:4000/Blog/comment/'+this.props.location.query.id,comment)
   .then((res)=> this.getBlog(),this.setState({
@@ -187,7 +189,7 @@ handledDeleteComment(id){
                  <Card.Title style={{float:"left"}}>
                    <p style={{ fontSize: "13px", textAlign: "center" }}>
                     <img
-                      src={pic2}
+                      src={`http://localhost:4000/images/${comment.userimage}`}
                       alt="blog-cover"
                       style={{
                         width: "20px",
@@ -218,7 +220,7 @@ handledDeleteComment(id){
                   </h1>
                   <p style={{ fontSize: "13px", textAlign: "center" }}>
                     <img
-                      src={pic2}
+                      src={`http://localhost:4000/images/${this.state.userimage}`}
                       alt="blog-cover"
                       style={{
                         width: "30px",

@@ -24,7 +24,8 @@ class BlogEditor extends Component {
       titlevalidate:"",
       imagevalidate:"",
       urlvalidate:"",
-      categorievalidate:""
+      categorievalidate:"",
+      userimage:""
     };
     this.handleTitle = this.handleTitle.bind(this);
     this.handleImage = this.handleImage.bind(this);
@@ -75,6 +76,7 @@ class BlogEditor extends Component {
       firebaseId:this.context.UserDetails.firebaseUserId,
       firstname:this.context.UserDetails.firstName,
       lastname:this.context.UserDetails.lastName,
+      userimage:this.context.UserDetails.photo,
     };
 
     axios

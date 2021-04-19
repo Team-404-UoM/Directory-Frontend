@@ -338,8 +338,8 @@ this.updateviews(id)
                 >
                   <p style={{ fontSize: "13px" }}>
                     <img
-                      src={pic2}
-                      alt=""
+                      src={`http://localhost:4000/images/${blog.userimage}`}
+                      alt="user image"
                       style={{
                         width: "30px",
                         height: "30px",
@@ -489,8 +489,8 @@ this.updateviews(id)
                   >
                     <p style={{ fontSize: "13px" }}>
                       <img
-                        src={pic2}
-                        alt=""
+                        src={`http://localhost:4000/images/${blog.userimage}`}
+                        alt="user image"
                         style={{
                           width: "30px",
                           height: "30px",

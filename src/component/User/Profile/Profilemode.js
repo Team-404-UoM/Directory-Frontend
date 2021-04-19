@@ -68,14 +68,10 @@ class ProfileForm extends Component {
                         <Row>
                             <Col className="col-2">
                                 <center>
-                                    <div className="row">
+                                    <div className="row">{this.state.profiledetails.photo ?
                                         <Image
-                                            src={pic5}
-                                            input
-                                            type="file"
-                                            accept="image/*"
-                                            multiple="false"
-                                        />
+                                            src={`http://localhost:4000/images/${this.state.profiledetails.photo}`}/>:<Image
+                                            src={pic5}/>}
                                     </div>
                                 </center>
                             </Col>

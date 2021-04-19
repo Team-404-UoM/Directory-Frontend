@@ -97,8 +97,8 @@ class directory extends Component{
                             query: { id: profile._id },
                           }}>    <h5>{profile.firstName} {profile.lastName}</h5></Link>
                         <small>{profile.type}</small>
-                </div>
-                <img className="profile-img" src ={pic5}/>
+                </div>{profile.photo?<img className="profile-img" src ={`http://localhost:4000/images/${profile.photo}`}/>:
+                <img className="profile-img" src ={pic5}/>}
             </div>))}
            
            
