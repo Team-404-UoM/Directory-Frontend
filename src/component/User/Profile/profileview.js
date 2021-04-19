@@ -60,6 +60,7 @@ class ProfileView extends Component {
         .then((res)=>this.setState({
             firstname:res.data.firstName,
             lastname:res.data.lastName,
+            faculty:res.data.faculty,
             type:res.data.type,
             status:res.data.status,
             dob:res.data.dob,
@@ -81,6 +82,28 @@ class ProfileView extends Component {
         return (
             <div className="container">
                 <Jumbotron>
+                <Row>
+                            <Col className="col-2">
+                                <center>
+                                    <div className="row">
+                                        <Image
+                                            src={pic5}
+                                            input
+                                            type="file"
+                                            accept="image/*"
+                                            multiple="false"
+                                        />
+                                    </div>
+                                </center>
+                            </Col>
+                     <Col>       
+                <div><center> {" "} <h2>{this.state.firstname} {this.state.lastname}</h2></center>
+                <center> {" "}<h3>{this.state.type}</h3></center>
+                <center> {" "} <h3>{this.state.faculty}</h3></center>
+                </div></Col></Row>
+                <hr/>
+                <br/><br/>  <br/><br/>
+               
                 <div className='row'>
                     <div className='col-3'>
                     <h5>First Name</h5>

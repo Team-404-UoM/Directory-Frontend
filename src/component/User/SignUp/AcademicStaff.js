@@ -34,13 +34,7 @@ class create extends Component {
         super()
         this.state = initialState;
 
-        // this.changeFirstName = this.changeFirstName.bind(this)
-        // this.changeLastName = this.changeLastName.bind(this)
-        // this.changeFaculty = this.changeFaculty.bind(this)
-        // this.changeGender = this.changeGender.bind(this)
-        // this.changeEmail = this.changeEmail.bind(this)
-        // this.changePassword = this.changePassword.bind(this)
-        // this.onSubmit = this.onSubmit.bind(this)
+
     }
     changeFirstName(event) {
         this.setState({
@@ -104,7 +98,7 @@ class create extends Component {
 
             passwordError = "password required";
         }
-        if (!this.state.facultyError) {
+        if (!this.state.facultyError || this.state.facultyError.length == 0) {
 
             facultyError = "Faculty required";
         }
@@ -120,8 +114,8 @@ class create extends Component {
             emailError = 'invalid email';
 
         }
-    
-        
+
+
         if (emailError || firstNameError || lastNameError || passwordError || facultyError || departmentError || genderError) {
             this.setState({ emailError, firstNameError, lastNameError, passwordError, facultyError, departmentError, genderError });
             return false;
@@ -135,72 +129,75 @@ class create extends Component {
         event.preventDefault()
 
 
-        //newly added email verification
-        await firebaseAuth.currentUser.sendEmailVerification();
+        // //newly added email verification
+        // await firebaseAuth.currentUser.sendEmailVerification();
 
-        alert(" Successfully loged to the system...");
-        this.setState({ loading: false });
-        //till here
+        // alert(" Successfully loged to the system...");
+        // this.setState({ loading: false });
+        // //till here
 
 
         //pushhh
 
-        try {
-            history.push('/signin');
-        } catch (e) {
-            console.error(e);
-        }
+        // try {
+        //     history.push('/signin');
+        // } catch (e) {
+        //     console.error(e);
+        // }
 
         //huh
         const isValid = this.validate();
+        if (isValid) {
 
-        const registered = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            faculty: this.state.faculty,
-            department: this.state.department,
-            gender: this.state.gender,
-            email: this.state.email,
-            password: this.state.password
-        }
-        /* axios.post('http://localhost:4000/app/signup', registered )
-         .then(response => console.log(response.data))*/
-        try {
-            alert(registered);
-            const response = await axiosInstance.post('/signup', registered, {
-                params: {
-                    type: "ACADEMIC"
-                }
-            })
 
-            const customeToken = response.data;
-            //here
-            /*  if (isValid) {
-                  console.log(customeToken);
-                  this.setState(initialState)
-              }*/
-            // console.log(customeToken);
-            //clear form
-            if (isValid) {
-
-                const userDeatils = await firebaseAuth.signInWithCustomToken(customeToken);
-                history.push("/waiting");
-                this.setState({
-                    firstName: '',
-                    lastName: '',
-                    faculty: '',
-                    department: '',
-                    gender: '',
-                    email: '',
-                    password: ''
-                })
+            const registered = {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                faculty: this.state.faculty,
+                department: this.state.department,
+                gender: this.state.gender,
+                email: this.state.email,
+                password: this.state.password
             }
-            this.setState(initialState)
-        }
-        catch (e) {
-            alert(e);
+            /* axios.post('http://localhost:4000/app/signup', registered )
+             .then(response => console.log(response.data))*/
+            try {
+                alert(registered);
+                const response = await axiosInstance.post('/signup', registered, {
+                    params: {
+                        type: "ACADEMIC"
+                    }
+                })
+
+                const customeToken = response.data;
+                //here
+                /*  if (isValid) {
+                      console.log(customeToken);
+                      this.setState(initialState)
+                  }*/
+                console.log(customeToken);
+                //clear form
+                if (isValid) {
+
+                    const userDeatils = await firebaseAuth.signInWithCustomToken(customeToken);
+                    history.push("/signin");
+                    this.setState({
+                        firstName: '',
+                        lastName: '',
+                        faculty: '',
+                        department: '',
+                        gender: '',
+                        email: '',
+                        password: ''
+                    })
+                }
+                this.setState(initialState)
+            }
+            catch (e) {
+                alert(e);
 
 
+            }
         }
     }
 
