@@ -88,6 +88,11 @@
                     }
                     
                     .input[type=text] {
+                        color: rgb(5, 5, 5);
+                        border-color: rgb(0, 0, 0);
+                        border-width: 3px;
+                        box-shadow: 5px 5px 5px #aaaaaa;
+                        border-radius: 10px;
                         margin-bottom: -10px;
                         margin-left: 250px;
                         padding: 10px;
@@ -107,4 +112,21 @@
                         padding-bottom: 35px;
                         font-weight: bold;
                         font-size: large;
+                    }
+                    
+                    #colorchange::placeholder {
+                        /* Chrome, Firefox, Opera, Safari 10.1+ */
+                        color: black;
+                        opacity: 1;
+                        /* Firefox */
+                    }
+                    
+                     :-ms-input-placeholder {
+                        /* Internet Explorer 10-11 */
+                        color: black;
+                    }
+                    
+                     ::-ms-input-placeholder {
+                        /* Microsoft Edge */
+                        color: black;
                     }
