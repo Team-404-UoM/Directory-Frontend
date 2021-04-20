@@ -89,3 +89,20 @@
 .editor {
     margin-left: 150px;
 }
+
+#blogeditor::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(105, 99, 99);
+    opacity: 1;
+    /* Firefox */
+}
+
+ :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: black;
+}
+
+ ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: black;
+}

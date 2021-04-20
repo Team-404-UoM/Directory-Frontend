@@ -264,7 +264,9 @@ class BlogEditor extends Component {
                   
                   <div className="editor">
                     <CKEditor
+                    
                       placeholder="write"
+                      id="blogeditor"
                       editor={ClassicEditor}
                       data={this.state.body}
                       config={{

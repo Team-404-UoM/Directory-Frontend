@@ -1,132 +1,138 @@
-                    .forumstyle {
-                        margin-top: 1rem;
-                        margin-left: 450px;
-                        margin-right: 850px;
-                        width: 500px;
-                        border: 2px solid black
-                    }
-                    
-                    .button {
-                        margin-left: 475px;
-                        margin-top: 10px;
-                        margin-bottom: 100px;
-                    }
-                    
-                    .cardbutton {
-                        margin-left: 10px;
-                        margin-top: 10px;
-                        margin-bottom: 10px;
-                    }
-                    
-                    .badgestyle {
-                        margin-left: 5px;
-                    }
-                    
-                    .divstyle {
-                        position: fixed;
-                        margin-left: 38%;
-                    }
-                    
-                    .carddeletebutton {
-                        float: right;
-                        margin-top: 6px;
-                    }
-                    
-                    .sidenav {
-                        height: 100%;
-                        width: 300px;
-                        position: fixed;
-                        z-index: 1;
-                        top: 0;
-                        left: 0;
-                        background-color: #343A40;
-                        overflow-x: hidden;
-                        padding-top: 20px;
-                        margin-top: 77px;
-                    }
-                    
-                    .overflow {
-                        background: grey;
-                        padding: 15px;
-                        width: 900px;
-                        height: 500px;
-                        margin-left: 400px;
-                        overflow: scroll;
-                        border: 1px solid #ccc;
-                    }
-                    
-                    .select-type {
-                        width: 100px;
-                        margin: 10px;
-                        margin-left: 20px;
-                    }
-                    
-                    .select-faculty {
-                        width: 180px;
-                        margin: 10px;
-                        margin-left: 20px;
-                    }
-                    
-                    .select-description {
-                        margin-left: 20px;
-                        margin-bottom: -8px;
-                    }
-                    
-                    .select-description-faculty {
-                        margin-left: 30%;
-                        margin-bottom: -8px;
-                        margin-top: -23px;
-                    }
-                    
-                    .profile-btn {
-                        margin-top: 50px;
-                        margin-left: 70px;
-                    }
-                    
-                    .searchbox {
-                        margin-top: -40px;
-                    }
-                    
-                    .input[type=text] {
-                        color: rgb(5, 5, 5);
-                        border-color: rgb(0, 0, 0);
-                        border-width: 3px;
-                        box-shadow: 5px 5px 5px #aaaaaa;
-                        border-radius: 10px;
-                        margin-bottom: -10px;
-                        margin-left: 250px;
-                        padding: 10px;
-                        height: 40px;
-                        width: 150px;
-                        -webkit-transition: width 0.4s ease-in-out;
-                        transition: width 0.4s ease-in-out;
-                    }
-                    /* When the input field gets focus, change its width to 100% */
-                    
-                    .input[type=text]:focus {
-                        width: 50%;
-                    }
-                    
-                    .label-search {
-                        margin-left: 45px;
-                        padding-bottom: 35px;
-                        font-weight: bold;
-                        font-size: large;
-                    }
-                    
-                    #colorchange::placeholder {
-                        /* Chrome, Firefox, Opera, Safari 10.1+ */
-                        color: black;
-                        opacity: 1;
-                        /* Firefox */
-                    }
-                    
-                     :-ms-input-placeholder {
-                        /* Internet Explorer 10-11 */
-                        color: black;
-                    }
-                    
-                     ::-ms-input-placeholder {
-                        /* Microsoft Edge */
-                        color: black;
-                    }
+@import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css";
+.forumstyle {
+    margin-top: 1rem;
+    margin-left: 450px;
+    margin-right: 850px;
+    width: 500px;
+    border: 2px solid black
+}
+
+.button {
+    margin-left: 475px;
+    margin-top: 10px;
+    margin-bottom: 100px;
+}
+
+.cardbutton {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.badgestyle {
+    margin-left: 5px;
+}
+
+.divstyle {
+    position: fixed;
+    margin-left: 38%;
+}
+
+.carddeletebutton {
+    float: right;
+    margin-top: 6px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #343A40;
+    overflow-x: hidden;
+    padding-top: 20px;
+    margin-top: 77px;
+}
+
+.overflow {
+    background: grey;
+    padding: 15px;
+    width: 900px;
+    height: 500px;
+    margin-left: 400px;
+    overflow: scroll;
+    border: 1px solid #ccc;
+}
+
+.select-type {
+    width: 100px;
+    margin: 10px;
+    margin-left: 20px;
+}
+
+.select-faculty {
+    width: 180px;
+    margin: 10px;
+    margin-left: 20px;
+}
+
+.select-description {
+    margin-left: 20px;
+    margin-bottom: -8px;
+}
+
+.select-description-faculty {
+    margin-left: 30%;
+    margin-bottom: -8px;
+    margin-top: -23px;
+}
+
+.profile-btn {
+    margin-top: 50px;
+    margin-left: 70px;
+}
+
+.searchbox {
+    margin-top: -40px;
+}
+
+.input[type=text] {
+    color: rgb(5, 5, 5);
+    border-color: rgb(0, 0, 0);
+    border-width: 3px;
+    box-shadow: 5px 5px 5px #aaaaaa;
+    border-radius: 10px;
+    margin-bottom: -10px;
+    margin-left: 250px;
+    padding: 10px;
+    height: 40px;
+    width: 150px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+
+/* When the input field gets focus, change its width to 100% */
+
+.input[type=text]:focus {
+    width: 50%;
+}
+
+.label-search {
+    margin-left: 45px;
+    padding-bottom: 35px;
+    font-weight: bold;
+    font-size: large;
+}
+
+#colorchange::placeholder {
+    font-family: FontAwesome;
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(114, 109, 109);
+    opacity: 1;
+    /* Firefox */
+}
+
+ :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    font-family: FontAwesome;
+    color: black;
+}
+
+ ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    font-family: FontAwesome;
+    color: black;
+}
