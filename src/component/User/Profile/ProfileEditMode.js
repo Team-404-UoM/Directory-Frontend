@@ -85,11 +85,9 @@ class ProfileForm extends Component {
 
 
   getuserprofile(username) {
-    console.log(username);
     axios.get('http://localhost:4000/user/' + username)
       .then((res) => this.setState({ profiledetails: res.data }))
-      .then(console.log(this.profiledetails))
-
+     
   }
   onUpdateprofileHandler = (e) => {
     e.preventDefault();
@@ -97,6 +95,21 @@ class ProfileForm extends Component {
       (e) => alert("saved successfully")
     );
 
+
+
+
+
+
+  }
+
+  updateUser(){
+const user={
+  firstName:this.state.firstname
+}
+
+    axios.put(`http://localhost:4000/user/${this.state.firebaseid}`,user)
+    .then((res)=>{console.log(res)})
+    
   }
   onChangeTextField = (e) => {
     this.setState({

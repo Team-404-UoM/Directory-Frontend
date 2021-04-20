@@ -309,7 +309,8 @@ this.updateviews(id)
                   <input
                     className="form-control me-2 "
                     type="search"
-                    placeholder="Search"
+                    id="blogsearch"
+                    placeholder="&#61442; Search Blogs ..."
                     aria-label="Search"
                     onChange={this.handleTextSearch}
                   />

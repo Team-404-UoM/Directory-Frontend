@@ -226,7 +226,8 @@ handlesearch=(e)=>{
               <Card.Text>
                 <textarea
                   style={{ width: "460px",height:"90px",paddingLeft:"5px" }}
-                  placeholder="Describe yourself here..."
+                  id="colorchange"
+                  placeholder="Write Your question here . . "
                   value={this.state.message}
                   onChange={this.handleChange}
                 ></textarea>
@@ -281,7 +282,7 @@ handlesearch=(e)=>{
         </div>
 <Button as={Link} to="/forum/forumprofile" className='profile-btn'><box-icon type='solid' size='xs' color='#ffffff' name='user'></box-icon> Forum Profile</Button>
 <label className="label-search">Search here your questions . . .</label>
-<div className="searchbox"><input className="input" type="text"  placeholder="Search.." aria-label="Search.." onChange={this.handlesearch}/></div>
+<div className="searchbox"><input className="input"  id="colorchange" type="text"  placeholder="&#61442; Search.." aria-label="Search.." onChange={this.handlesearch}/></div>
         <div style={{ backgroundColor: "rgba(192,192,192,0.3)" }}>
           {this.state.posts
             .slice(0, this.state.visiblequestions)
