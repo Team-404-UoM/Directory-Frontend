@@ -129,11 +129,11 @@ class Admin extends Component {
     async onSubmit(event) {
         event.preventDefault()
         //newly added email verification
-        await firebaseAuth.currentUser.sendEmailVerification();
+        // await firebaseAuth.currentUser.sendEmailVerification();
 
-        alert(" Successfully loged to the system. Check Email For Verification");
-        this.setState({ loading: false });
-        //till here
+        // alert(" Successfully loged to the system. Check Email For Verification");
+        // this.setState({ loading: false });
+        // //till here
 
         try {
             history.push('/admin/events');

@@ -90,6 +90,7 @@ class directory extends Component{
                 <div  className="user-review">
                     <p> <div><h6>{profile.faculty}</h6> </div>
                     <div>{profile.gender} </div>
+                    <div>{profile.Batch} </div>
                         <div>Manager at Commercial Credit PLC</div>
                     </p>
                     <Link to={{
