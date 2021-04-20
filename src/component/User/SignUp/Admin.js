@@ -3,8 +3,8 @@ import "./bootstrap.min.css"
 import axios from 'axios'
 import './PastStudent.css';
 import student from "./student.png";
-import { Row, Col, Button, Jumbotron, InputGroup, Container } from 'react-bootstrap';
 import Questionform from './Questionform';
+import { Row, Col, Button, Jumbotron, InputGroup, Container } from 'react-bootstrap';
 import { firebaseAuth } from '../../../config/FirebaseConfig';
 import history from '../../../config/history';
 
@@ -32,17 +32,11 @@ const initialState = {
 
 
 }
-class create extends Component {
+class Admin extends Component {
     constructor() {
         super()
         this.state = initialState;
-        //  this.changeFirstName = this.changeFirstName.bind(this)
-        //  this.changeLastName = this.changeLastName.bind(this)
-        //  this.changeFaculty = this.changeFaculty.bind(this)
-        //   this.changeGender = this.changeGender.bind(this)
-        //  this.changeEmail = this.changeEmail.bind(this)
-        //   this.changePassword = this.changePassword.bind(this)
-        //   this.onSubmit = this.onSubmit.bind(this)
+
     }
     changeFirstName(event) {
         this.setState({
@@ -107,7 +101,7 @@ class create extends Component {
 
             passwordError = "password required";
         }
-        if (!this.state.facultyError  || this.state.facultyError.length == 0) {
+        if (!this.state.facultyError) {
 
             facultyError = "Faculty required";
         }
@@ -134,14 +128,19 @@ class create extends Component {
 
     async onSubmit(event) {
         event.preventDefault()
-        // //newly added email verification
+        //newly added email verification
         // await firebaseAuth.currentUser.sendEmailVerification();
 
         // alert(" Successfully loged to the system. Check Email For Verification");
         // this.setState({ loading: false });
         // //till here
 
-        //huh
+        try {
+            history.push('/admin/events');
+        } catch (e) {
+            console.error(e);
+        }
+
         const isValid = this.validate();
 
         const registered = {
@@ -157,7 +156,7 @@ class create extends Component {
             alert(registered);
             const response = await axios.post('http://localhost:4000/signup', registered, {
                 params: {
-                    type: "PAST_STUDENT"
+                    type: "ADMIN"
                 }
             })
 
@@ -204,7 +203,7 @@ class create extends Component {
                         height="100"
                         className="std"
                         border="2px" /> </center>
-                    <div className="topic"> <center> <h3> SignUp - Past Student </h3></center > </div>
+                    <div className="topic"> <center> <h3> SignUp - Admin </h3></center > </div>
 
                     <div style={{ marginLeft: '250px', marginTop: '20px' }}>
                         <Jumbotron className='jumbo'>
@@ -322,4 +321,4 @@ class create extends Component {
 
     }
 }
-export default create;
+export default Admin;

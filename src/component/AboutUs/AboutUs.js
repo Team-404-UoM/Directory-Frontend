@@ -159,9 +159,9 @@ class Test extends Component {
 
                         <Col xs={3} style={{ marginTop: '30px', color: 'white' }}>
                             <h3 style={{ marginBottom: '30px' }}>Follow Us on</h3>
-                            <p> FaceBook - @uom.facebook</p>
-                            <p> Twitter     - @uom.twitter</p>
-                            <p> Youtube    - @uom.youtube</p>
+                            <p><box-icon  name='facebook-square' type='logo' color='#0672f1' ></box-icon>{' '} FaceBook - @uom.facebook</p>
+                            <p> <box-icon name='twitter' type='logo' color='#4a7ae5' ></box-icon>{' '} Twitter - @uom.twitter</p>
+                            <p><box-icon name='linkedin-square' type='logo' color='#0048e9' > </box-icon>{' '} LinkedIn    - @uom.Linkedin</p>
 
                         </Col>
 

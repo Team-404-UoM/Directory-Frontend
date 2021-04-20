@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import "./ProfileEditMode.css";
+import "./profileview.css";
 import { Row, Col, Button, Jumbotron, Image, Form, Card } from "react-bootstrap";
 import boxicons from "boxicons";
 import { Usercontext, user } from '../../../context/context';
@@ -27,7 +27,7 @@ class ProfileView extends Component {
             email: "",
             faculty: "",
             department: "",
-            batch: "",
+            Batch: "",
             status:"",
             dob:"",
             education:[],
@@ -60,6 +60,7 @@ class ProfileView extends Component {
         .then((res)=>this.setState({
             firstname:res.data.firstName,
             lastname:res.data.lastName,
+            faculty:res.data.faculty,
             type:res.data.type,
             status:res.data.status,
             dob:res.data.dob,
@@ -79,16 +80,47 @@ class ProfileView extends Component {
 
     render() {
         return (
+            
             <div className="container">
+               
                 <Jumbotron>
+                <Card>
+                <Card>
+                <Row>
+                
+                    <br/><br/> <center> <Card className="backgroundcl">
+                    <br/><br/>
+                            <div className="col-4">{this.state.userimage?
+                        <Image width={'180px'} height={'195px'} src={`http://localhost:4000/images/${this.state.userimage}`}></Image>:
+                        <Image width={'150px'} height={'165px'} src={pic5}></Image>}
+                        </div>  
+                        <Col>  
+                   
+                <div><center> {" "} <h2 className="firstname" >{this.state.firstname} {this.state.lastname} </h2></center>
+                <center> {" "}<h3 className="firstname">{this.state.type} {' '}  {this.state.Batch}</h3></center>
+                <center> {" "} <h3 className="firstname">{this.state.faculty}</h3></center>
+                </div>
+                
+              
+                </Col> </Card></center>
+                          
+                    
+                           
+                     </Row>
+              
+                <br/><br/>  <br/><br/>
+               
                 <div className='row'>
+           
+                <Col></Col>  
                     <div className='col-3'>
+               
                     <h5>First Name</h5>
                     <h5>Last Name</h5>
-                    <h5>Gender</h5>
+                    
                     <h5>Member Type</h5>
                     <h5>Faculty</h5>
-                    <h5>Batch</h5>
+                    <h5>Gender</h5>
                     <h5>Status</h5>
                     <h5>Date of Birth</h5>
                     <h5>Education</h5>
@@ -99,15 +131,17 @@ class ProfileView extends Component {
                     <div><a href={this.state.instalink} target="_blank" ><box-icon name='instagram' type='logo' color='#e34c4c' ></box-icon></a></div>
                     <div><a href={this.state.twitterlink} target="_blank" ><box-icon name='twitter' type='logo' color='#4a7ae5' ></box-icon></a></div>
                     <div><a href={this.state.linkedinlink} target="_blank" ><box-icon name='linkedin-square' type='logo' color='#0048e9' ></box-icon></a></div>
-                    
+                
                     </div>  
                     <div className='col'>
+               
                    <div> <h5>{this.state.firstname}</h5></div>
                     <div><h5>{this.state.lastname}</h5></div>
-                    <div><h5>{this.state.gender}</h5></div>
+                   
                     <h5>{this.state.type}</h5>
                     <h5>{this.state.faculty}</h5>
-                    <h5>{this.state.batch}</h5>
+                    <div><h5>{this.state.gender}</h5></div>
+                   
                     <h5>{this.state.status}</h5>
                     <h5>{this.state.dob}</h5>
                     
@@ -139,17 +173,23 @@ class ProfileView extends Component {
                              </h5>
                           );
                     })}
-                   
+                 
 
                     
                     </div> 
-                    <div className="col-4">{this.state.userimage?
+                    
+                    {/* <div className="col-4">{this.state.userimage?
                         <Image width={'180px'} height={'195px'} src={`http://localhost:4000/images/${this.state.userimage}`}></Image>:
                         <Image width={'150px'} height={'165px'} src={pic5}></Image>}
-                        </div>               
+                        </div>    */}
+                                    
                     </div>  
+                    </Card>
+                    </Card>
                     </Jumbotron>
+                  
             </div>
+            
         );
     }
 }
