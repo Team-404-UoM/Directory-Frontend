@@ -203,7 +203,7 @@ class create extends Component {
 
     render() {
         //  this.state.showSignUp 
-        const condition = true;
+        const condition = this.state.showSignUp;
         return condition ? (
 
             <div className="academic">
