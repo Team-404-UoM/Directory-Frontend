@@ -298,7 +298,8 @@ cancleEdit = () => {
                   <Card.Title> </Card.Title>{" "}
                   <Card.Text>
                     <textarea
-                      placeholder="Please Type reply here"
+                    id="replycolorchange"
+                      placeholder="Please Type reply here . . "
                       style={{ width: "580px",height:"90px",paddingLeft:"5px"}}
                       value={this.state.replymessage}
                       onChange={this.handleChange}
