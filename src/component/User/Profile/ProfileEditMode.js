@@ -26,7 +26,7 @@ class ProfileForm extends Component {
       department: "",
       batch: "",
       status: "",
-      contactno: "",
+      contactNumber: "",
       dob: "",
       workingPlace: "",
       workingPlaceStart: "",
@@ -199,7 +199,7 @@ const user={
                     <Col className="mb-3">
                       <Form.Label>First Name</Form.Label>
                       <br />
-                      <Form.Control input type="text" value={this.state.profiledetails.firstName} className="form-field" />
+                      <Form.Control name="firstName" onChange={(e) => this.onChangeTextField(e)} input type="text" value={this.state.profiledetails.firstName} className="form-field" />
                     </Col>
                   
                     <Col className="mb-3">
@@ -633,7 +633,7 @@ const user={
                 <div className="col-3">
                   <div className="mb-3">
                     <label>Last Name</label>
-                    <Form.Control  input type="text" className="form-field" value={this.state.profiledetails.lastName} />
+                    <Form.Control  name="lastName" onChange={(e) => this.onChangeTextField(e)} input type="text" className="form-field" value={this.state.profiledetails.lastName} />
                   </div>
                   <div className="mb-3">
                     <label>Faculty</label>
@@ -648,7 +648,7 @@ const user={
                   <div className="mb-3">
                     <label>Contact No</label>
                     <br />
-                    <Form.Control input type="text" className="form-field" value={this.state.profiledetails.ContactNo} />
+                    <Form.Control name="contactNumber" onChange={(e) => this.onChangeTextField(e)} input type="text" className="form-field" value={this.state.profiledetails.contactNumber} />
                   </div>
                   <div className="mb-3">
                     <label>position</label>

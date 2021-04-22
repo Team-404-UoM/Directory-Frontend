@@ -93,6 +93,14 @@ class ProfileForm extends Component {
                                     <h3>{this.state.profiledetails.faculty}</h3>
                                 </center>
                             </Col>
+                            <Col>
+                            
+                            <div><a href={this.state.profiledetails.socialLinkFB} target="_blank" ><box-icon  name='facebook-square' type='logo' color='#0672f1' ></box-icon></a> {' '} 
+                                        <a href={this.state.sociallLinkInsta} target="_blank" ><box-icon name='instagram' type='logo' color='#e34c4c' ></box-icon></a>{' '} 
+                                        <a href={this.state.socialLinkTwitter} target="_blank" ><box-icon name='twitter' type='logo' color='#4a7ae5' ></box-icon></a>{' '} 
+                   <a href={this.state.socialLinkLinkedin} target="_blank" ><box-icon name='linkedin-square' type='logo' color='#0048e9' ></box-icon></a></div>{' '} 
+                            
+                            </Col>
                             </Card>
                         </Row>
                         <br />
@@ -107,6 +115,7 @@ class ProfileForm extends Component {
                                     <Form.Row>
                                     <Col></Col>
                                         <Col className="formhandle">
+                                            
                                         <Form.Label>First Name</Form.Label>
                                       
                                             <Form.Control placeholder="First name" input type="text" className="form-field" value={this.state.profiledetails.firstName} />
