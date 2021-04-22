@@ -23,6 +23,7 @@ class directory extends Component{
 
     componentDidMount(){
         this.getProfile();
+        console.log(this.context.indexNo.firstName);
         
        
     }

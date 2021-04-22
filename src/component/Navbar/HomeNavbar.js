@@ -66,14 +66,17 @@ componentDidMount(){
 
 
 firebasefunction(){
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
+  firebase.auth().onAuthStateChanged(function(users) {
+    if (users) {
       // User is signed in.
       console.log("done");
-      console.log(user.uid);
+      console.log(users.uid);
+      axios.get('http://localhost:4000/user/'+users.uid)
+      .then((res)=>user.indexNo=res.data)
+       
       this.setState({userid:true})
       console.log(this.state.userid);
-      this.getuserprofile(user.uid)
+      this.getuserprofile(users.uid)
 
     } else {
       this.setState({userid:false})

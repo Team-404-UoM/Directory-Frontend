@@ -97,6 +97,7 @@ class Forum extends Component {
 
   componentDidMount() {
     this.getAllPosts();
+    console.log(this.context.indexNo.number);
    
   }
   
