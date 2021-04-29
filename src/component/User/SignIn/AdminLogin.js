@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import uni from './uni.png';
-import './Login.css';
+import './AdminLogin.css';
 import { Row, Col, Button, Form, Jumbotron, Container, } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { MdMail } from "react-icons/md";
@@ -133,7 +133,7 @@ export default class Home extends Component {
       })
     
       
-      history.push('/User/Directory');
+      history.push('/admin/events');
     } catch (e) {
       console.error(e);
     } 
@@ -163,14 +163,14 @@ setlocal(id){
 }
 
   render() {
-    return (<div className="backgrnd">
+    return (<div className="backgrnd1">
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 </style>
       <Container fluid>
         <div className="myform" >
           <div style={{ marginLeft: '40px', marginBottom: '30px' }}>
-            <p className='h1'>LogIn</p>
+            <p className='h1'>Admin LogIn</p>
             <Form>
               <Form.Group controlId="formBasicEmail">
 
@@ -187,14 +187,10 @@ setlocal(id){
                 <strong>Sign In</strong>
               </Button>
             </Form>
-            <p style={{ marginTop: '5px', color: 'white', fontWeight: 'bold' }}>Don't have account yet?<a style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', marginLeft: '5px' }} href='/signUp/selection'>SignUp</a></p>
+            <p style={{ marginTop: '5px', color: 'white', fontWeight: 'bold' }}>Don't have account yet?<a style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', marginLeft: '5px' }} href='/SignUp/Admin'>SignUp</a></p>
             <div className="mt-3">
               <Link to="/forget" style={{ color: "white" }}>
                 <b className="text-secondary">Forget Password</b>
-              </Link>
-              <br/>
-              <Link to="SignIn/AdminLogin" style={{ color: "black" }}>
-                <b className="text-secondary">Login as an Admin</b>
               </Link>
             </div>
           </div>

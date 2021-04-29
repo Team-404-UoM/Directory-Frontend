@@ -14,10 +14,25 @@
  
     
 }
+.jam{
+    background-color: rgb(32, 96, 99);
+}
+/* .topictit{
+    background-color: cornflowerblue;
+} */
+.cardpic{
+
+    background-color: rgb(32, 96, 99);
+}
+.cardpic2{
+
+    background-color: rgb(170, 202, 204);
+}
 .h1{
     font-style:normal;
     font-weight: bold;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: black;
     
 }
 

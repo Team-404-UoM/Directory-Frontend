@@ -32,6 +32,7 @@ import PastStudent from './component/User/SignUp/PastStudent';
 import AcademicStaff from './component/User/SignUp/AcademicStaff';
 import Selection from './component/User/SignUp/Selection';
 import Login from './component/User/SignIn/Login';
+import AdminLogin from './component/User/SignIn/AdminLogin';
 import Forget from './component/User/SignIn/forget';
 import AboutUs from './component/AboutUs/AboutUs';
 import Settings from './component/Settings/Settings';
@@ -90,6 +91,8 @@ const App = () => {
        
  
         <Route path = "/" exact component = {Login}>
+        </Route> 
+        <Route path = "/SignIn/AdminLogin/" exact component = {AdminLogin}>
         </Route> 
         
         <Route path="/admin/events" component={EventAdminHome} />

@@ -17,7 +17,7 @@ const initialState = {
     lastName: '',
     faculty: '',
     gender: '',
-    batch: '',
+    Batch: '',
     email: '',
     password: '',
     showSignUp: false,
@@ -137,7 +137,7 @@ class create extends Component {
         // //newly added email verification
         // await firebaseAuth.currentUser.sendEmailVerification();
 
-        // alert(" Successfully loged to the system. Check Email For Verification");
+        //alert(" Successfully loged to the system");
         // this.setState({ loading: false });
         // //till here
 
@@ -167,7 +167,7 @@ class create extends Component {
             if (isValid) {
 
                 const userDeatils = await firebaseAuth.signInWithCustomToken(customeToken);
-                history.push("/ProfileEditMode");
+                history.push("/signin");
                 this.setState({
                     firstName: '',
                     lastName: '',
@@ -301,7 +301,7 @@ class create extends Component {
                                         onClick={(e) => this.onSubmit(e)}
                                         value="Submit" /> {' '} </center>
                                     <br /> <br />
-
+                                   
                                 </Col> </form>
                         </Jumbotron>
                     </div>
