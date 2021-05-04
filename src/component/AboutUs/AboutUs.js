@@ -20,7 +20,7 @@ class Test extends Component {
 
                     <div className='header'>
                         <div style={{ marginBottom: '200px' }}>
-                            <h1>Welcome to University of Moratuwa Web Member Directory</h1>
+                            <h1>Welcome to xxxxx organization Web Member Directory</h1>
                             <h5>About Us</h5>
                         </div>
 
@@ -33,8 +33,8 @@ class Test extends Component {
                     <Col>
                         <div className="para">
                             <h1>Our Values</h1>
-                            <p>This is the official Web Member Directory of University of Moratuwa. Through this web member directory <b>Past students</b> and the
-                            <b>Academic staff</b> of University Of moratuwa would be able to maintain their proffessional relationships in a good mannar.
+                            <p>This is the official Web Member Directory of an educational organization. Through this web member directory <b>Past students</b> and the
+                            <b>Academic staff</b> of this educational institute would be able to maintain their proffessional relationships in a good mannar.
                             We hope to provide a user friendly platform for the users and number of benefits in order to optimize the usability of this platform.
                         <br/><br/>
                              <center> <div className="feat"><ul>
@@ -74,7 +74,7 @@ class Test extends Component {
                         </div>
                         <div className="feature-details">
                             <h4>Vision</h4>
-                            <p>To be the most globally recognized Knowledge Enterprise in South Asia..</p>
+                            <p>To be the most globally cbfgbc  recognized Knowledge fghbfgb  Enterprise in South Asia..</p>
                             
                         
                     </div>
@@ -121,7 +121,7 @@ class Test extends Component {
                         </div>
                         <div className="feature-details">
                             <h4>Mission</h4>
-                            <p>To be the leading Knowledge Enterprise for technological and related disciplines in South Asia by:</p>
+                            <p>To be the leading Knowledge Enterprise for dfbgdfbh technological and related disciplines in South Asia by fhsbfvsj vfjs</p>
                             
                         
                     </div>
@@ -151,17 +151,17 @@ class Test extends Component {
 
                         <Col style={{ marginLeft: '150px', marginTop: '30px', color: 'white' }}>
                             <h3 style={{ marginBottom: '30px' }}>Contact Us</h3>
-                            <p> Tel: +94 112640051</p>
-                            <p> Fax:+94112650622</p>
-                            <p>Email: info@uom.lk</p>
+                            <p> Tel: +333 112640051</p>
+                            <p> Fax:+112663372</p>
+                            <p>Email: info@mmm.lk</p>
 
                         </Col>
 
                         <Col xs={3} style={{ marginTop: '30px', color: 'white' }}>
                             <h3 style={{ marginBottom: '30px' }}>Follow Us on</h3>
-                            <p><box-icon  name='facebook-square' type='logo' color='#0672f1' ></box-icon>{' '} FaceBook - @uom.facebook</p>
-                            <p> <box-icon name='twitter' type='logo' color='#4a7ae5' ></box-icon>{' '} Twitter - @uom.twitter</p>
-                            <p><box-icon name='linkedin-square' type='logo' color='#0048e9' > </box-icon>{' '} LinkedIn    - @uom.Linkedin</p>
+                            <p><box-icon  name='facebook-square' type='logo' color='#0672f1' ></box-icon>{' '} FaceBook - @oeme.facebook</p>
+                            <p> <box-icon name='twitter' type='logo' color='#4a7ae5' ></box-icon>{' '} Twitter - @oeme.twitter</p>
+                            <p><box-icon name='linkedin-square' type='logo' color='#0048e9' > </box-icon>{' '} LinkedIn    - @oeme.Linkedin</p>
 
                         </Col>
 

@@ -11,6 +11,7 @@ import BlogView from './component/Blog/BlogView';
 import BlogEditPost from './component/Blog/BlogEditPost';
 import BlogProfile from './component/Blog/blogprofile';
 import Test from './component/Test/Test';
+// import Test3 from './component/Test/Test3';
 import ForumReply from './component/Forum/ForumReply';
 import UserForum from './component/Forum/Forumprofile';
 
@@ -120,7 +121,7 @@ const App = () => {
         </Route>
 
         <Route path = "/Test" exact component = {Test}/>
-
+        {/* <Route path = "/Test" exact component = {Test3}/> */}
         <Route path="/User/Directory" exact component={Directory} />
         <Route path = "/Blog/BlogView" exact component = {BlogView}/>
 
