@@ -51,7 +51,10 @@ class ProfileView extends Component {
         console.log(this.props.location);
         this.getuserdetails();
     }
+    handleModal() {
+        this.setState({ show: !this.state.show })
 
+    }
 
 
     getuserdetails() {
@@ -93,9 +96,41 @@ class ProfileView extends Component {
                                     <div className="col-4">{this.state.userimage ?
                                         <Image width={'180px'} height={'195px'} src={`http://localhost:4000/images/${this.state.userimage}`}></Image> :
                                         <Image width={'150px'} height={'165px'} src={pic5}></Image>}
+                                        <Col></Col>
+                                        <Col></Col>
+                                        <br />
+                                        <Button variant="primary" size="lg" onClick={() => { this.handleModal() }}>
+                                            Get Help
+                  </Button>
                                     </div>
+                                    <br />
+                                    <div className="mb-2">
 
 
+                                        <Modal show={this.state.show} >
+                                            <Card className="gethelp">
+                                                <Card.Header as="h5">Get help</Card.Header>
+                                                <Card.Body>
+                                                    <Card.Title></Card.Title>
+                                                    <Card.Text>
+                                                        <textarea
+                                                            id="colorchange"
+                                                            style={{ width: "460px", height: "90px", paddingLeft: "5px" }}
+                                                            placeholder="Please type a message here..."
+                                                            value={this.state.message}
+                                                            onChange={this.handleChange}
+                                                        ></textarea>
+                                                        <div style={{ color: 'red', fontSize: 12 }}>{this.state.messagevalidate}</div>
+                                                    </Card.Text>
+                                                </Card.Body>
+                                                <Modal.Footer>
+                                                    <Button variant="primary" size="lg" onClick={() => { this.handleModal() }} >close </Button>{' '}<Button variant="primary" size="lg"  >Send </Button>
+                                                </Modal.Footer>
+                                            </Card>
+                                        </Modal>
+
+
+                                    </div>
 
                                     <Col>
 
@@ -118,7 +153,7 @@ class ProfileView extends Component {
                                 <Col>
                                     <Card>
 
-                                    
+
                                         <Card.Header><Card.Title>About me</Card.Title></Card.Header>
                                         <Card.Body>
 
@@ -127,22 +162,22 @@ class ProfileView extends Component {
                                                 of the card's content.
       </Card.Text>
                                         </Card.Body>
-                                        <br/>
+                                        <br />
                                     </Card>
                                     <Card>
-                                    <Card.Header><Card.Title>Social media Links</Card.Title></Card.Header>
+                                        <Card.Header><Card.Title>Social media Links</Card.Title></Card.Header>
                                         <Card.Body>
 
                                             <Card.Text>
-                                            <div><a href={this.state.fblink} target="_blank" ><box-icon name='facebook-square' type='logo' color='#0672f1' ></box-icon></a></div>
-                                    <div><a href={this.state.instalink} target="_blank" ><box-icon name='instagram' type='logo' color='#e34c4c' ></box-icon></a></div>
-                                    <div><a href={this.state.twitterlink} target="_blank" ><box-icon name='twitter' type='logo' color='#4a7ae5' ></box-icon></a></div>
-                                    <div><a href={this.state.linkedinlink} target="_blank" ><box-icon name='linkedin-square' type='logo' color='#0048e9' ></box-icon></a></div>
-      </Card.Text>
+                                                <div><a href={this.state.fblink} target="_blank" ><box-icon name='facebook-square' type='logo' color='#0672f1' ></box-icon></a></div>
+                                                <div><a href={this.state.instalink} target="_blank" ><box-icon name='instagram' type='logo' color='#e34c4c' ></box-icon></a></div>
+                                                <div><a href={this.state.twitterlink} target="_blank" ><box-icon name='twitter' type='logo' color='#4a7ae5' ></box-icon></a></div>
+                                                <div><a href={this.state.linkedinlink} target="_blank" ><box-icon name='linkedin-square' type='logo' color='#0048e9' ></box-icon></a></div>
+                                            </Card.Text>
                                         </Card.Body>
                                     </Card>
                                 </Col>
-      
+
                                 <div className='col-3'>
 
                                     <h5>First Name</h5>
@@ -157,7 +192,7 @@ class ProfileView extends Component {
                                     <h5>Education</h5>
                                     <h5>Position</h5>
                                     <h5>Working Place</h5>
-                        
+
 
                                 </div>
                                 <div className='col'>
