@@ -28,10 +28,10 @@ class blogprofile extends Component {
   }
 
   getAllPosts() {
+    const username=localStorage.getItem('firebaseId')
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/Blog/blogprofile/?Id=` +
-          this.context.loggedInUser.username
+        `${process.env.REACT_APP_BASE_URL}/Blog/blogprofile/?Id=`+username
       )
       .then((res) => {
         this.setState((cur) => ({ ...cur, profileblog: res.data.reverse() }));
@@ -39,10 +39,10 @@ class blogprofile extends Component {
   }
 
   getUploadPosts() {
+    const username=localStorage.getItem('firebaseId')
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/Bloguploader/userblogs/?Id=` +
-          this.context.loggedInUser.username
+        `${process.env.REACT_APP_BASE_URL}/Bloguploader/userblogs/?Id=`+username
       )
       .then((res) => {
         this.setState((cur) => ({ ...cur, uploadprofileblog: res.data.reverse() }));

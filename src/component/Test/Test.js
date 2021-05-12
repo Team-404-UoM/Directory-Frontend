@@ -60,6 +60,7 @@ componentDidMount() {
 
     render() {
     const value=JSON.parse(localStorage.getItem('userdetails'));
+    const id=localStorage.getItem('firebaseId');
       return (
         <div>
             
@@ -67,7 +68,7 @@ componentDidMount() {
               File Upload using React!
             </h3>
             <div>
-              <h1>{value.firstName}</h1>
+              <h1></h1>
               <h1></h1>
                 <input type="file" onChange={this.onChangeHandler} />
                 <button onClick={this.onClickHandler}>
@@ -84,6 +85,7 @@ componentDidMount() {
 
                 </div>  
            <button >click</button>
+           <h1>{id}</h1>
             </div>
             
         

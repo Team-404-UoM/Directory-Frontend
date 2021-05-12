@@ -273,7 +273,8 @@ class BlogEditor extends Component {
                         ckfinder: {
                           // Upload the images to the server using the CKFinder QuickUpload command.
                           uploadUrl:
-                            "https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json",
+                          "https://api.cloudinary.com/v1_1/team404/image/upload"
+                            /* "https://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json" */,
                         },
                       }}
                       /*  onInit={editor => {

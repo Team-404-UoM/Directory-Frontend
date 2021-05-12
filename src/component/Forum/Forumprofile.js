@@ -36,10 +36,10 @@ class Userforum extends Component {
   }
 
 getuserforum(){
+  const username=localStorage.getItem('firebaseId')
   axios
   .get(
-    `${process.env.REACT_APP_BASE_URL}/Forum/forumprofile/?Id=` +
-      this.context.loggedInUser.username
+    `${process.env.REACT_APP_BASE_URL}/Forum/forumprofile/?Id=`+username
   )
   .then((res) => {
     this.setState((cur) => ({ ...cur,userquestion: res.data.reverse() }));
