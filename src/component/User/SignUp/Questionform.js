@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from "axios"
-import { Form, Row, Col, Button, Container } from "react-bootstrap";
+import { Form, Row, Col, Button, Container,Card } from "react-bootstrap";
 import './Questionform.css';
 import Jumbotron from 'react-bootstrap/Jumbotron'
 
@@ -48,10 +48,15 @@ export default class Questionform extends Component {
 
     render() {
         return (
-            <Jumbotron className="form">
+            <Jumbotron  className="jam">
+            <Card className="cardpic">
+                
+                  <Card className="cardpic2">
+                
                   <Container>
-                  <h2 className="h1">Question form</h2>
+                  <Card className="topictit"> <center><h2 className="h1">Question form</h2></center></Card>
             <Form className="form1" >
+              
                <br/>
                 { 
                     this.state.questions.map((question, questionIndex) => {
@@ -87,7 +92,8 @@ export default class Questionform extends Component {
                         <Button onClick={() => this.onClickSubmit()}>Submit Answer</Button>
                     </Col>
                 </Form.Group>
-            </Form> </Container></Jumbotron>
+              
+            </Form> </Container>  </Card><br/></Card></Jumbotron>
         )
     }
 }

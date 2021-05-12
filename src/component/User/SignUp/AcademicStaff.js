@@ -203,7 +203,7 @@ class create extends Component {
 
     render() {
         //  this.state.showSignUp 
-        const condition = true;
+        const condition = this.state.showSignUp;
         return condition ? (
 
             <div className="academic">
@@ -275,9 +275,12 @@ class create extends Component {
                                         <option value="" disabled selected hidden >
                                             Department
                                         </option>
-                                        <option value="department1">IDS Department </option>
-                                        <option value="department2">Computational Mathematics Department </option>
-                                        <option value="department2">IT Department </option>
+                                        <option value="IDS Department">IDS Department </option>
+                                        <option value="Computational Mathematics Department">Computational Mathematics Department </option>
+                                        <option value="IT Department">IT Department </option>
+                                        <option value="Material engineering Department ">Material engineering Department </option>
+                                        <option value="Electronoic engineering Department">Electronoic engineering Department </option>
+                                        <option value="Chemical engineering Department">Chemical engineering Department </option>
 
                                     </select>
                                     <div style={{ color: "red" }}>{this.state.departmentError} </div>
