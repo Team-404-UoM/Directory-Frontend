@@ -73,23 +73,12 @@ const options = {
 
 const App = () => {
    const userdetail=useContext(Usercontext);
- /*    useEffect(()=>{firebase.auth().onAuthStateChanged(function(users) {
-     console.log("test");
-    if (users) {
-      console.log(users.uid);
-        axios.get('http://localhost:4000/user/'+users.uid)
-        .then((res)=>user.indexNo=res.data)
-        
-           
-    
-    
-      //console/log("user logged")
-      // User is signed in.
-    } else {
-      console.log("user is not logged");
-      // No user is signed in.
-    }
-  });}) */
+     useEffect(()=>{
+   const firebaseid=localStorage.getItem('firebaseId')
+   console.log(firebaseid);
+   axios.get('http://localhost:4000/user/'+firebaseid)
+    .then((res)=>user.UserDetails=res.data)
+ }) 
     
     return ( 
         
