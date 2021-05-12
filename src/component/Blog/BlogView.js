@@ -152,7 +152,7 @@ handledDeleteComment(id){
                   size="lg"
                   name="comment-detail"
                 ></box-icon>
-                <div style={{marginTop:"-10px",marginLeft:"10px"}}><span class="badge rounded-pill bg-dark">{this.state.comments.length}</span></div>
+                <div style={{marginTop:"-10px",marginLeft:"10px"}}><span className="badge rounded-pill bg-dark">{this.state.comments.length}</span></div>
                 
               </div>
 

@@ -152,7 +152,7 @@ export default class Home extends Component {
     console.log(username);
     axios.get('http://localhost:4000/user/'+username)
     .then((res)=>user.UserDetails=res.data)
-    .then((res)=>localStorage.setItem('userdetails',JSON.stringify(res))) 
+    /* .then((res)=>localStorage.setItem('userdetails',JSON.stringify(res)))*/  
        
 }
 

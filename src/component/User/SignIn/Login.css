@@ -1,7 +1,7 @@
 .myform {
     background-color: transparent;
     width: 500px;
-    height: 710px;
+    height: 789px;
     padding: 200px 50px 50px 50px;
     margin-left: auto;
     margin-right: auto;
@@ -12,6 +12,7 @@
     background-image: url('LoginCover.jpg');
     background-size: cover;
     opacity: 0.9;
+    height: 100%;
 }
 
 .App-logo {

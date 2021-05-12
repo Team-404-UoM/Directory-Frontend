@@ -12,21 +12,22 @@ class Notification extends Component{
     super(props);
     this.state = {
       show:false,
-      padding: { paddingBottom: "0px" },
+      padding: { paddingBottom: "0px", border: "0px solid" },
       notification:[],
       firebaseid:"",
-      notificationcolor:"white"
+      notificationcolor:"white",
+      test:"test add sdds dassd dsdsa"
     };
     this.handleSidebar = this.handleSidebar.bind(this);
    
   }
  componentDidMount(){
- this.getnotification(); 
+/*  this.getnotification(); */ 
 console.log(this.state.notification.UserId);
 this.firebasefunction(); 
  }
 componentDidUpdate(){
-  /* this.getnotification(); */
+    /* this.getnotification();  */
  
 }
 firebasefunction(){
@@ -47,8 +48,7 @@ firebasefunction(){
     if (this.state.show==false){
     this.setState({
       show: true,
-      padding: { paddingBottom: "400px",
-    notificationcolor:"white" },
+      padding: { paddingBottom: "400px" },
     })}else{
       this.setState({
         show: false,
@@ -59,35 +59,45 @@ firebasefunction(){
     console.log(this.state.padding);
   }
 
-getnotification(){
+ getnotification(){
  
   axios.get('http://localhost:4000/notification/?id='+this.state.firebaseid)
-  .then((res)=>{ this.setState((cur) => ({ ...cur, notification: res.data,notificationcolor:"red"}));
+  .then((res)=>{ this.setState((cur) => ({ ...cur, notification: res.data}));
 
   }).catch((err)=>{console.log("Error in notifcation" );})
-  console.log(this.state.notificationcolor);
-}
+} 
+
+/* 
+handledelete(notificationId){
+  console.log(notificationId);
+  axios.delete(`http://localhost:4000/notification/`+notificationId)
+  .then((res)=>{console.log("Delete Successfully")})
+  .catch((err)=>{console.log(err);})
+
+} */
   
 render(){
     return(<div className='notification-icon'>
       <div className='icon'>
-      <box-icon type='solid' name='bell' color={this.state.notificationcolor} onClick={this.handleSidebar}></box-icon>
+      <box-icon type='solid' name='bell' color="white" onClick={this.handleSidebar}></box-icon>
       </div>
 
-      <div className={"downbar"} 
+      <div className="downbar"
       style={this.state.padding}>
-        {this.state.notification.map((message)=>
+        {this.state.notification =="" ? <span className="without-notification">No Any Notification</span>:<div>
+        {this.state.notification.map((message)=>(
   
-    <div style={{color:'white'}}>
+     <div style={{color:'black'}}> 
     
    
-     <p>{message.NotificationType}{moment(message.Date).fromNow()}</p>
-     <p>{message.Title}</p>
-    <p>{message.Message}</p> 
-    <div className='bar'/>
+   <div><span style={{fontWeight:"bold"}}>{message.NotificationType}</span> <p className="time-align">{moment(message.Date).fromNow()}</p></div>
+   <p className="notification-title">{message.Title}</p>
+   <div className="notification-removeicon"> <box-icon size="sm" color="red"  name='message-square-x' animation="burst-hover"></box-icon></div>
+    <p>{message.Message}</p>
+     <div className='bar'/> 
   
-    </div>
-    )}
+    </div> 
+        ))}</div>}
   </div>
 
     </div>

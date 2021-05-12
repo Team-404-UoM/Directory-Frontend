@@ -9,18 +9,20 @@
 
 .downbar {
     height: 10%;
-    width: 30%;
-    margin-top: 40px;
-    padding-right: 360px;
-    padding-left: 2px;
-    padding-bottom: 500px;
+    width: 360px;
+    margin-top: 30px;
+    /* padding-right: 200px; */
+    padding-left: 3px;
+    /*  padding-bottom: 500px; */
     position: absolute;
     top: 0;
     right: 0;
     z-index: 1;
-    background-color: rgba(5, 5, 5, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     transition: 0.5s;
     overflow-x: hidden;
+    border: 1px solid;
+    border-color: white;
 }
 
 .icon {
@@ -34,6 +36,33 @@
 
 .bar {
     padding: 1px;
-    background-color: white;
+    background-color: rgb(0, 0, 0);
     width: 23rem;
+}
+
+.time-align {
+    text-align: right;
+    /*  margin-left: 160px; */
+    margin-bottom: -3px;
+    margin-top: -20px;
+    font-size: 12px;
+}
+
+.notification-title {
+    text-align: center;
+    margin-left: 10px;
+    font-weight: bolder;
+    color: rgb(91, 91, 139);
+}
+
+.notification-removeicon {
+    float: right;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.without-notification {
+    margin-left: 32%;
+    margin-right: 20%;
+    font-weight: bold;
 }

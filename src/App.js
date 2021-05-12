@@ -1,4 +1,4 @@
-import React,{useContext,useEffect} from 'react';
+import React,{useContext,useEffect,useState} from 'react';
 import './App.css';
 import Bloginterface from './component/Blog/Bloginterface';
 import Forum from './component/Forum/Forum';
@@ -43,7 +43,7 @@ import history from './config/history';
 import {Usercontext,user} from './context/context';
 import firebase from "firebase/app";
 import "firebase/auth";
-
+import axios from "axios";
 
 import 'bootstrap/dist/css/bootstrap.css';
 //test commit 2
@@ -56,23 +56,31 @@ const options = {
     type: types.INFO
   }
   
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      console.log(user.uid);
-      //console/log("user logged")
-      // User is signed in.
-    } else {
-      console.log("user is not logged");
-      // No user is signed in.
-    }
-  });
+  firebase.auth().onAuthStateChanged(function(users) {
+    console.log("test");
+   if (users) {
+      console.log(users.uid);
+ 
+     //console/log("user logged")
+     // User is signed in.
+   } else {
+     console.log("user is not logged");
+     // No user is signed in.
+  }})
+       
+ 
+  
   
 
 const App = () => {
    const userdetail=useContext(Usercontext);
-   useEffect(() => {console.log('test');
-       
-   }, [userdetail.loggedInUser.username])
+     useEffect(()=>{
+   const firebaseid=localStorage.getItem('firebaseId')
+   console.log(firebaseid);
+   axios.get('http://localhost:4000/user/'+firebaseid)
+    .then((res)=>user.UserDetails=res.data)
+ }) 
+    
     return ( 
         
     <BrowserRouter>
